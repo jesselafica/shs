@@ -4,8 +4,8 @@ Scene Scheduling
 	Once
 	Daily/Weekly (Display days of the week to select)
 	Seasonal
-		---> Humidifiers = adjust TRIP RATE *info about how to gather humidifier flow rate for deriving new trip
-		      Other (e.g. travel, etc) = TIME TO ALARM *Reccommend water off if leaving for long durations and no water needed at property
+		---> Humidifiers = adjust TRIP RATE *info about how to gather humidifier flow rate for deriving new trip BOTH HOME & AWAY
+		      Other (e.g. travel, etc) = TIME TO ALARM *Recommend water off if leaving for long durations and no water needed at property
 
 //MODE:
 	Will the user be...
@@ -22,3 +22,5 @@ Scene Scheduling
 	Daily/Weekly - Display M Tu Wed Th Fr Sa Su w/ :30 resolution
 
 + Notification indicating the initiation of a scheduled scene
+
++ Secondary trip rate - 1% @ 4:15mins - notification only? Enable/Disable within settings
