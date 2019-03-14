@@ -1,0 +1,15 @@
+.container {
+    background-color: rgb(173, 170, 216);
+    margin: auto;
+    padding: 10px;
+    border: 1px solid black;
+    height: 500px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+.btn {
+    /* flex: stretch; */
+}
