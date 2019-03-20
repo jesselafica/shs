@@ -1,0 +1,16 @@
+TRIP RATE ALTERING SCENES
+An explanation/warning  should be given at the outset. This should inform the user of the potential consequences of adjusting the trip rate.
+A warning should be included for trip rates above 25%. i.e. "Are you sure?"
+
+turn up humidistat,
+then turn on the heat
+
+take out 5 or 6 glasses of water
+
+away trip at 10
+
+//HUMIDIFIERS
+
+
+//ROs (UNDER-SINK)
+MODE = Home -->
