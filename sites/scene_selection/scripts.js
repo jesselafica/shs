@@ -23,8 +23,7 @@ let endDay;         //day 0-6
 let tripPercent;    //percent expressed as decimal to hundreths
 
 // create new object constructor
-
-function newScene (timeToAlarm, ){
+function newScene (frequency, mode, timeToAlarm, startTime, endTime, startDay, endDay ){
 
 }
 
