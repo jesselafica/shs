@@ -42,3 +42,6 @@ Scen11      4      	0      	0      	2
 Scen12      6      	0      	0      	1
 ---------------------------------------------
 Scen13      7      	0      	0      	0
+
+
+Use the <kbd> to indicate input that is typically entered via keyboard.
