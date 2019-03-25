@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Packing for Peanuts</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  </head>
-  <body>
-      <div class="container">
-      <div class="jumbotron">
-        <h1 class="display-4">Packing for Peanuts</h1>
-        <div class="row">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PFP</title>
+  <link rel="shortcut icon" type="image/png" href="https://cdn.pixabay.com/photo/2016/04/01/08/49/box-1299001_960_720.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">Packing for Peanuts</h1>
+      <div class="row">
         <div class="col-8">
-        <form class="">
-    <!-- N E W - F O R M - R O W -->
+          <form class="">
+            <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
                 <p>How many API's?</p>
               </div>
               <div class="col">
-                <input type="number" id="api" placeholder="API">
+                <input type="number" min="0" id="api" placeholder="API">
               </div>
             </div>
-    <!-- N E W - F O R M - R O W -->
+            <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
                 <p>How many POLD's?</p>
               </div>
               <div class="col">
-                <input type="number" id="pold" placeholder="POLD">
+                <input type="number" min="0" id="pold" placeholder="POLD">
               </div>
             </div>
-    <!-- N E W - F O R M - R O W -->
+            <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
                 <p>How many SSR's?</p>
               </div>
               <div class="col">
-                <input type="number" id="ssr" placeholder="SSR">
+                <input type="number" min="0" id="ssr" placeholder="SSR">
               </div>
             </div>
-    <!-- N E W - F O R M - R O W -->
+            <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
                 <p>How many 4hr Timers & Recirculation Pump Switches?</p>
               </div>
               <div class="col">
-                <input type="number" id="recirc" placeholder="4hr Timers & Recircs">
+                <input type="number" min="0" id="recirc" placeholder="4hr Timers & Recircs">
               </div>
             </div>
-    <!-- N E W - F O R M - R O W -->
+            <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
                 <input type="button" value="Package!" id="submit_button" class="btn btn-success">
@@ -63,17 +66,18 @@
             <section>
             </section>
           </form>
-          </div>
-          <div class="col-4">
-            <h1 class="display-6" id="message">Add items and package!</h1>
-          </div>
+        </div>
+        <div class="col-4">
+          <h1 class="display-6" id="message">Add items and package!</h1>
         </div>
       </div>
-      <footer>
-
-      </footer>
     </div>
-    <script src="scripts.js" charset="utf-8"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  </body>
+    <footer>
+
+    </footer>
+  </div>
+  <script src="scripts.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</body>
+
 </html>

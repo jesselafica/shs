@@ -3,7 +3,7 @@ PACKING FOR PEANUTS
 2. Create form inputs with device names
 3. Create each of the  scenarios in scripts.js
 4. Create conversion logic for SSRs to POLDs
-
+5. ADD TERNARY for > max of each to return the need for a POLD box.
 ACCESSORIES
 API
 POLD
