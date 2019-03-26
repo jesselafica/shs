@@ -108,10 +108,17 @@ function calcPack(e) {
   const formValsObj = {};
   oneBox = false;
 
-  formValsObj.apis = parseInt(apis.value);
-  formValsObj.polds = parseInt(polds.value);
-  formValsObj.ssrs = parseInt(ssrs.value);
-  formValsObj.recircs = parseInt(recircs.value);
+  formValsObj.api = parseInt(apis.value);
+  formValsObj.pold = parseInt(polds.value);
+  formValsObj.ssr = parseInt(ssrs.value);
+  formValsObj.recirc = parseInt(recircs.value);
+
+  scenarios.forEach((scenario, ind) => {
+    if (JSON.stringify(formValsObj) === JSON.stringify(scenario)) {
+      console.log("Matched!", ind);
+    }
+  });
+
 
   console.log(formValsObj);
 
