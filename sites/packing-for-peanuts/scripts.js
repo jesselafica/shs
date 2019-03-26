@@ -31,34 +31,84 @@ function calcPack() {
   // add ternary for conditional >max of each type to end function and return second shipper
   // before continuing with conditionals for 13 single shipper scenarios
 
-  // Scen1	    API  0	    POLD  18    SSR  0     RECIRC 	1
-
-  // Scen2	    API  1	    POLD  18    SSR  0     RECIRC 	0
-
-  // Scen3	    API  1	    POLD  1	    SSR  2	   RECIRC  3
-
-  // Scen4	    API  1	    POLD  13    SSR  0     RECIRC 	1
-
-  // Scen5	    API  1	    POLD  12    SSR  2     RECIRC 	1
-
-  // Scen6	    API  2	    POLD  13    SSR  0     RECIRC 	0
-
-  // Scen7	    API  2	    POLD  0	    SSR  0	   RECIRC   3
-
-  // Scen8	    API  3	    POLD  0	    SSR  0	   RECIRC   2
-
-  // Scen9	    API  3	    POLD  7	    SSR  0	   RECIRC   1
-
-  // Scen10     API  3      POLD 	10	  SSR 0	     RECIRC   0
-
-  // Scen11     API  4      POLD 	0     SSR 	0    RECIRC 	2
-
-  // Scen12     API  6      POLD 	0     SSR 	0    RECIRC 	1
-
-  // Scen13     API  7      POLD 	0     SSR 	0    RECIRC 	0
-
-
-};
+  const oScenario1 = {
+    api    : 0,
+    pold   : 18,
+    ssr    : 0,
+    recirc : 1
+  };
+  const oScenario2 = {
+    api    : 1,
+    pold   : 18,
+    ssr    : 0,
+    recirc : 0
+  };
+  const oScenario3 = {
+    api    : 1,
+    pold   : 1,
+    ssr    : 2,
+    recirc : 3
+  };
+  const oScenario4 = {
+    api    : 1,
+    pold   : 13,
+    ssr    : 0,
+    recirc : 1
+  };
+  const oScenario5 = {
+    api    : 1,
+    pold   : 12,
+    ssr    : 2,
+    recirc : 1
+  };
+  const oScenario6 = {
+    api    : 2,
+    pold   : 13,
+    ssr    : 0,
+    recirc : 0
+  };
+  const oScenario7 = {
+    api    : 2,
+    pold   : 0,
+    ssr    : 0,
+    recirc : 3
+  };
+  const oScenario8 = {
+    api    : 3,
+    pold   : 0,
+    ssr    : 0,
+    recirc : 2
+  };
+  const oScenario9 = {
+    api    : 3,
+    pold   : 7,
+    ssr    : 0,
+    recirc : 1
+  };
+  const oScenario10 = {
+    api    : 3,
+    pold   : 10,
+    ssr    : 0,
+    recirc : 0
+  };
+  const oScenario11 = {
+    api    : 4,
+    pold   : 0,
+    ssr    : 0,
+    recirc : 2
+  };
+  const oScenario12 = {
+    api    : 6,
+    pold   : 0,
+    ssr    : 0,
+    recirc : 1
+  };
+  const oScenario13 = {
+    api    : 7,
+    pold   : 0,
+    ssr    : 0,
+    recirc : 0
+  };
 
 // Add event listenters to buttons
 submitBtn.addEventListener('click', calcPack);
