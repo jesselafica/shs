@@ -10,9 +10,19 @@ POLD
 SSR
 4hr Timer / Recirc Pump Switch
 
-
+*add ability to save failed packaging request as an object for later
 Important Notes:
 2 SSRs = 1 POLD
+
+PHASE 1
+  Create initial application that will only look at the input values and see if they exceed the 13 possible scenarios
+PHASE 2
+  Add support for additional packaging i.e. POLD boxes
+PHASE 3
+  Add support for the rest of the potential packaging i.e. electrical junction boxes, LDS outdoor bags, etc.
+PHASE 4
+  Setup database (using PHP & mySQL?) that will accept comments or requests for changes. App will store failed attempts to package. --->if error is detected email the object using https://formspree.io/
+
 
 13 scenarios"Will they all fit?
 (LDS Small Shipper)"

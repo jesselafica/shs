@@ -17,14 +17,14 @@
       <h1 class="display-4">Packing for Peanuts</h1>
       <div class="row">
         <div class="col-8">
-          <form class="">
+          <form id="pack_form">
             <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
                 <p>How many API's?</p>
               </div>
               <div class="col">
-                <input type="number" min="0" id="api" placeholder="API">
+                <input type="number" min="0" id="api" placeholder="0" value="0">
               </div>
             </div>
             <!-- N E W - F O R M - R O W -->
@@ -33,7 +33,7 @@
                 <p>How many POLD's?</p>
               </div>
               <div class="col">
-                <input type="number" min="0" id="pold" placeholder="POLD">
+                <input type="number" min="0" id="pold" placeholder="0" value="0">
               </div>
             </div>
             <!-- N E W - F O R M - R O W -->
@@ -42,7 +42,7 @@
                 <p>How many SSR's?</p>
               </div>
               <div class="col">
-                <input type="number" min="0" id="ssr" placeholder="SSR">
+                <input type="number" min="0" id="ssr" placeholder="0" value="0">
               </div>
             </div>
             <!-- N E W - F O R M - R O W -->
@@ -51,13 +51,13 @@
                 <p>How many 4hr Timers & Recirculation Pump Switches?</p>
               </div>
               <div class="col">
-                <input type="number" min="0" id="recirc" placeholder="4hr Timers & Recircs">
+                <input type="number" min="0" id="recirc" placeholder="0" value="0">
               </div>
             </div>
             <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
-                <input type="button" value="Package!" id="submit_button" class="btn btn-success">
+                <input type="submit" value="Package!" id="submit_button" class="btn btn-success">
               </div>
               <div class="col">
                 <input type="reset" id="reset_button" class="btn btn-danger">

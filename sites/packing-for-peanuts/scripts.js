@@ -8,27 +8,31 @@ const ssrs    = document.querySelector("#ssr");
 const recircs = document.querySelector("#recirc");
 
 //Buttons
-const submitBtn = document.querySelector("#submit_button");
-      submitBtn.addEventListener('click', calcPack);
-const resetBtn = document.querySelector("#reset_button");
+// const submitBtn = document.querySelector("#submit_button");
+//       submitBtn.addEventListener('click', calcPack, false);
+const resetBtn  = document.querySelector("#reset_button");
+const form      = document.querySelector("#pack_form");
+      form.addEventListener('submit', calcPack, false);
 
 // Message
 const message = document.querySelector("#message");
 
 // Declare functions
-
-function calcPack() {
+function calcPack(e) {
   // reinit vars and vals
+  e.preventDefault();
+
   oneBox = false;
 
-  apis.value;
-  polds.value;
-  ssrs.value;
-  recircs.value;
+  console.log(apis.value);
+  console.log(polds.value);
+  console.log(ssrs.value);
+  console.log(recircs.value);
 
   // convert SSRs and add them to POLDs
 
   // add ternary for conditional >max of each type to end function and return second shipper
+}
   // before continuing with conditionals for 13 single shipper scenarios
 
   const oScenario1 = {
@@ -109,6 +113,3 @@ function calcPack() {
     ssr    : 0,
     recirc : 0
   };
-
-// Add event listenters to buttons
-submitBtn.addEventListener('click', calcPack);
