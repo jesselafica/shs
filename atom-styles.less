@@ -30,6 +30,13 @@ atom-text-editor {
 atom-text-editor .cursor {
   border-color: yellow;
 }
+.tab-bar .active {
+  background-color: #666c77;
+  color: #000000;
+}
+.tab-bar .tab.active[data-type$="Editor"], .tab-bar .tab.active[data-type$="AboutView"], .tab-bar .tab.active[data-type$="TimecopView"], .tab-bar .tab.active[data-type$="StyleguideView"], .tab-bar .tab.active[data-type="MarkdownPreviewView"] {
+  background: #97afd2;
+}
 syntax--entity syntax--name syntax--tag syntax--custom syntax--css {
   color: white;
 }
