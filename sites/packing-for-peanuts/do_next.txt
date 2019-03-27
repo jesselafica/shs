@@ -3,3 +3,10 @@ Set oneBox value (instead of matched)
 Text output for match
 ---> 14x14x14 if >150
 Add logic for 075 up to 150, 200 and up ignore i.e. option inputs
+
+ADDITIONAL PACKAGES
+First create a POLD only box set of scenarios
+then find shipper scenario that object most closely relates to i.e. !<scenario.key values
+-->subtract scenario.key values from shipper.key values
+-->take remainder and divide into POLD only boxes
+Round up and count number of POLD only boxes + shipper
