@@ -143,10 +143,21 @@ function calcPack(e) {
      && formValsObj.poldSsr    <= scenario.poldSsr
      && formValsObj.recirc     <= scenario.recirc ) {
        console.log("Matched!", ind);
-       oneBox = true;
-       message.innerHTML
+       message.innerHTML = "One small shipper required!";
+       return oneBox = true;
     }
   });
+  if (!oneBox){
+    message.innerHTML = "Please call the Warehouse for assistance."
+  }
+    scenarios.forEach((scenario, ind) =>{
+
+    });
+    // find scenario with smallest % (modulo) && >= all scenario.keys (not <)
+    // subtract scenario.keys from formValsObj.keys
+    // divide remaining formValsObj.keys values into poldScenario.keys until all formValsObj.keys <= poldScenario.keys
+    // round up number of times remaining formValsObj divided into poldScenario to determine # of boxes required to ship
+
 
 
   console.log(formValsObj);
