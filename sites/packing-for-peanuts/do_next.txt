@@ -1,6 +1,5 @@
 Convert ssrs to polds ---> add new key poldSsr = pold + ssr
 Set oneBox value (instead of matched)
 Text output for match
-
-
-Why did Jer have JSON.stringify?
+---> 14x14x14 if >150
+Add logic for 075 up to 150, 200 and up ignore i.e. option inputs

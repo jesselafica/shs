@@ -141,6 +141,7 @@ function calcPack(e) {
      && formValsObj.ssr    <= scenario.ssr
      && formValsObj.recirc <= scenario.recirc ) {
        console.log("Matched!", ind);
+       oneBox = true;
     }
   });
 
