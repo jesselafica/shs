@@ -11,8 +11,12 @@ SSR
 4hr Timer / Recirc Pump Switch
 
 *add ability to save failed packaging request as an object for later
+
 Important Notes:
 2 SSRs = 1 POLD
+// Add Ssrs to pold key instead of creating key value pair
+// formValsObj.pold += (formValsObj.ssr / 2);
+
 
 PHASE 1
   Create initial application that will only look at the input values and see if they exceed the 13 possible scenarios

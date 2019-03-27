@@ -134,8 +134,6 @@ function calcPack(e) {
   // add polds and ssrs together in new key
   formValsObj.poldSsr = formValsObj.pold + (formValsObj.ssr / 2);
 
-  // Add Ssrs to pold key instead of creating key value pair
-  // formValsObj.pold += (formValsObj.ssr / 2);
 
 
   scenarios.forEach((scenario, ind) => {
@@ -158,11 +156,4 @@ function calcPack(e) {
     // divide remaining formValsObj.keys values into poldScenario.keys until all formValsObj.keys <= poldScenario.keys
     // round up number of times remaining formValsObj divided into poldScenario to determine # of boxes required to ship
 
-
-
-  console.log(formValsObj);
-
-  // convert SSRs and add them to POLDs
-
-  // add ternary for conditional >max of each type to end function and return second shipper
 }
