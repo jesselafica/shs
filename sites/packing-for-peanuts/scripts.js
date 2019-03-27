@@ -126,9 +126,9 @@ function calcPack(e) {
   const formValsObj = {};
   oneBox = false;
 
-  formValsObj.api = parseInt(apis.value);
-  formValsObj.pold = parseInt(polds.value);
-  formValsObj.ssr = parseInt(ssrs.value);
+  formValsObj.api    = parseInt(apis.value);
+  formValsObj.pold   = parseInt(polds.value);
+  formValsObj.ssr    = parseInt(ssrs.value);
   formValsObj.recirc = parseInt(recircs.value);
 
   // add polds and ssrs together
@@ -136,11 +136,11 @@ function calcPack(e) {
   console.log(formValsObj.poldSsr);
 
   scenarios.forEach((scenario, ind) => {
-    if (formValsObj.api <= scenario.api
-      && formValsObj.pold <= scenario.pold
-      && formValsObj.ssr <= scenario.ssr
-      && formValsObj.recirc <= scenario.recirc ) {
-      console.log("Matched!", ind);
+    if (formValsObj.api    <= scenario.api
+     && formValsObj.pold   <= scenario.pold
+     && formValsObj.ssr    <= scenario.ssr
+     && formValsObj.recirc <= scenario.recirc ) {
+       console.log("Matched!", ind);
     }
   });
 
