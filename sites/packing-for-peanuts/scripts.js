@@ -114,11 +114,6 @@ const scenarios = [
 ];
 
 
-function checkpoldSsr(){
-  scenarios.forEach((scenario, ind) => {
-    return((scenario.pold + scenario.ssr) === scenario.poldSsr) ? console.log(ind + " correct") : console.log(ind + "ERROR " + scenario.value);
-  });
-};
 // Declare functions
 function calcPack(e) {
   // reinit vars and vals
@@ -149,7 +144,11 @@ function calcPack(e) {
     message.innerHTML = "Please call the Warehouse for assistance."
   }
     scenarios.forEach((scenario, ind) =>{
-
+      // create scenarioRemainder{} {remainder : 0, index: =ind}
+      // loop through scenario[]
+      // += each remainder to a temporary variable (tempRemainder) (i.e. formValsObj.api - scenario.api, etc.)
+      // if tempRemainder is < scenarioRemainder.tempRemainder
+      // -->then scenarioRemainder.remainder = tempRemainder & add scenario index to scenarioRemainder.scenario
     });
     // find scenario with smallest % (modulo) && >= all scenario.keys (not <)
     // subtract scenario.keys from formValsObj.keys
@@ -157,3 +156,10 @@ function calcPack(e) {
     // round up number of times remaining formValsObj divided into poldScenario to determine # of boxes required to ship
 
 }
+
+// tool check scenario object poldSsr count
+// function checkpoldSsr(){
+//   scenarios.forEach((scenario, ind) => {
+//     return((scenario.pold + scenario.ssr) === scenario.poldSsr) ? console.log(ind + " correct") : console.log(ind + "ERROR " + scenario.value);
+//   });
+// };
