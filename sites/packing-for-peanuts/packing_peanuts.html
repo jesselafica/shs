@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PFP</title>
   <link rel="shortcut icon" type="image/png" href="">
-  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -46,7 +46,26 @@
             <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
-                <p>How many API's?</p>
+                <label for="lds_size">Leak Defense System size?</label>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <select required id="lds_size" placeholder="-" class="form-control">
+                    <!-- <option value="POLD">POLD</option> -->
+                    <option>LDS-3-...</option>
+                    <option value="075">LDS-3-075</option>
+                    <option value="100">LDS-3-100</option>
+                    <option value="125">LDS-3-125</option>
+                    <option value="150">LDS-3-150</option>
+                    <option value="200">LDS-3-200</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- N E W - F O R M - R O W -->
+            <div class="form-row">
+              <div class="col">
+                <label for="api">How many API's?</label>
               </div>
               <div class="col">
                 <input required type="number" min="0" id="api" placeholder="0" value="0">
@@ -55,7 +74,7 @@
             <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
-                <p>How many POLD's?</p>
+                <label for="pold">How many POLD's?</label>
               </div>
               <div class="col">
                 <input required type="number" min="0" id="pold" placeholder="0" value="0">
@@ -64,7 +83,7 @@
             <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
-                <p>How many SSR's?</p>
+                <label for="ssr">How many SSR's?</label>
               </div>
               <div class="col">
                 <input required type="number" min="0" id="ssr" placeholder="0" value="0">
@@ -73,7 +92,7 @@
             <!-- N E W - F O R M - R O W -->
             <div class="form-row">
               <div class="col">
-                <p>How many 4hr Timers & Recirculation Pump Switches?</p>
+                <label for="recirc">Total 4hr Timers & Recirc Pump Switches?</label>
               </div>
               <div class="col">
                 <input required type="number" min="0" id="recirc" placeholder="0" value="0">

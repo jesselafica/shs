@@ -10,3 +10,11 @@ then find shipper scenario that object most closely relates to i.e. !<scenario.k
 -->subtract scenario.key values from shipper.key values
 -->take remainder and divide into POLD only boxes
 Round up and count number of POLD only boxes + shipper
+
+
+
+*****************************************************
+ADD LDS SIZE INPUT FIELDS
+*****************************************************
+>=2" systems
+POLD Only
