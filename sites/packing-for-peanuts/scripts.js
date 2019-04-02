@@ -6,7 +6,7 @@ const apis    = document.getElementById("api");
 const polds   = document.getElementById("pold");
 const ssrs    = document.getElementById("ssr");
 const recircs = document.getElementById("recirc");
-
+const ldsSize = document.getElementById("lds_size");
 //Buttons
 // const submitBtn = document.getElementById("submit_button");
 //       submitBtn.addEventListener('click', calcPack, false);
@@ -121,10 +121,11 @@ function calcPack(e) {
   const formValsObj = {};
   oneBox = false;
 
-  formValsObj.api    = parseInt(apis.value);
-  formValsObj.pold   = parseInt(polds.value);
-  formValsObj.ssr    = parseInt(ssrs.value);
-  formValsObj.recirc = parseInt(recircs.value);
+  formValsObj.api     = parseInt(apis.value);
+  formValsObj.pold    = parseInt(polds.value);
+  formValsObj.ssr     = parseInt(ssrs.value);
+  formValsObj.recirc  = parseInt(recircs.value);
+  formValsObj.ldsSize = parseInt(ldsSize.value);
 
   // add polds and ssrs together in new key
   formValsObj.poldSsr = formValsObj.pold + (formValsObj.ssr / 2);
@@ -136,7 +137,8 @@ function calcPack(e) {
      && formValsObj.poldSsr    <= scenario.poldSsr
      && formValsObj.recirc     <= scenario.recirc ) {
        console.log("Matched!", ind);
-       message.innerHTML = "One small shipper required!";
+       let shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
+       message.innerHTML = "One box required:<br>" + shipperSize;
        return oneBox = true;
     }
   });
