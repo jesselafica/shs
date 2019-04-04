@@ -19,76 +19,76 @@ const message = document.getElementById("message");
 
 // before continuing with conditionals for 13 single shipper scenarios
 
-const scenarios = [
+const shipperScenarios = [
   {
-    api    : 0,
-    pold   : 18,
-    ssr    : 0,
-    poldSsr: 18,
-    recirc : 1
+    api     : 0,
+    pold    : 18,
+    ssr     : 0,
+    poldSsr : 18,
+    recirc  : 1
   },
   {
-    api    : 1,
-    pold   : 18,
-    ssr    : 0,
-    poldSsr: 18,
-    recirc : 0
+    api     : 1,
+    pold    : 18,
+    ssr     : 0,
+    poldSsr : 18,
+    recirc  : 0
   },
   {
-    api    : 1,
-    pold   : 1,
-    ssr    : 2,
-    poldSsr: 3,
-    recirc : 3
+    api     : 1,
+    pold    : 1,
+    ssr     : 2,
+    poldSsr : 3,
+    recirc  : 3
   },
   {
-    api    : 1,
-    pold   : 13,
-    ssr    : 0,
-    poldSsr: 13,
-    recirc : 1
+    api     : 1,
+    pold    : 13,
+    ssr     : 0,
+    poldSsr : 13,
+    recirc  : 1
   },
   {
-    api    : 1,
-    pold   : 12,
-    ssr    : 2,
-    poldSsr: 14,
-    recirc : 1
+    api     : 1,
+    pold    : 12,
+    ssr     : 2,
+    poldSsr : 14,
+    recirc  : 1
   },
   {
-    api    : 2,
-    pold   : 13,
-    ssr    : 0,
-    poldSsr: 13,
-    recirc : 0
+    api     : 2,
+    pold    : 13,
+    ssr     : 0,
+    poldSsr : 13,
+    recirc  : 0
   },
   {
-    api    : 2,
-    pold   : 0,
-    ssr    : 0,
-    poldSsr: 0,
-    recirc : 3
+    api     : 2,
+    pold    : 0,
+    ssr     : 0,
+    poldSsr : 0,
+    recirc  : 3
   },
   {
-    api    : 3,
-    pold   : 0,
-    ssr    : 0,
-    poldSsr: 0,
-    recirc : 2
+    api     : 3,
+    pold    : 0,
+    ssr     : 0,
+    poldSsr : 0,
+    recirc  : 2
   },
   {
-    api    : 3,
-    pold   : 7,
-    ssr    : 0,
-    poldSsr: 7,
-    recirc : 1
+    api     : 3,
+    pold    : 7,
+    ssr     : 0,
+    poldSsr : 7,
+    recirc  : 1
   },
   {
-    api    : 3,
-    pold   : 10,
-    ssr    : 0,
-    poldSsr: 10,
-    recirc : 0
+    api     : 3,
+    pold    : 10,
+    ssr     : 0,
+    poldSsr : 10,
+    recirc  : 0
   },
   {
     api    : 4,
@@ -113,6 +113,100 @@ const scenarios = [
   }
 ];
 
+const poldScnarios = [
+  {
+    api     : 3,
+    pold    : 0,
+    ssr     : 0,
+    poldSsr : 0,
+    recirc  : 3
+  }
+  {
+    api     : 0,
+    pold    : 0,
+    ssr     : 2,
+    poldSsr : 1,
+    recirc  : 5
+  }
+  {
+    api     : 6,
+    pold    : 0,
+    ssr     : 2,
+    poldSsr : 1,
+    recirc  : 0
+  }
+  {
+    api     : 2,
+    pold    : 2,
+    ssr     : 2,
+    poldSsr : 3,
+    recirc  : 3
+  }
+  {
+    api     : 1,
+    pold    : 4,
+    ssr     : 2,
+    poldSsr : 5,
+    recirc  : 3
+  }
+  {
+    api     : 0,
+    pold    : 6,
+    ssr     : 2,
+    poldSsr : 7,
+    recirc  : 3
+  }
+  {
+    api     : 0,
+    pold    : 15,
+    ssr     : 2,
+    poldSsr : 16,
+    recirc  : 2
+  }
+  {
+    api     : 0,
+    pold    : 22,
+    ssr     : 2,
+    poldSsr : 23,
+    recirc  : 0
+  }
+  {
+    api     : 2,
+    pold    : 14,
+    ssr     : 2,
+    poldSsr : 15,
+    recirc  : 0
+  }
+  {
+    api     : 1,
+    pold    : 18,
+    ssr     : 2,
+    poldSsr : 19,
+    recirc  : 0
+  }
+  {
+    api     : 3,
+    pold    : 12,
+    ssr     : 2,
+    poldSsr : 13,
+    recirc  : 0
+  }
+  {
+    api     : 4,
+    pold    : 8,
+    ssr     : 2,
+    poldSsr : 9,
+    recirc  : 0
+  }
+  {
+    api     : 5,
+    pold    : 4,
+    ssr     : 2,
+    poldSsr : 5,
+    recirc  : 0
+  }
+];
+
 
 // Declare functions
 function calcPack(e) {
@@ -132,7 +226,7 @@ function calcPack(e) {
 
 
 
-  scenarios.forEach((scenario, ind) => {
+  shipperScenarios.forEach((scenario, ind) => {
     if (formValsObj.api        <= scenario.api
      && formValsObj.poldSsr    <= scenario.poldSsr
      && formValsObj.recirc     <= scenario.recirc ) {
@@ -145,7 +239,7 @@ function calcPack(e) {
   if (!oneBox){
     message.innerHTML = "Please call the Warehouse for assistance."
   }
-    scenarios.forEach((scenario, ind) =>{
+    shipperScenarios.forEach((scenario, ind) =>{
       // create scenarioRemainder{} {remainder : 0, index: =ind}
       // loop through scenario[]
       // += each remainder to a temporary variable (tempRemainder) (i.e. formValsObj.api - scenario.api, etc.)
@@ -161,7 +255,7 @@ function calcPack(e) {
 
 // tool check scenario object poldSsr count
 // function checkpoldSsr(){
-//   scenarios.forEach((scenario, ind) => {
+//   shipperScenarios.forEach((scenario, ind) => {
 //     return((scenario.pold + scenario.ssr) === scenario.poldSsr) ? console.log(ind + " correct") : console.log(ind + "ERROR " + scenario.value);
 //   });
 // };
