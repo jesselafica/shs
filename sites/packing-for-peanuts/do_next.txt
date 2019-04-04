@@ -4,6 +4,10 @@ Text output for match
 ---> 14x14x14 if >150
 Add logic for 075 up to 150, 200 and up ignore i.e. option inputs
 
+Remove reset Button
+print out what was added on submit
+clear inputs i.e. reset form on submit
+
 ADDITIONAL PACKAGES
 First create a POLD only box set of scenarios
 then find shipper scenario that object most closely relates to i.e. !<scenario.key values
