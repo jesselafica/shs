@@ -19,7 +19,7 @@ const message = document.getElementById("message");
 
 // before continuing with conditionals for 13 single shipper scenarios
 
-const shipperScenarios = [
+const smShipperScenarios = [
   {
     api     : 0,
     pold    : 18,
@@ -226,7 +226,7 @@ function calcPack(e) {
 
 
 
-  shipperScenarios.forEach((scenario, ind) => {
+  smShipperScenarios.forEach((scenario, ind) => {
     if (formValsObj.api        <= scenario.api
      && formValsObj.poldSsr    <= scenario.poldSsr
      && formValsObj.recirc     <= scenario.recirc ) {
@@ -239,7 +239,7 @@ function calcPack(e) {
   if (!oneBox){
     message.innerHTML = "Please call the Warehouse for assistance."
   }
-    shipperScenarios.forEach((scenario, ind) =>{
+    smShipperScenarios.forEach((scenario, ind) =>{
       // create scenarioRemainder{} {remainder : 0, index: =ind}
       // loop through scenario[]
       // += each remainder to a temporary variable (tempRemainder) (i.e. formValsObj.api - scenario.api, etc.)
@@ -255,7 +255,7 @@ function calcPack(e) {
 
 // tool check scenario object poldSsr count
 // function checkpoldSsr(){
-//   shipperScenarios.forEach((scenario, ind) => {
+//   smShipperScenarios.forEach((scenario, ind) => {
 //     return((scenario.pold + scenario.ssr) === scenario.poldSsr) ? console.log(ind + " correct") : console.log(ind + "ERROR " + scenario.value);
 //   });
 // };
