@@ -7,6 +7,13 @@ PHASE 3
 PHASE 4
   Setup database (using PHP & mySQL?) that will accept comments or requests for changes. App will store failed attempts to package. --->if error is detected email the object using https://formspree.io/
 
+Combine brownBoxScenarios with panelScenarios
+Add new key/value ldsSize
+--> brownBoxScenarios  ldsSize : 200
+--> smShipperScenarios ldsSize : 150
+Combine new brownBoxScenarios with smShipperScenarios
+*USE COMMENTS TO DELINEATE small shipper scens from brown box within array
+
 ADDITIONAL PACKAGES
   ADD SCENARIOS:
     1. POLD      13x10x5
@@ -25,9 +32,9 @@ Add logic for 075 up to 150, 200 and up ignore i.e. option inputs
 
 
 
-*****************************************************
+***********************************************
 ADD LDS SIZE INPUT FIELDS
-*****************************************************
+***********************************************
 >=2" systems
 POLD Only
 
@@ -38,4 +45,5 @@ C O S M E T I C
   clear inputs i.e. reset form on submit
   Add input for PAM-1 Relays
   --> PAM-1(1) = POLD(2)
+  Add limit to inputs i.e. max=""
 /////////////////////////////////////////////////////////////

@@ -1,4 +1,6 @@
-LDS Small Shipper 19x12x7
+LDS Small Shipper
+smShipperScenarios
+19x12x7
             API	    POLD	  SSR's	  Recircs
 Scen1	      0	      18      0      	1
 ---------------------------------------------
@@ -26,7 +28,9 @@ Scen12      6      	0      	0      	1
 ---------------------------------------------
 Scen13      7      	0      	0      	0
 
-POLD Box 13x10x5
+POLD Box
+poldScenarios
+13x10x5
          API  POLD     SSR   Recircs
 Scen1  	  3	    0	      0	      3
 ---------------------------------------------
@@ -54,7 +58,9 @@ Scen12  	4	    8	      2	      0
 ---------------------------------------------
 Scen13  	5	    4	      2	      0
 
-API/PANEL 10x8x3
+API/PANEL
+panelScenarios
+10x8x3
          API   POLD    SSR   Recircs
 Scen1   	2	    0	      0	      0
 ---------------------------------------------
@@ -63,7 +69,9 @@ Scen2   	1	    2	      0	      0
 Scen3   	0	    4	      0	      0
 ---------------------------------------------
 
-LDS 14x14x14
+LDS
+brownBoxScenarios
+14x14x14
   *THIS ASSUMES API/PANEL Scen$!
          API   POLD    SSR   Recircs
 Scen1   	0	    0	      0	      2

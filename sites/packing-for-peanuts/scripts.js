@@ -16,188 +16,226 @@ form.addEventListener('submit', calcPack, false);
 
 // Message
 const message = document.getElementById("message");
-
-// before continuing with conditionals for 13 single shipper scenarios
-
-const smShipperScenarios = [
+// Scenario array objects
+const ldsScenarios  = [
+// START SM SHIPPER
   {
     api     : 0,
     pold    : 18,
     ssr     : 0,
     poldSsr : 18,
-    recirc  : 1
+    recirc  : 1,
+    ldsSize: 150
   },
   {
     api     : 1,
     pold    : 18,
     ssr     : 0,
     poldSsr : 18,
-    recirc  : 0
+    recirc  : 0,
+    ldsSize: 150
   },
   {
     api     : 1,
     pold    : 1,
     ssr     : 2,
     poldSsr : 3,
-    recirc  : 3
+    recirc  : 3,
+    ldsSize: 150
   },
   {
     api     : 1,
     pold    : 13,
     ssr     : 0,
     poldSsr : 13,
-    recirc  : 1
+    recirc  : 1,
+    ldsSize: 150
   },
   {
     api     : 1,
     pold    : 12,
     ssr     : 2,
     poldSsr : 14,
-    recirc  : 1
+    recirc  : 1,
+    ldsSize: 150
   },
   {
     api     : 2,
     pold    : 13,
     ssr     : 0,
     poldSsr : 13,
-    recirc  : 0
+    recirc  : 0,
+    ldsSize: 150
   },
   {
     api     : 2,
     pold    : 0,
     ssr     : 0,
     poldSsr : 0,
-    recirc  : 3
+    recirc  : 3,
+    ldsSize: 150
   },
   {
     api     : 3,
     pold    : 0,
     ssr     : 0,
     poldSsr : 0,
-    recirc  : 2
+    recirc  : 2,
+    ldsSize: 150
   },
   {
     api     : 3,
     pold    : 7,
     ssr     : 0,
     poldSsr : 7,
-    recirc  : 1
+    recirc  : 1,
+    ldsSize: 150
   },
   {
     api     : 3,
     pold    : 10,
     ssr     : 0,
     poldSsr : 10,
-    recirc  : 0
+    recirc  : 0,
+    ldsSize: 150
   },
   {
     api    : 4,
     pold   : 0,
     ssr    : 0,
     poldSsr: 0,
-    recirc : 2
+    recirc : 2,
+    ldsSize: 150
   },
   {
     api    : 6,
     pold   : 0,
     ssr    : 0,
     poldSsr: 0,
-    recirc : 1
+    recirc : 1,
+    ldsSize: 150
   },
   {
     api    : 7,
     pold   : 0,
     ssr    : 0,
     poldSsr: 0,
-    recirc : 0
-  }
+    recirc : 0,
+    ldsSize: 150
+  },
+// END SM SHIPPER
+// START BROWN BOX
+{
+  api     : 2,
+  pold    : 0,
+  ssr     : 0,
+  poldSsr : 0,
+  recirc  : 2,
+  ldsSize : 200
+},
+{
+  api     : 1,
+  pold    : 2,
+  ssr     : 0,
+  poldSsr : 2,
+  recirc  : 2,
+  ldsSize : 200
+},
+{
+  api     : 0,
+  pold    : 4,
+  ssr     : 0,
+  poldSsr : 4,
+  recirc  : 2,
+  ldsSize : 200
+}
+// END BROWN BOX
 ];
-
-const poldScnarios = [
+const poldScenarios = [
   {
     api     : 3,
     pold    : 0,
     ssr     : 0,
     poldSsr : 0,
     recirc  : 3
-  }
+  },
   {
     api     : 0,
     pold    : 0,
     ssr     : 2,
     poldSsr : 1,
     recirc  : 5
-  }
+  },
   {
     api     : 6,
     pold    : 0,
     ssr     : 2,
     poldSsr : 1,
     recirc  : 0
-  }
+  },
   {
     api     : 2,
     pold    : 2,
     ssr     : 2,
     poldSsr : 3,
     recirc  : 3
-  }
+  },
   {
     api     : 1,
     pold    : 4,
     ssr     : 2,
     poldSsr : 5,
     recirc  : 3
-  }
+  },
   {
     api     : 0,
     pold    : 6,
     ssr     : 2,
     poldSsr : 7,
     recirc  : 3
-  }
+  },
   {
     api     : 0,
     pold    : 15,
     ssr     : 2,
     poldSsr : 16,
     recirc  : 2
-  }
+  },
   {
     api     : 0,
     pold    : 22,
     ssr     : 2,
     poldSsr : 23,
     recirc  : 0
-  }
+  },
   {
     api     : 2,
     pold    : 14,
     ssr     : 2,
     poldSsr : 15,
     recirc  : 0
-  }
+  },
   {
     api     : 1,
     pold    : 18,
     ssr     : 2,
     poldSsr : 19,
     recirc  : 0
-  }
+  },
   {
     api     : 3,
     pold    : 12,
     ssr     : 2,
     poldSsr : 13,
     recirc  : 0
-  }
+  },
   {
     api     : 4,
     pold    : 8,
     ssr     : 2,
     poldSsr : 9,
     recirc  : 0
-  }
+  },
   {
     api     : 5,
     pold    : 4,
@@ -207,7 +245,6 @@ const poldScnarios = [
   }
 ];
 
-
 // Declare functions
 function calcPack(e) {
   // reinit vars and vals
@@ -215,31 +252,32 @@ function calcPack(e) {
   const formValsObj = {};
   oneBox = false;
 
+// create formValsObj from inputs
   formValsObj.api     = parseInt(apis.value);
   formValsObj.pold    = parseInt(polds.value);
   formValsObj.ssr     = parseInt(ssrs.value);
   formValsObj.recirc  = parseInt(recircs.value);
   formValsObj.ldsSize = parseInt(ldsSize.value);
-
-  // add polds and ssrs together in new key
   formValsObj.poldSsr = formValsObj.pold + (formValsObj.ssr / 2);
 
-
-
-  smShipperScenarios.forEach((scenario, ind) => {
+// loop through ldsScenarios test if oneBox = true
+  ldsScenarios.forEach((scenario, ind) => {
     if (formValsObj.api        <= scenario.api
      && formValsObj.poldSsr    <= scenario.poldSsr
-     && formValsObj.recirc     <= scenario.recirc ) {
-       console.log("Matched!", ind);
-       let shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
-       message.innerHTML = "One box required:<br>" + shipperSize;
-       return oneBox = true;
+     && formValsObj.recirc     <= scenario.recirc
+     && formValsObj.ldsSize    <= scenario.ldsSize)
+    {
+    console.log("Matched!", ind);
+    let shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
+    message.innerHTML = "One box required:<br>" + shipperSize;
+    return oneBox = true;
+    } else if (!oneBox) {
+      message.innerHTML = "Please call the Warehouse for assistance."
     }
   });
   if (!oneBox){
-    message.innerHTML = "Please call the Warehouse for assistance."
   }
-    smShipperScenarios.forEach((scenario, ind) =>{
+    ldsScenarios.forEach((scenario, ind) =>{
       // create scenarioRemainder{} {remainder : 0, index: =ind}
       // loop through scenario[]
       // += each remainder to a temporary variable (tempRemainder) (i.e. formValsObj.api - scenario.api, etc.)
@@ -254,8 +292,8 @@ function calcPack(e) {
 }
 
 // tool check scenario object poldSsr count
-// function checkpoldSsr(){
-//   smShipperScenarios.forEach((scenario, ind) => {
-//     return((scenario.pold + scenario.ssr) === scenario.poldSsr) ? console.log(ind + " correct") : console.log(ind + "ERROR " + scenario.value);
-//   });
-// };
+function checkPoldSsr(scenArray){
+  scenArray.forEach((scenario, ind) => {
+    return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + " correct") : console.log("Check scenario at index " + ind);
+  });
+};
