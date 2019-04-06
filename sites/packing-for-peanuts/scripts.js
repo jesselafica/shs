@@ -1,6 +1,4 @@
 // Initialize variables
-let oneBox = false;
-
 // Inputs
 const apis    = document.getElementById("api");
 const polds   = document.getElementById("pold");
@@ -249,8 +247,11 @@ const poldScenarios = [
 function calcPack(e) {
   // reinit vars and vals
   e.preventDefault();
+
   const formValsObj = {};
-  oneBox = false;
+
+  let shipperSize = "";
+  let oneBox      = false;
 
 // create formValsObj from inputs
   formValsObj.api     = parseInt(apis.value);
@@ -268,15 +269,15 @@ function calcPack(e) {
      && formValsObj.ldsSize    <= scenario.ldsSize)
     {
     console.log("Matched!", ind);
-    let shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
+    shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
     message.innerHTML = "One box required:<br>" + shipperSize;
     return oneBox = true;
-    } else if (!oneBox) {
+  } else if (!oneBox) {
+
+
       message.innerHTML = "Please call the Warehouse for assistance."
     }
   });
-  if (!oneBox){
-  }
     ldsScenarios.forEach((scenario, ind) =>{
       // create scenarioRemainder{} {remainder : 0, index: =ind}
       // loop through scenario[]

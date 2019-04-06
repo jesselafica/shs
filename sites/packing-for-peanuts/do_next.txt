@@ -1,18 +1,19 @@
-PHASE 1
-  Create initial application that will only look at the input values and see if they exceed the 13 possible scenarios
-PHASE 2
-  Add support for additional packaging i.e. POLD boxes
-PHASE 3
-  Add support for the rest of the potential packaging i.e. electrical junction boxes, LDS outdoor bags, etc.
-PHASE 4
-  Setup database (using PHP & mySQL?) that will accept comments or requests for changes. App will store failed attempts to package. --->if error is detected email the object using https://formspree.io/
+TO DO:
+  Combine brownBoxScenarios with panelScenarios
+  Add new key/value ldsSize
+  --> brownBoxScenarios  ldsSize : 200
+  --> smShipperScenarios ldsSize : 150
+  Combine new brownBoxScenarios with smShipperScenarios
+  *USE COMMENTS TO DELINEATE small shipper scens from brown box within array
 
-Combine brownBoxScenarios with panelScenarios
-Add new key/value ldsSize
---> brownBoxScenarios  ldsSize : 200
---> smShipperScenarios ldsSize : 150
-Combine new brownBoxScenarios with smShipperScenarios
-*USE COMMENTS TO DELINEATE small shipper scens from brown box within array
+PHASE 1
+Create initial application that will only look at the input values and see if they exceed the 13 possible scenarios
+PHASE 2
+Add support for additional packaging i.e. POLD boxes
+PHASE 3
+Add support for the rest of the potential packaging i.e. electrical junction boxes, LDS outdoor bags, etc.
+PHASE 4
+Setup database (using PHP & mySQL?) that will accept comments or requests for changes. App will store failed attempts to package. --->if error is detected email the object using https://formspree.io/
 
 ADDITIONAL PACKAGES
   ADD SCENARIOS:
