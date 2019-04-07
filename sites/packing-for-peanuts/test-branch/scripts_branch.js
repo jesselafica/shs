@@ -259,45 +259,46 @@ function calcPack(e) {
   formValsObj.ssr     = parseInt(ssrs.value);
   formValsObj.recirc  = parseInt(recircs.value);
   formValsObj.ldsSize = parseInt(ldsSize.value);
-  formValsObj.poldSsr = formValsObj.pold + (formValsObj.ssr / 2);
+  formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
 
 // loop through ldsScenarios test if oneBox = true
-  ldsScenarios.forEach((scenario, ind) => {
-    if (formValsObj.api        <= scenario.api
-     && formValsObj.poldSsr    <= scenario.poldSsr
-     && formValsObj.recirc     <= scenario.recirc
-     && formValsObj.ldsSize    <= scenario.ldsSize)
+  for (var i = 0; i < ldsScenarios.length; i++) {
+    if (formValsObj.api        <= ldsScenarios[i].api
+     && formValsObj.poldSsr    <= ldsScenarios[i].poldSsr
+     && formValsObj.recirc     <= ldsScenarios[i].recirc
+     && formValsObj.ldsSize    <= ldsScenarios[i].ldsSize)
     {
-    console.log("Matched!", ind);
+    console.log("Matched!", [i]);
     shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
     message.innerHTML = "One box required:<br>" + shipperSize;
     return oneBox = true;
-  } else if (!oneBox) {
-
-
+    break;
+  }
+};
+  if (!oneBox) {
       message.innerHTML = "Please call the Warehouse for assistance."
-    }
-  });
-    ldsScenarios.forEach((scenario, ind) =>{
-      let apiMod     = formValsObj.api % scenario.api;
-      let poldSsrMod = formValsObj.poldSsr % scenario.poldSsr;
-      let recircMod  = formValsObj.recirc % scenario.recirc;
+      ldsScenarios.forEach((scenario, ind) =>{
+          let apiMod     = formValsObj.api % scenario.api;
+          let poldSsrMod = formValsObj.poldSsr % scenario.poldSsr;
+          let recircMod  = formValsObj.recirc % scenario.recirc;
 
-      console.log(apiMod);
-      console.log(poldSsrMod);
-      console.log(recircMod);
+          console.log(apiMod);
+          console.log(poldSsrMod);
+          console.log(recircMod);
+        });
+    }
+
+  }
       // create scenarioRemainder{} {remainder : 0, index: =ind}
       // loop through scenario[]
       // += each remainder to a temporary variable (tempRemainder) (i.e. formValsObj.api - scenario.api, etc.)
       // if tempRemainder is < scenarioRemainder.tempRemainder
       // -->then scenarioRemainder.remainder = tempRemainder & add scenario index to scenarioRemainder.scenario
-    });
     // find scenario with smallest % (modulo) && >= all scenario.keys (not <)
     // subtract scenario.keys from formValsObj.keys
     // divide remaining formValsObj.keys values into poldScenario.keys until all formValsObj.keys <= poldScenario.keys
     // round up number of times remaining formValsObj divided into poldScenario to determine # of boxes required to ship
 
-}
 
 // tool check scenario object poldSsr count
 function checkPoldSsr(scenArray){
