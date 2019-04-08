@@ -248,14 +248,15 @@ function calcPack(e) {
   // reinit vars and vals
   e.preventDefault();
 
-  const formValsObj = {
-    index:  0,
-    remain: 0
-  };
+  const formValsObj = {};
 
   let shipperSize = "";
   let oneBox      = false;
-  let remainIndObj  = {};
+  let remainIndObj  = {
+    // initialize remainder higher than potential remainder so that one may succeed
+    remainder : 100,
+    index     : 0
+  };
 
 // create formValsObj from inputs
   formValsObj.api     = parseInt(apis.value);
@@ -283,61 +284,35 @@ function calcPack(e) {
       message.innerHTML = "Please call the Warehouse for assistance."
       ldsScenarios.forEach((scenario, ind) =>{
         let indexRemain   = 0;
+        // Correct the way values are passed into the functions
+        // or rewrite this as conditionals with more vars instead of a single function with 3 vars
         let apiRemain     = calcRemain(api);
         let poldSsrRemain = calcRemain(poldSsr);
         let recircRemain  = calcRemain(recirc);
         if((!apiRemain &&
           !poldSsrRemain &&
-          !recircRemain)
-          ((remainIndObj === {}) || indexRemain < remainIndObj.remainder))
+          !recircRemain) &&
+          (indexRemain < remainIndObj.remainder))
            {
             remainIndObj.remainder = indexRemain;
             remainIndObj.index     = ind;
             console.log("Match at index " + ind + "\n with remainder of " + indexRemain);
         }
-        function calcRemain () {
-          let remainder = parseInt(formValsObj.this - scenario.this);
-          if(formValsObj.this > scenario.this){
+        // calculate remainder and test whether or not it is a negative value
+        function calcRemain(objKey) {
+          let remainder = parseInt(formValsObj.objKey - scenario.objKey);
+          console.log(formValsObj.objKey);
+          if(remainder > 0){
             indexRemain += remainder;
             return true;
           } else { return false; }
         }
 
-        // let negVal        = false;
-        // let apiRemain     = 0;
-        // let poldSsrRemain = 0;
-        // let recircRemain  = 0;
-        // need ternary to test whether NaN
-          // apiRemain     = (formValsObj.api < scenario.api) ? formValsObj.api - scenario.api : negVal = true;
-          // poldSsrRemain = (formValsObj.poldSsr < scenario.poldSsr) ? formValsObj.poldSsr - scenario.poldSsr : negVal = true;
-          // recircRemain  = (formValsObj.recirc < scenario.recirc) ? formValsObj.recirc - scenario.recirc : negVal = true;
-          //
-          // let indexRemain   = apiRemain + poldSsrRemain + recircRemain;
-          // // test for smallest remainder against remainIndObj
-          // if ((!negVal) && ((indexRemain <= remainIndObj.remain) || (!remainIndObj.remain))) {
-          //   remainIndObj.remain = indexRemain;
-          //   remainIndObj.ind    = ind;
-          //   console.log("Index : " + remainIndObj.ind +
-          //            "\n Remainder : " + remainIndObj.remain)
-          // }
-          // track what is remaining to be packaged in POLD box!
-
-          // console.log("Scenario at index " + ind + "\n" + apiMod + "\n" + poldSsrMod + "\n" + recircMod + "\n" );
 
         });
     }
 
   }
-      // create scenarioRemainder{} {remainder : 0, index: =ind}
-      // loop through scenario[]
-      // += each remainder to a temporary variable (tempRemainder) (i.e. formValsObj.api - scenario.api, etc.)
-      // if tempRemainder is < scenarioRemainder.tempRemainder
-      // -->then scenarioRemainder.remainder = tempRemainder & add scenario index to scenarioRemainder.scenario
-    // find scenario with smallest % (modulo) && >= all scenario.keys (not <)
-    // subtract scenario.keys from formValsObj.keys
-    // divide remaining formValsObj.keys values into poldScenario.keys until all formValsObj.keys <= poldScenario.keys
-    // round up number of times remaining formValsObj divided into poldScenario to determine # of boxes required to ship
-
 
 // tool check scenario object poldSsr count
 function checkPoldSsr(scenArray){

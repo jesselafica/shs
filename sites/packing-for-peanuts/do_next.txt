@@ -1,10 +1,9 @@
 TO DO:
-  Combine brownBoxScenarios with panelScenarios
-  Add new key/value ldsSize
-  --> brownBoxScenarios  ldsSize : 200
-  --> smShipperScenarios ldsSize : 150
-  Combine new brownBoxScenarios with smShipperScenarios
-  *USE COMMENTS TO DELINEATE small shipper scens from brown box within array
+FIX the !oneBox logic
+--> key names being passed into function is broken
+--> consider creating an array of successful matches during the initial pack when checking oneBox
+then use that stored array if !oneBox and loop through each matched array and += POLD box keys
+then test formValsObj.keys <= (matchedArr.keys += poldBox.keys)
 
 PHASE 1
 Create initial application that will only look at the input values and see if they exceed the 13 possible scenarios
