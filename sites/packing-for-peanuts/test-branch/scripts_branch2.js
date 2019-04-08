@@ -295,9 +295,9 @@ function calcPack(e) {
             remainIndObj.index     = ind;
             console.log("Match at index " + ind + "\n with remainder of " + indexRemain);
         }
-        function calcRemain () {
-          let remainder = parseInt(formValsObj.this - scenario.this);
-          if(formValsObj.this > scenario.this){
+        function calcRemain (key) {
+          let remainder = parseInt(formValsObj.key - scenario.key);
+          if(formValsObj.key > scenario.key){
             indexRemain += remainder;
             return true;
           } else { return false; }
