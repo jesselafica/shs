@@ -1,9 +1,13 @@
 TO DO:
 FIX the !oneBox logic
 --> key names being passed into function is broken
---> consider creating an array of successful matches during the initial pack when checking oneBox
-then use that stored array if !oneBox and loop through each matched array and += POLD box keys
-then test formValsObj.keys <= (matchedArr.keys += poldBox.keys)
+--> loop through each poldScenarios and (formValsObj - poldScenarios[i]) before
+looping through ldsScenarios again (formvalsObj <= ldsScenarios[i])*
+*turn the calc pack initial loop into a function that can be invoked here
+!oneBox and during the initial oneBox
+
+
+Add accessory/POLD only for size
 
 PHASE 1
 Create initial application that will only look at the input values and see if they exceed the 13 possible scenarios

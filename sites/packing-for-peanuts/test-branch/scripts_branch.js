@@ -1,10 +1,10 @@
 // Initialize variables
 // Inputs
-const apis    = document.getElementById("api");
-const polds   = document.getElementById("pold");
-const ssrs    = document.getElementById("ssr");
-const recircs = document.getElementById("recirc");
-const ldsSize = document.getElementById("lds_size");
+const apiInput    = document.getElementById("api");
+const poldInput   = document.getElementById("pold");
+const ssrInput    = document.getElementById("ssr");
+const recircInput = document.getElementById("recirc");
+const ldsSize     = document.getElementById("lds_size");
 //Buttons
 // const submitBtn = document.getElementById("submit_button");
 //       submitBtn.addEventListener('click', calcPack, false);
@@ -250,6 +250,7 @@ function calcPack(e) {
 
   const formValsObj = {};
 
+  let matchedArr  = [];
   let shipperSize = "";
   let oneBox      = false;
   let remainIndObj  = {
@@ -259,10 +260,10 @@ function calcPack(e) {
   };
 
 // create formValsObj from inputs
-  formValsObj.api     = parseInt(apis.value);
-  formValsObj.pold    = parseInt(polds.value);
-  formValsObj.ssr     = parseInt(ssrs.value);
-  formValsObj.recirc  = parseInt(recircs.value);
+  formValsObj.api     = parseInt(apiInput.value);
+  formValsObj.pold    = parseInt(poldInput.value);
+  formValsObj.ssr     = parseInt(ssrInput.value);
+  formValsObj.recirc  = parseInt(recircInput.value);
   formValsObj.ldsSize = parseInt(ldsSize.value);
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
 
@@ -273,7 +274,9 @@ function calcPack(e) {
      && formValsObj.recirc     <= ldsScenarios[i].recirc
      && formValsObj.ldsSize    <= ldsScenarios[i].ldsSize)
     {
-    console.log("Matched!", [i]);
+    // console.log("Matched!", [i]);
+    // matchedArr.push(ldsScenarios[i]);
+    // console.log(matchedArr);
     shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
     message.innerHTML = "One box required:<br>" + shipperSize;
     return oneBox = true;
@@ -284,30 +287,32 @@ function calcPack(e) {
       message.innerHTML = "Please call the Warehouse for assistance."
       ldsScenarios.forEach((scenario, ind) =>{
         let indexRemain   = 0;
+        let positiveVals  = true;
         // Correct the way values are passed into the functions
         // or rewrite this as conditionals with more vars instead of a single function with 3 vars
-        let apiRemain     = calcRemain(api);
-        let poldSsrRemain = calcRemain(poldSsr);
-        let recircRemain  = calcRemain(recirc);
-        if((!apiRemain &&
-          !poldSsrRemain &&
-          !recircRemain) &&
-          (indexRemain < remainIndObj.remainder))
+        let apiRemain     = formValsObj.api - scenario.api;
+        let poldSsrRemain = formValsObj.poldSsr - scenario.poldSsr;
+        let recircRemain  = formValsObj.recirc - scenario.recirc;
+        calcRemain(apiRemain);
+        console.log(apiRemain);
+        calcRemain(poldSsrRemain);
+        console.log(poldSsrRemain);
+        calcRemain(recircRemain);
+        console.log(recircRemain + "\n");
+        if(poisitiveVals && indexRemain < remainIndObj.remainder)
            {
             remainIndObj.remainder = indexRemain;
             remainIndObj.index     = ind;
             console.log("Match at index " + ind + "\n with remainder of " + indexRemain);
         }
         // calculate remainder and test whether or not it is a negative value
-        function calcRemain(objKey) {
-          let remainder = parseInt(formValsObj.objKey - scenario.objKey);
-          console.log(formValsObj.objKey);
-          if(remainder > 0){
-            indexRemain += remainder;
-            return true;
-          } else { return false; }
+        function calcRemain() {
+          if(this >= 0){
+            indexRemain += this;
+          } else {
+            poisitiveVals = false;
+          }
         }
-
 
         });
     }
