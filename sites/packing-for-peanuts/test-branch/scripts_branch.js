@@ -16,7 +16,7 @@ form.addEventListener('submit', calcPack, false);
 const message = document.getElementById("message");
 // Scenario array objects
 const ldsScenarios  = [
-// START SM SHIPPER
+  // START SM SHIPPER
   {
     api     : 0,
     pold    : 18,
@@ -121,33 +121,33 @@ const ldsScenarios  = [
     recirc : 0,
     ldsSize: 150
   },
-// END SM SHIPPER
-// START BROWN BOX
-{
-  api     : 2,
-  pold    : 0,
-  ssr     : 0,
-  poldSsr : 0,
-  recirc  : 2,
-  ldsSize : 200
-},
-{
-  api     : 1,
-  pold    : 2,
-  ssr     : 0,
-  poldSsr : 2,
-  recirc  : 2,
-  ldsSize : 200
-},
-{
-  api     : 0,
-  pold    : 4,
-  ssr     : 0,
-  poldSsr : 4,
-  recirc  : 2,
-  ldsSize : 200
-}
-// END BROWN BOX
+  // END SM SHIPPER
+  // START BROWN BOX
+  {
+    api     : 2,
+    pold    : 0,
+    ssr     : 0,
+    poldSsr : 0,
+    recirc  : 2,
+    ldsSize : 200
+  },
+  {
+    api     : 1,
+    pold    : 2,
+    ssr     : 0,
+    poldSsr : 2,
+    recirc  : 2,
+    ldsSize : 200
+  },
+  {
+    api     : 0,
+    pold    : 4,
+    ssr     : 0,
+    poldSsr : 4,
+    recirc  : 2,
+    ldsSize : 200
+  }
+  // END BROWN BOX
 ];
 const poldScenarios = [
   {
@@ -250,16 +250,10 @@ function calcPack(e) {
 
   const formValsObj = {};
 
-  let matchedArr  = [];
   let shipperSize = "";
   let oneBox      = false;
-  let remainIndObj  = {
-    // initialize remainder higher than potential remainder so that one may succeed
-    remainder : 100,
-    index     : 0
-  };
 
-// create formValsObj from inputs
+  // create formValsObj from inputs
   formValsObj.api     = parseInt(apiInput.value);
   formValsObj.pold    = parseInt(poldInput.value);
   formValsObj.ssr     = parseInt(ssrInput.value);
@@ -267,61 +261,36 @@ function calcPack(e) {
   formValsObj.ldsSize = parseInt(ldsSize.value);
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
 
-// loop through ldsScenarios test if oneBox = true
-  for (var i = 0; i < ldsScenarios.length; i++) {
-    if (formValsObj.api        <= ldsScenarios[i].api
-     && formValsObj.poldSsr    <= ldsScenarios[i].poldSsr
-     && formValsObj.recirc     <= ldsScenarios[i].recirc
-     && formValsObj.ldsSize    <= ldsScenarios[i].ldsSize)
-    {
-    // console.log("Matched!", [i]);
-    // matchedArr.push(ldsScenarios[i]);
-    // console.log(matchedArr);
+  // loop through ldsScenarios test if oneBox = true
+
+  oneBox = oneBoxFunc();
+  if (oneBox) {
     shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
     message.innerHTML = "One box required:<br>" + shipperSize;
-    return oneBox = true;
-    break;
-    }
-};
-  if (!oneBox) {
-      message.innerHTML = "Please call the Warehouse for assistance."
-      ldsScenarios.forEach((scenario, ind) =>{
-        let indexRemain   = 0;
-        let positiveVals  = true;
-        // Correct the way values are passed into the functions
-        // or rewrite this as conditionals with more vars instead of a single function with 3 vars
-        let apiRemain     = formValsObj.api - scenario.api;
-        let poldSsrRemain = formValsObj.poldSsr - scenario.poldSsr;
-        let recircRemain  = formValsObj.recirc - scenario.recirc;
-        calcRemain(apiRemain);
-        console.log(apiRemain);
-        calcRemain(poldSsrRemain);
-        console.log(poldSsrRemain);
-        calcRemain(recircRemain);
-        console.log(recircRemain + "\n");
-        if(poisitiveVals && indexRemain < remainIndObj.remainder)
-           {
-            remainIndObj.remainder = indexRemain;
-            remainIndObj.index     = ind;
-            console.log("Match at index " + ind + "\n with remainder of " + indexRemain);
-        }
-        // calculate remainder and test whether or not it is a negative value
-        function calcRemain() {
-          if(this >= 0){
-            indexRemain += this;
-          } else {
-            poisitiveVals = false;
-          }
-        }
-
-        });
-    }
+  } else if (!oneBox) {
+    message.innerHTML = "Please call the Warehouse for assistance."
 
   }
 
-// tool check scenario object poldSsr count
-function checkPoldSsr(scenArray){
-  scenArray.forEach((scenario, ind) => {
-    return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + " correct") : console.log("Check scenario at index " + ind);
-  });
-};
+  // Create oneBoxFunc to use for loop through formValsObj <= ldsScenarios
+  function oneBoxFunc() {
+    for (var i = 0; i < ldsScenarios.length; i++) {
+      if (formValsObj.api        <= ldsScenarios[i].api
+        && formValsObj.poldSsr    <= ldsScenarios[i].poldSsr
+        && formValsObj.recirc     <= ldsScenarios[i].recirc
+        && formValsObj.ldsSize    <= ldsScenarios[i].ldsSize)
+        {
+          return oneBox = true;
+          break;
+        } 
+      }
+    } // End oneBoxFunc
+
+} // End calcPack
+
+  // tool check scenario object poldSsr count
+  function checkPoldSsr(scenArray){
+    scenArray.forEach((scenario, ind) => {
+      return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + " correct") : console.log("Check scenario at index " + ind);
+    });
+  };
