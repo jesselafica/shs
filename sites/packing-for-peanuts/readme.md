@@ -8,6 +8,8 @@ turn the calc pack initial loop into a function that can be invoked here
 
 
 Add accessory/POLD only for size
+Add input for LDC
+--> if >75' then POLD box required
 
 PHASE 1
 Create initial application that will only look at the input values and see if they exceed the 13 possible scenarios
