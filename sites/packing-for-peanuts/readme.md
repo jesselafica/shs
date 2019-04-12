@@ -41,15 +41,13 @@ Add logic for 075 up to 150, 200 and up ignore i.e. option inputs
 
 ADD LDS SIZE INPUT FIELDS
 
->=2" systems
+##### >=2" systems
 POLD Only
 
-C O S M E T I C
-/////////////////////////////////////////////////////////////
-  Remove reset Button
-  print out what was added on submit
-  clear inputs i.e. reset form on submit
-  Add input for PAM-1 Relays
-  --> PAM-1(1) = POLD(2)
-  Add limit to inputs i.e. max=""
-/////////////////////////////////////////////////////////////
+### C O S M E T I C
+  1. Remove reset Button
+  2. print out what was added on submit
+  3. clear inputs i.e. reset form on submit
+  4. Add input for PAM-1 Relays
+  > --> PAM-1(1) = POLD(2)
+  5. Add limit to inputs i.e. max=""
