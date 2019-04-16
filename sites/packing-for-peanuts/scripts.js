@@ -252,6 +252,7 @@ function calcPack(e) {
 
   let shipperSize = "";
   let oneBox      = false;
+  let twoBox      = false;
 
   // create formValsObj from inputs
   formValsObj.api     = parseInt(apiInput.value);
@@ -268,17 +269,37 @@ function calcPack(e) {
     shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
     message.innerHTML = "One box required:<br>" + shipperSize;
   } else if (!oneBox) {
-    message.innerHTML = "Please call the Warehouse for assistance."
+
+    for(var i = 0; i < poldScenarios.length && twoBox === false; i++){
+      for(var c = 0; c < ldsScenarios.length && twoBox === false; c++){
+        if(formValsObj.api      <= poldScenarios[i].api + ldsScenarios[c].api
+        && formValsObj.poldSsr  <= poldScenarios[i].poldSsr + ldsScenarios[c].poldSsr
+        && formValsObj.recirc   <= poldScenarios[i].recirc + ldsScenarios[c].recirc
+        && formValsObj.ldsSize  <= ldsScenarios[c].ldsSize){
+          twoBox = true;
+          break;
+        }
+      }
+    }
+    if (twoBox) {
+      shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
+      message.innerHTML = "Two boxes required:<br>" +
+                          shipperSize + "<br>" +
+                          "13 x 10 x 5";
+
+    } else if (!twoBox){
+      message.innerHTML = "Please call the Warehouse for assistance.";
+    }
 
   }
 
   // Create oneBoxFunc to use for loop through formValsObj <= ldsScenarios
   function oneBoxFunc() {
     for (var i = 0; i < ldsScenarios.length; i++) {
-      if (formValsObj.api        <= ldsScenarios[i].api
-        && formValsObj.poldSsr    <= ldsScenarios[i].poldSsr
-        && formValsObj.recirc     <= ldsScenarios[i].recirc
-        && formValsObj.ldsSize    <= ldsScenarios[i].ldsSize)
+      if (formValsObj.api       <= ldsScenarios[i].api
+        && formValsObj.poldSsr  <= ldsScenarios[i].poldSsr
+        && formValsObj.recirc   <= ldsScenarios[i].recirc
+        && formValsObj.ldsSize  <= ldsScenarios[i].ldsSize)
         {
           return oneBox = true;
           break;
