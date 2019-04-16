@@ -269,7 +269,7 @@ function calcPack(e) {
     shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
     message.innerHTML = "One box required:<br>" + shipperSize;
   } else if (!oneBox) {
-
+// loop through pold scenarios test if twoBox = true
     for(var i = 0; i < poldScenarios.length && twoBox === false; i++){
       for(var c = 0; c < ldsScenarios.length && twoBox === false; c++){
         if(formValsObj.api      <= poldScenarios[i].api + ldsScenarios[c].api
