@@ -264,7 +264,7 @@ function calcPack(e) {
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
 
   // check if lds or poldOnly
-  poldOnly = (formValsObj.ldsSize === 9000) true ? false;
+  poldOnly = (formValsObj.ldsSize === 9000) ? true : false;
 
   if (poldOnly) {
     shipperSize = "13 x 10 x 5";
