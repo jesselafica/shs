@@ -250,6 +250,7 @@ function calcPack(e) {
 
   const formValsObj = {};
 
+  let poldOnly    = false;
   let shipperSize = "";
   let oneBox      = false;
   let twoBox      = false;
@@ -262,11 +263,18 @@ function calcPack(e) {
   formValsObj.ldsSize = parseInt(ldsSize.value);
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
 
+  // check if lds or poldOnly
+
+  //if poldOnly
+  shipperSize = formValsObj.ldsSize;
+
+  //else if !poldOnly
+  shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
+
   // loop through ldsScenarios test if oneBox = true
 
-  oneBox = oneBoxFunc();
+  oneBox = ldsBoxFunc();
   if (oneBox) {
-    shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
     message.innerHTML = "One box required:<br>" + shipperSize;
   } else if (!oneBox) {
 // loop through pold scenarios test if twoBox = true
@@ -282,7 +290,6 @@ function calcPack(e) {
       }
     }
     if (twoBox) {
-      shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
       message.innerHTML = "Two boxes required:<br>" +
                           shipperSize + "<br>" +
                           "13 x 10 x 5";
@@ -293,8 +300,8 @@ function calcPack(e) {
 
   }
 
-  // Create oneBoxFunc to use for loop through formValsObj <= ldsScenarios
-  function oneBoxFunc() {
+  // Create ldsBoxFunc to use for loop through formValsObj <= ldsScenarios
+  function ldsBoxFunc() {
     for (var i = 0; i < ldsScenarios.length; i++) {
       if (formValsObj.api       <= ldsScenarios[i].api
         && formValsObj.poldSsr  <= ldsScenarios[i].poldSsr
@@ -305,7 +312,7 @@ function calcPack(e) {
           break;
         }
       }
-    } // End oneBoxFunc
+    } // End ldsBoxFunc
 
 } // End calcPack
 
