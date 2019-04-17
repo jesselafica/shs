@@ -264,16 +264,40 @@ function calcPack(e) {
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
 
   // check if lds or poldOnly
+  poldOnly = (formValsObj.ldsSize === 9000) true ? false;
 
-  //if poldOnly
-  shipperSize = formValsObj.ldsSize;
-
-  //else if !poldOnly
-  shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
+  if (poldOnly) {
+    shipperSize = "13 x 10 x 5";
+    // for loop --> check if <= poldScenarios.key
+    for (var i = 0; i < poldScenarios.length && oneBox === false; i++) {
+      if(formValsObj.api      <= poldScenarios[i].api
+      && formValsObj.poldSsr  <= poldScenarios[i].poldSsr - 2
+      && formValsObj.recirc   <= poldScenarios[i].recirc){
+        oneBox = true;
+        break;
+      }
+    }
+    if (!oneBox) {
+      // loop through pold scenarios test if twoBox = true
+          for(var i = 0; i < poldScenarios.length && twoBox === false; i++){
+            for(var c = 0; c < poldScenarios.length && twoBox === false; c++){
+              if(formValsObj.api      <= poldScenarios[i].api + poldScenarios[c].api
+              && formValsObj.poldSsr  <= (poldScenarios[i].poldSsr - 2) + poldScenarios[c].poldSsr
+              && formValsObj.recirc   <= poldScenarios[i].recirc + poldScenarios[c].recirc){
+                twoBox = true;
+                break;
+              }
+            }
+          }
+    }
+    // && <= (poldScenarios.poldSsr - 2)
+    // set oneBox value
+  } else if (!poldOnly){
+    shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
+    oneBox = ldsBoxFunc();
+  }
 
   // loop through ldsScenarios test if oneBox = true
-
-  oneBox = ldsBoxFunc();
   if (oneBox) {
     message.innerHTML = "One box required:<br>" + shipperSize;
   } else if (!oneBox) {
