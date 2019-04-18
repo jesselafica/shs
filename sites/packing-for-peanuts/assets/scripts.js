@@ -6,14 +6,16 @@ const ssrInput    = document.getElementById("ssr");
 const recircInput = document.getElementById("recirc");
 const ldsSize     = document.getElementById("lds_size");
 //Buttons
-// const submitBtn = document.getElementById("submit_button");
-//       submitBtn.addEventListener('click', calcPack, false);
 const resetBtn  = document.getElementById("reset_button");
 const form      = document.getElementById("pack_form");
 form.addEventListener('submit', calcPack, false);
 
 // Message
-const message = document.getElementById("message");
+// const message      = document.getElementById("message");
+const modal      = document.getElementById("modal");
+const modalBody  = document.getElementById("modal_body");
+const modalTitle = document.getElementById("modal_title");
+
 // Scenario array objects
 const ldsScenarios  = [
   // START SM SHIPPER
@@ -299,7 +301,8 @@ function calcPack(e) {
 
   // loop through ldsScenarios test if oneBox = true
   if (oneBox) {
-    message.innerHTML = "One box required:<br>" + shipperSize;
+    modalTitle.innerHTML = "One box required:";
+    modalBody.innerHTML  = shipperSize;
   } else if (!oneBox) {
 // loop through pold scenarios test if twoBox = true
     for(var i = 0; i < poldScenarios.length && twoBox === false; i++){
@@ -314,12 +317,11 @@ function calcPack(e) {
       }
     }
     if (twoBox) {
-      message.innerHTML = "Two boxes required:<br>" +
-                          shipperSize + "<br>" +
-                          "13 x 10 x 5";
-
+      modalTitle.innerHTML = "Two boxes required:";
+      modalBody.innerHTML  = shipperSize + "<br>" + "13 x 10 x 5";
     } else if (!twoBox){
-      message.innerHTML = "Please call the Warehouse for assistance.";
+      modalTitle.innerHTML = "Uh oh...";
+      modalBody.innerHTML  = "Please call the Warehouse for assistance.";
     }
 
   }
