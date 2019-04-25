@@ -1,11 +1,13 @@
 # TO DO:
 ### FIX the !oneBox logic
---> key names being passed into function is broken
---> loop through each poldScenarios and (formValsObj - poldScenarios[i]) before
-looping through ldsScenarios again (formvalsObj <= ldsScenarios[i])
-turn the calc pack initial loop into a function that can be invoked here
-!oneBox and during the initial oneBox
 
+#### New SCENARIOS (to be adjusted)
+oneBox limit
+api: 2
+recirc: 2
+
+api: 4
+recirc: 1
 
 Add accessory/POLD only for size
 Add input for LDC
