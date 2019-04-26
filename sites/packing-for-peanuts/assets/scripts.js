@@ -24,15 +24,15 @@ const ldsScenarios  = [
     pold    : 18,
     ssr     : 0,
     poldSsr : 18,
-    recirc  : 1,
+    recirc  : 0,
     ldsSize: 150
   },
   {
     api     : 1,
-    pold    : 18,
+    pold    : 14,
     ssr     : 0,
-    poldSsr : 18,
-    recirc  : 0,
+    poldSsr : 14,
+    recirc  : 1,
     ldsSize: 150
   },
   {
@@ -72,31 +72,15 @@ const ldsScenarios  = [
     pold    : 0,
     ssr     : 0,
     poldSsr : 0,
-    recirc  : 3,
-    ldsSize: 150
-  },
-  {
-    api     : 3,
-    pold    : 0,
-    ssr     : 0,
-    poldSsr : 0,
     recirc  : 2,
     ldsSize: 150
   },
   {
     api     : 3,
-    pold    : 7,
+    pold    : 5,
     ssr     : 0,
-    poldSsr : 7,
+    poldSsr : 5,
     recirc  : 1,
-    ldsSize: 150
-  },
-  {
-    api     : 3,
-    pold    : 10,
-    ssr     : 0,
-    poldSsr : 10,
-    recirc  : 0,
     ldsSize: 150
   },
   {
@@ -104,23 +88,7 @@ const ldsScenarios  = [
     pold   : 0,
     ssr    : 0,
     poldSsr: 0,
-    recirc : 2,
-    ldsSize: 150
-  },
-  {
-    api    : 6,
-    pold   : 0,
-    ssr    : 0,
-    poldSsr: 0,
     recirc : 1,
-    ldsSize: 150
-  },
-  {
-    api    : 7,
-    pold   : 0,
-    ssr    : 0,
-    poldSsr: 0,
-    recirc : 0,
     ldsSize: 150
   },
   // END SM SHIPPER
