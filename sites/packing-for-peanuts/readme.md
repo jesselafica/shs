@@ -2,12 +2,7 @@
 ### FIX the !oneBox logic
 
 #### New SCENARIOS (to be adjusted)
-oneBox limit
-api: 2
-recirc: 2
 
-api: 4
-recirc: 1
 
 Add accessory/POLD only for size
 Add input for LDC
