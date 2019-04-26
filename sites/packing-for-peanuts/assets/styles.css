@@ -14,3 +14,9 @@ select {
   padding: 0;
   text-align: center;
 }
+.green-text {
+  color: #28a745;
+}
+.small-text {
+  font-size: 0.9rem;
+}
