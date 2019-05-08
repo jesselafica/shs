@@ -1,12 +1,11 @@
 # TO DO:
-### FIX the !oneBox logic
 
-#### New SCENARIOS (to be adjusted)
-
-
-Add accessory/POLD only for size
-Add input for LDC
+###What's next?
+#####Add checkbox for accessory/POLD only for size
+#####Add input for LDC
 --> if >75' then POLD box required
+#####Add Checkbox for Electrical Junction Box 
+#####
 
 PHASE 1
 Create initial application that will only look at the input values and see if they exceed the 13 possible scenarios
