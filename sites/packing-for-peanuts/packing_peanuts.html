@@ -43,6 +43,17 @@
           <form id="pack_form">
             <!-- N E W - F O R M - R O W -->
             <div class="form-row">
+              <!-- <div class="col">
+              <label></label>
+            </div> -->
+            <div class="col">
+              <input type="radio" name="type_radios" id="type_radios" value="lds"><label for="lds">LDS Valve</label>
+              <input type="radio" name="type_radios" id="type_radios" value="pold" checked>
+              <input type="radio" name="type_radios" id="type_radios" value="accessories">
+            </div>
+          </div>
+            <!-- N E W - F O R M - R O W -->
+            <div class="form-row">
               <div class="col">
                 <label for="lds_size">Leak Defense System size?</label>
               </div>
@@ -51,7 +62,7 @@
                   <select required id="lds_size" placeholder="-" class="form-control">
                     <!-- <option value="POLD">POLD</option> -->
                     <option value="">LDS-3-...</option>
-                    <option value="9000">LDS-3-POLD</option>
+                    <!-- <option value="9000">LDS-3-POLD</option> -->
                     <option value="200">LDS-3-200</option>
                     <option value="150">LDS-3-150</option>
                     <option value="125">LDS-3-125</option>

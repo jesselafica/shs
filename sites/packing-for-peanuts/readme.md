@@ -4,8 +4,12 @@
 #####Add checkbox for accessory/POLD only for size
 #####Add input for LDC
 --> if >75' then POLD box required
-#####Add Checkbox for Electrical Junction Box 
-#####
+#####Use radio buttons to determine: LDS vs POLD vs Accessories only
+--> if POLD only set formValsObj.ldsSize === 9000
+--> if Accessories only set formValsObj.ldsSize === 9999?
+If lds radio checked show ldsSize else hide for accessories and POLD only
+#####Add Checkbox for Electrical Junction Box
+#####2 JUNC BOXES = 14X14X14
 
 PHASE 1
 Create initial application that will only look at the input values and see if they exceed the 13 possible scenarios

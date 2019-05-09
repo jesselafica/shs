@@ -5,6 +5,7 @@ const poldInput   = document.getElementById("pold");
 const ssrInput    = document.getElementById("ssr");
 const recircInput = document.getElementById("recirc");
 const ldsSize     = document.getElementById("lds_size");
+const juncBox     = document.getElementById("junc_box");
 //Buttons
 const resetBtn  = document.getElementById("reset_button");
 const form      = document.getElementById("pack_form");
@@ -269,8 +270,13 @@ function calcPack(e) {
 
   // loop through ldsScenarios test if oneBox = true
   if (oneBox) {
-    modalTitle.innerHTML = "One box required:";
-    modalBody.innerHTML  = shipperSize;
+    if (juncBox.checked) {
+      modalTitle.innerHTML = "Two boxes required:";
+      modalBody.innerHTML  = shipperSize + "<br>16 x 12 x 8 (Junction Box)";
+    } else {
+      modalTitle.innerHTML = "One box required:";
+      modalBody.innerHTML  = shipperSize;
+    }
   } else if (!oneBox) {
 // loop through pold scenarios test if twoBox = true
     for(var i = 0; i < poldScenarios.length && twoBox === false; i++){
@@ -285,11 +291,16 @@ function calcPack(e) {
       }
     }
     if (twoBox) {
-      modalTitle.innerHTML = "Two boxes required:";
-      modalBody.innerHTML  = shipperSize + "<br>" + "13 x 10 x 5";
+      if (juncBox.checked) {
+        modalTitle.innerHTML = "Three boxes required:";
+        modalBody.innerHTML  = shipperSize + "<br>13 x 10 x 5<br>16 x 12 x 8 (Junction Box)";
+      } else {
+        modalTitle.innerHTML = "Two boxes required:";
+        modalBody.innerHTML  = shipperSize + "<br>13 x 10 x 5";
+      }
     } else if (!twoBox){
-      modalTitle.innerHTML = "Uh oh...";
-      modalBody.innerHTML  = "Please call the Warehouse for assistance.";
+      modalTitle.innerHTML = "Call 760-884-3734";
+      modalBody.innerHTML  = "We'd like to help with this one.";
     }
 
   }
