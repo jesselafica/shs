@@ -6,6 +6,9 @@
   width: 125px;
   text-align: center;
 }
+input[type="radio"]{
+  width: 13px;
+}
 .form-control {
   padding: 0;
   /* text-align: center; */
@@ -20,3 +23,9 @@ select {
 .small-text {
   font-size: 0.9rem;
 }
+/* .radio-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+} */

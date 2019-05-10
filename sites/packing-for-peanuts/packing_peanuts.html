@@ -12,28 +12,28 @@
 </head>
 <body>
   <!-- Button trigger modal -->
-<button type="button" id="modal_button" class="d-none" data-toggle="modal" data-target="#exampleModalCenter"></button>
+  <button type="button" id="modal_button" class="d-none" data-toggle="modal" data-target="#exampleModalCenter"></button>
 
-<!-- BOOTSTRAP MODAL -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal_title">Empty box?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p id="modal_body">Please close this window and add items.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <!-- BOOTSTRAP MODAL -->
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal_title">Empty box?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="modal_body">Please close this window and add items.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- END BOOTSTRAP MODAL -->
+  <!-- END BOOTSTRAP MODAL -->
 
   <div class="container">
     <div class="jumbotron">
@@ -46,107 +46,107 @@
               <!-- <div class="col">
               <label></label>
             </div> -->
-            <div class="col">
-              <input type="radio" name="type_radios" id="type_radios" value="lds"><label for="lds">LDS Valve</label>
-              <input type="radio" name="type_radios" id="type_radios" value="pold" checked>
-              <input type="radio" name="type_radios" id="type_radios" value="accessories">
+            <div class="col radio-group">
+              <input type="radio" name="type_radios" id="lds_radio" value="lds" checked><label for="lds_radio">LDS Valve</label>
+              <input type="radio" name="type_radios" id="pold_radio" value="pold"><label for="pold_radio">POLD Only</label>
+              <input type="radio" name="type_radios" id="accessories_radio" value="accessories"><label for="accessories_radio">Accessories Only</label>
             </div>
           </div>
-            <!-- N E W - F O R M - R O W -->
-            <div class="form-row">
-              <div class="col">
-                <label for="lds_size">Leak Defense System size?</label>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <select required id="lds_size" placeholder="-" class="form-control">
-                    <!-- <option value="POLD">POLD</option> -->
-                    <option value="">LDS-3-...</option>
-                    <!-- <option value="9000">LDS-3-POLD</option> -->
-                    <option value="200">LDS-3-200</option>
-                    <option value="150">LDS-3-150</option>
-                    <option value="125">LDS-3-125</option>
-                    <option value="100">LDS-3-100</option>
-                    <option value="075">LDS-3-075</option>
-                  </select>
-                </div>
+          <!-- N E W - F O R M - R O W -->
+          <div class="form-row">
+            <div class="col">
+              <label for="lds_size">Leak Defense System size?</label>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <select required id="lds_size" placeholder="-" class="form-control">
+                  <!-- <option value="POLD">POLD</option> -->
+                  <option value="">LDS-3-...</option>
+                  <!-- <option value="9000">LDS-3-POLD</option> -->
+                  <option value="200">LDS-3-200</option>
+                  <option value="150">LDS-3-150</option>
+                  <option value="125">LDS-3-125</option>
+                  <option value="100">LDS-3-100</option>
+                  <option value="075">LDS-3-075</option>
+                </select>
               </div>
             </div>
-            <!-- N E W - F O R M - R O W -->
-            <div class="form-row">
-              <div class="col">
-                <label for="junc_box">Electrical Junction Box?</label>
-              </div>
-              <div class="col">
-                <input type="checkbox" id="junc_box">
-              </div>
+          </div>
+          <!-- N E W - F O R M - R O W -->
+          <div class="form-row">
+            <div class="col">
+              <label for="junc_box">Electrical Junction Box?</label>
             </div>
-            <!-- N E W - F O R M - R O W -->
-            <div class="form-row">
-              <div class="col">
-                <label for="api">How many API's?</label>
-              </div>
-              <div class="col">
-                <input required type="number" min="0" id="api" placeholder="0" value="0">
-              </div>
+            <div class="col">
+              <input type="checkbox" id="junc_box">
             </div>
-            <!-- N E W - F O R M - R O W -->
-            <div class="form-row">
-              <div class="col">
-                <label for="pold">How many POLD's?</label>
-              </div>
-              <div class="col">
-                <input required type="number" min="0" id="pold" placeholder="0" value="0">
-              </div>
+          </div>
+          <!-- N E W - F O R M - R O W -->
+          <div class="form-row">
+            <div class="col">
+              <label for="api">How many API's?</label>
             </div>
-            <!-- N E W - F O R M - R O W -->
-            <div class="form-row">
-              <div class="col">
-                <label for="ssr">How many SSR's?</label>
-              </div>
-              <div class="col">
-                <input required type="number" min="0" id="ssr" placeholder="0" value="0">
-              </div>
+            <div class="col">
+              <input required type="number" min="0" id="api" placeholder="0" value="0">
             </div>
-            <!-- N E W - F O R M - R O W -->
-            <div class="form-row">
-              <div class="col">
-                <label for="recirc">Total 4hr Timers & Recirc Pump Switches?</label>
-              </div>
-              <div class="col">
-                <input required type="number" min="0" id="recirc" placeholder="0" value="0">
-              </div>
+          </div>
+          <!-- N E W - F O R M - R O W -->
+          <div class="form-row">
+            <div class="col">
+              <label for="pold">How many POLD's?</label>
             </div>
-            <!-- N E W - F O R M - R O W -->
-            <div class="form-row">
-              <div class="col">
-                <input type="reset" id="reset_button" class="btn btn-danger">
-              </div>
-              <div class="col">
-                <input type="submit" value="Package!" id="submit_button" class="btn btn-success" data-toggle="modal" data-target="#modal">
-              </div>
+            <div class="col">
+              <input required type="number" min="0" id="pold" placeholder="0" value="0">
             </div>
-            <section>
-            </section>
-          </form>
-        </div>
-        <div class="card col-5">
-          <h1 class="display-5" id="message">Add items and ship!</h1>
-          <p>Adjust the size and number of each accessory before pressing the <strong class="font-weight-bold green-text">Package!</strong> button. </p>
-          <p>Don't worry about any accessories you don't see on this list, we've got you covered.</p>
-          <p class="small-text font-italic">If you have any questions, feel free to email jessel@senthydro.com.</p>
-        </div>
+          </div>
+          <!-- N E W - F O R M - R O W -->
+          <div class="form-row">
+            <div class="col">
+              <label for="ssr">How many SSR's?</label>
+            </div>
+            <div class="col">
+              <input required type="number" min="0" id="ssr" placeholder="0" value="0">
+            </div>
+          </div>
+          <!-- N E W - F O R M - R O W -->
+          <div class="form-row">
+            <div class="col">
+              <label for="recirc">Total 4hr Timers & Recirc Pump Switches?</label>
+            </div>
+            <div class="col">
+              <input required type="number" min="0" id="recirc" placeholder="0" value="0">
+            </div>
+          </div>
+          <!-- N E W - F O R M - R O W -->
+          <div class="form-row">
+            <div class="col">
+              <input type="reset" id="reset_button" class="btn btn-danger">
+            </div>
+            <div class="col">
+              <input type="submit" value="Package!" id="submit_button" class="btn btn-success" data-toggle="modal" data-target="#modal">
+            </div>
+          </div>
+          <section>
+          </section>
+        </form>
+      </div>
+      <div class="card col-5">
+        <h1 class="display-5" id="message">Add items and ship!</h1>
+        <p>Adjust the size and number of each accessory before pressing the <strong class="font-weight-bold green-text">Package!</strong> button. </p>
+        <p>Don't worry about any accessories you don't see on this list, we've got you covered.</p>
+        <p class="small-text font-italic">If you have any questions, feel free to email jessel@senthydro.com.</p>
       </div>
     </div>
-    <footer>
-
-    </footer>
   </div>
+  <footer>
+
+  </footer>
+</div>
 <!-- SCRIPT FILES -->
-  <script src="assets/scripts.js" charset="utf-8"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="assets/scripts.js" charset="utf-8"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

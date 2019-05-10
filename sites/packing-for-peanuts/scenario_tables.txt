@@ -1,3 +1,29 @@
+LDS w/ CP (and power supply), 24VAC, and shipper (14x14x14 or 19x12x7 depending)
+075  =  9.05
+100  =  9.95
+125  =  10.6
+150  =  12.2
+200  =  17.4
+
+SCV
+075  =  0.5
+100  =  0.75
+125  =  1.2
+150  =  1.6
+200  =  2.35
+
+API + Power Supply = 0.6
+
+POLD + Batteries = 0.2
+
+13x10x5 = 0.75
+
+Recirc & 4hr = 0.8
+
+Elec Junc Box + 14x14x14 = 5.45
+
+Backflow Preventer Bag = 1.2
+
 LDS Small Shipper
 smShipperScenarios
 19x12x7
