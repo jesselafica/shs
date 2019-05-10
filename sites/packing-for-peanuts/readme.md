@@ -9,6 +9,7 @@
 --> if Accessories only set formValsObj.ldsSize === 9999?
 If lds radio checked show ldsSize else hide for accessories and POLD only
 #####Add Checkbox for Electrical Junction Box
+#####Add weights for each accessory and provide sum for each package type.
 #####2 JUNC BOXES = 14X14X14
 
 PHASE 1
