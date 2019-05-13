@@ -1,21 +1,29 @@
 // Initialize variables
 // Inputs
-const apiInput    = document.getElementById("api");
-const poldInput   = document.getElementById("pold");
-const ssrInput    = document.getElementById("ssr");
-const recircInput = document.getElementById("recirc");
-const ldsSize     = document.getElementById("lds_size");
-const juncBox     = document.getElementById("junc_box");
+const apiInput    = document.getElementById('api');
+const poldInput   = document.getElementById('pold');
+const ssrInput    = document.getElementById('ssr');
+const recircInput = document.getElementById('recirc');
+const ldsSize     = document.getElementById('lds_size');
+const juncBox     = document.getElementById('junc_box');
+const ldsRadio    = document.getElementById('lds_radio');
+const poldRadio   = document.getElementById('pold_radio');
+const apiRadio    = document.getElementById('api_radio');
 //Buttons
-const resetBtn  = document.getElementById("reset_button");
-const form      = document.getElementById("pack_form");
+const resetBtn  = document.getElementById('reset_button');
+const form      = document.getElementById('pack_form');
 form.addEventListener('submit', calcPack, false);
 
 // Message
-// const message      = document.getElementById("message");
-const modal      = document.getElementById("modal");
-const modalBody  = document.getElementById("modal_body");
-const modalTitle = document.getElementById("modal_title");
+// const message      = document.getElementById('message');
+const modal      = document.getElementById('modal');
+const modalBody  = document.getElementById('modal_body');
+const modalTitle = document.getElementById('modal_title');
+const radioBtns = document.getElementsByClassName('radio-btn');
+// add eventListeners to radioBtns for input disabling
+for (var i = 0; i < radioBtns.length; i++) {
+  radioBtns[i].addEventListener('click',disableRadios)
+}
 
 // Scenario array objects
 const ldsScenarios  = [
@@ -216,15 +224,14 @@ const poldScenarios = [
 
 // Declare functions
 function calcPack(e) {
-  // reinit vars and vals
+  // Reinit vars and vals
   e.preventDefault();
 
   const formValsObj = {};
-
-  let poldOnly    = false;
-  let shipperSize = "";
-  let oneBox      = false;
-  let twoBox      = false;
+  let orderType     = document.getElementById('id')
+  let oneBox        = false;
+  let twoBox        = false;
+  let shipperSize   = '';
 
   // create formValsObj from inputs
   formValsObj.api     = parseInt(apiInput.value);
@@ -234,11 +241,8 @@ function calcPack(e) {
   formValsObj.ldsSize = parseInt(ldsSize.value);
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
 
-  // check if lds or poldOnly
-  poldOnly = (formValsObj.ldsSize === 9000) ? true : false;
-
-  if (poldOnly) {
-    shipperSize = "13 x 10 x 5";
+  if (poldRadio.checked) {
+    shipperSize = '13 x 10 x 5';
     // for loop --> check if <= poldScenarios.key
     for (var i = 0; i < poldScenarios.length && oneBox === false; i++) {
       if(formValsObj.api      <= poldScenarios[i].api
@@ -263,18 +267,18 @@ function calcPack(e) {
     }
     // && <= (poldScenarios.poldSsr - 2)
     // set oneBox value
-  } else if (!poldOnly){
-    shipperSize = (formValsObj.ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
+  } else if (ldsRadio.checked){
+    shipperSize = (formValsObj.ldsSize < 200) ? '19 x 12 x 7' : '14 x 14 x 14';
     oneBox = ldsBoxFunc();
   }
 
   // loop through ldsScenarios test if oneBox = true
   if (oneBox) {
     if (juncBox.checked) {
-      modalTitle.innerHTML = "Two boxes required:";
-      modalBody.innerHTML  = shipperSize + "<br>16 x 12 x 8 (Junction Box)";
+      modalTitle.innerHTML = 'Two boxes required:';
+      modalBody.innerHTML  = shipperSize + '<br>16 x 12 x 8 (Junction Box)';
     } else {
-      modalTitle.innerHTML = "One box required:";
+      modalTitle.innerHTML = 'One box required:';
       modalBody.innerHTML  = shipperSize;
     }
   } else if (!oneBox) {
@@ -292,14 +296,14 @@ function calcPack(e) {
     }
     if (twoBox) {
       if (juncBox.checked) {
-        modalTitle.innerHTML = "Three boxes required:";
-        modalBody.innerHTML  = shipperSize + "<br>13 x 10 x 5<br>16 x 12 x 8 (Junction Box)";
+        modalTitle.innerHTML = 'Three boxes required:';
+        modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5<br>16 x 12 x 8 (Junction Box)';
       } else {
-        modalTitle.innerHTML = "Two boxes required:";
-        modalBody.innerHTML  = shipperSize + "<br>13 x 10 x 5";
+        modalTitle.innerHTML = 'Two boxes required:';
+        modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5';
       }
     } else if (!twoBox){
-      modalTitle.innerHTML = "Call 760-884-3734";
+      modalTitle.innerHTML = 'Call 760-884-3734';
       modalBody.innerHTML  = "We'd like to help with this one.";
     }
 
@@ -320,10 +324,18 @@ function calcPack(e) {
     } // End ldsBoxFunc
 
 } // End calcPack
+// Disables/enables ldsSize select input based on type_radios
+function disableRadios(){
+  if (!ldsRadio.checked) {
+    ldsSize.disabled = true;
+  } else {
+    ldsSize.disabled = false;
+  }
+}
 
   // tool check scenario object poldSsr count
-  function checkPoldSsr(scenArray){
-    scenArray.forEach((scenario, ind) => {
-      return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + " correct") : console.log("Check scenario at index " + ind);
-    });
-  };
+  // function checkPoldSsr(scenArray){
+  //   scenArray.forEach((scenario, ind) => {
+  //     return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + ' correct') : console.log('Check scenario at index ' + ind);
+  //   });
+  // };

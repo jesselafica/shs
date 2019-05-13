@@ -1,13 +1,15 @@
 # TO DO:
 
 ###What's next?
-#####Add checkbox for accessory/POLD only for size
+#####ADD ACCESSORIES LOGIC!
 #####Add input for LDC
 --> if >75' then POLD box required
 #####Use radio buttons to determine: LDS vs POLD vs Accessories only
 --> if POLD only set formValsObj.ldsSize === 9000
 --> if Accessories only set formValsObj.ldsSize === 9999?
 If lds radio checked show ldsSize else hide for accessories and POLD only
+#####Backflow Preventer
+--> 1 backflow preventer = 13x10x5
 #####Add Checkbox for Electrical Junction Box
 --> 2 electrical junction boxes = 14x14x14
 #####Add weights for each accessory and provide sum for each package type.
