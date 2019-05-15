@@ -326,11 +326,8 @@ function calcPack(e) {
 } // End calcPack
 // Disables/enables ldsSize select input based on type_radios
 function disableRadios(){
-  if (!ldsRadio.checked) {
-    ldsSize.disabled = true;
-  } else {
-    ldsSize.disabled = false;
-  }
+  ldsSize.disabled = (!ldsRadio.checked) ? true : false;
+  juncBox.disabled = (poldRadio.checked) ? true : false;
 }
 
   // tool check scenario object poldSsr count
