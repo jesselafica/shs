@@ -9,6 +9,9 @@
 input[type="radio"]{
   width: 13px;
 }
+input[type="radio"] + label {
+  margin: 0 1rem;
+}
 .form-control {
   padding: 0;
   /* text-align: center; */
