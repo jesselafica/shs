@@ -44,14 +44,14 @@
             <!-- N E W - F O R M - R O W -->
             <div class="form-row">
             <div class="col btn-group btn-group-toggle radio-group" data-toggle="buttons">
-              <label class="btn btn-secondary active" for="lds_radio">
-                <input type="radio" class="radio-btn" name="options" id="lds_radio" checked>LDS Valve
+              <label class="btn btn-secondary radio-btn active" id="lds_radio" for="lds_radio">
+                <input type="radio" class="" name="options">LDS Valve
               </label>
-              <label class="btn btn-secondary" for="pold_radio">
-                <input type="radio" class="radio-btn" name="options" id="accessories_radio">Accessories Only
+              <label class="btn btn-secondary radio-btn" id="accessories_radio" for="pold_radio">
+                <input type="radio" class="" name="options">Accessories Only
               </label>
-              <label class="btn btn-secondary" for="accessories_radio">
-                <input type="radio" class="radio-btn" name="options" id="pold_radio">POLD Only
+              <label class="btn btn-secondary radio-btn" id="pold_radio" for="accessories_radio">
+                <input type="radio" class="" name="options">POLD Only
               </label>
             </div>
           </div>
@@ -75,11 +75,14 @@
           </div>
           <!-- N E W - F O R M - R O W -->
           <div class="form-row">
-            <div class="col">
-              <label for="junc_box">Electrical Junction Box?</label>
-            </div>
-            <div class="col">
-              <input type="checkbox" id="junc_box">
+            <div class="col btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary" id="backflow_bag">
+                <input type="radio" name="options">Backflow Preventer Bag
+              </label>
+
+              <label class="btn btn-secondary" id="junc_box">
+                <input type="radio" name="options">Electrical Junction Box
+              </label>
             </div>
           </div>
           <!-- N E W - F O R M - R O W -->

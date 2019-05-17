@@ -23,6 +23,7 @@ Recirc & 4hr = 0.8
 Elec Junc Box + 14x14x14 = 5.45
 
 Backflow Preventer Bag = 1.2
+--> ships in small shipper 19x12x7
 
 LDS Small Shipper
 smShipperScenarios

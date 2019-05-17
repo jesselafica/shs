@@ -6,6 +6,7 @@ const ssrInput    = document.getElementById('ssr');
 const recircInput = document.getElementById('recirc');
 const ldsSize     = document.getElementById('lds_size');
 const juncBox     = document.getElementById('junc_box');
+const backflowBag = document.getElementById('backflow_bag');
 const ldsRadio    = document.getElementById('lds_radio');
 const poldRadio   = document.getElementById('pold_radio');
 const apiRadio    = document.getElementById('api_radio');
@@ -22,7 +23,7 @@ const modalTitle = document.getElementById('modal_title');
 const radioBtns = document.getElementsByClassName('radio-btn');
 // add eventListeners to radioBtns for input disabling
 for (var i = 0; i < radioBtns.length; i++) {
-  radioBtns[i].addEventListener('click',disableRadios)
+  radioBtns[i].addEventListener('click', disableRadios, false);
 }
 
 // Scenario array objects
@@ -274,9 +275,9 @@ function calcPack(e) {
 
   // loop through ldsScenarios test if oneBox = true
   if (oneBox) {
-    if (juncBox.checked) {
+    if ($(juncBox).hasClass('active') || $(backflowBag).hasClass('active')) {
       modalTitle.innerHTML = 'Two boxes required:';
-      modalBody.innerHTML  = shipperSize + '<br>16 x 12 x 8 (Junction Box)';
+      modalBody.innerHTML  = ($(juncBox.hasClass('active'))) ? shipperSize + '<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>19 x 12 x 7 (Backflow Preventer Bag)';
     } else {
       modalTitle.innerHTML = 'One box required:';
       modalBody.innerHTML  = shipperSize;
@@ -295,9 +296,9 @@ function calcPack(e) {
       }
     }
     if (twoBox) {
-      if (juncBox.checked) {
+      if ($(juncBox).hasClass('active') || $(backflowBag).hasClass('active')) {
         modalTitle.innerHTML = 'Three boxes required:';
-        modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5<br>16 x 12 x 8 (Junction Box)';
+        modalBody.innerHTML  = ($(juncBox.hasClass('active'))) ? shipperSize + '<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>19 x 12 x 7 (Backflow Preventer Bag)';
       } else {
         modalTitle.innerHTML = 'Two boxes required:';
         modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5';
@@ -324,10 +325,15 @@ function calcPack(e) {
     } // End ldsBoxFunc
 
 } // End calcPack
-// Disables/enables ldsSize select input based on type_radios
+
+// Disables/enables ldsSize select and juncBox inputs based on type_radios
 function disableRadios(){
-  ldsSize.disabled = (!ldsRadio.checked) ? true : false;
-  juncBox.disabled = (poldRadio.checked) ? true : false;
+  // set delay to allow .active to be added to clicked el before code is run
+  setTimeout(function(){
+    ldsSize.disabled = ($(ldsRadio).hasClass('active')) ? false : true;
+    juncBox.disabled = ($(poldRadio).hasClass('active')) ? true : false;
+    backflowBag.disabled = ($(poldRadio).hasClass('active')) ? true : false;
+  }, 1);
 }
 
   // tool check scenario object poldSsr count
