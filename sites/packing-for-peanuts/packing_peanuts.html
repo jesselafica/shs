@@ -41,27 +41,24 @@
       <div class="row">
         <div class="col-7">
           <form id="pack_form">
-            <!-- N E W - F O R M - R O W -->
+            <!-- L D S - T Y P E - R O W -->
             <div class="form-row">
             <div class="col btn-group btn-group-toggle radio-group" data-toggle="buttons">
               <label class="btn btn-secondary radio-btn active" id="lds_radio" for="lds_radio">
                 <input type="radio" class="" name="options">LDS Valve
               </label>
-              <label class="btn btn-secondary radio-btn" id="accessories_radio" for="pold_radio">
+              <label class="btn btn-secondary radio-btn" id="accessories_radio" for="accessories_radio">
                 <input type="radio" class="" name="options">Accessories Only
               </label>
-              <label class="btn btn-secondary radio-btn" id="pold_radio" for="accessories_radio">
+              <label class="btn btn-secondary radio-btn" id="pold_radio" for="pold_radio">
                 <input type="radio" class="" name="options">POLD Only
               </label>
             </div>
           </div>
-          <!-- N E W - F O R M - R O W -->
+          <!-- L D S - S I Z E - R O W -->
           <div class="form-row">
-            <div class="col">
-              <label for="lds_size">Leak Defense System size?</label>
-            </div>
-            <div class="col">
-              <div class="form-group">
+            <div class="col lds-size">
+              <div class="">
                 <select required id="lds_size" placeholder="-" class="form-control">
                   <option value="">LDS-3-...</option>
                   <option value="200">LDS-3-200</option>
@@ -73,19 +70,19 @@
               </div>
             </div>
           </div>
-          <!-- N E W - F O R M - R O W -->
+          <!-- B P - B A G - E J - B O X - R O W -->
           <div class="form-row">
             <div class="col btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-secondary" id="backflow_bag">
-                <input type="radio" name="options">Backflow Preventer Bag
+              <label class="btn btn-warning" id="backflow_bag">
+                <input type="checkbox" name="options">Backflow Preventer Bag
               </label>
 
-              <label class="btn btn-secondary" id="junc_box">
-                <input type="radio" name="options">Electrical Junction Box
+              <label class="btn btn-warning" id="junc_box">
+                <input type="checkbox" name="options">Electrical Junction Box
               </label>
             </div>
           </div>
-          <!-- N E W - F O R M - R O W -->
+          <!-- A P I - I N P U T - R O W -->
           <div class="form-row">
             <div class="col">
               <label for="api">How many API's?</label>
@@ -94,7 +91,7 @@
               <input required type="number" min="0" id="api" placeholder="0" value="0">
             </div>
           </div>
-          <!-- N E W - F O R M - R O W -->
+          <!-- P O L D - I N P U T - R O W -->
           <div class="form-row">
             <div class="col">
               <label for="pold">How many POLD's?</label>
@@ -103,7 +100,7 @@
               <input required type="number" min="0" id="pold" placeholder="0" value="0">
             </div>
           </div>
-          <!-- N E W - F O R M - R O W -->
+          <!-- S S R - I N P U T - R O W -->
           <div class="form-row">
             <div class="col">
               <label for="ssr">How many SSR's?</label>
@@ -112,7 +109,7 @@
               <input required type="number" min="0" id="ssr" placeholder="0" value="0">
             </div>
           </div>
-          <!-- N E W - F O R M - R O W -->
+          <!-- R E C I R C - I N P U T - R O W -->
           <div class="form-row">
             <div class="col">
               <label for="recirc">Total 4hr Timers & Recirc Pump Switches?</label>
@@ -121,7 +118,7 @@
               <input required type="number" min="0" id="recirc" placeholder="0" value="0">
             </div>
           </div>
-          <!-- N E W - F O R M - R O W -->
+          <!-- R E S E T - P A C K A G E - B T N S - R O W -->
           <div class="form-row">
             <div class="col">
               <input type="reset" id="reset_button" class="btn btn-danger">
