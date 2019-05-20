@@ -231,7 +231,6 @@ function calcPack(e) {
   e.preventDefault();
 
   const formValsObj = {};
-  let orderType     = document.getElementById('id')
   let oneBox        = false;
   let twoBox        = false;
   let shipperSize   = '';
@@ -245,124 +244,151 @@ function calcPack(e) {
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
 
   if (isChecked(poldRadio)) {
+    // P O L D - O N L Y - T E S T
     shipperSize = '13 x 10 x 5';
     // for loop --> check if <= poldScenarios.key
     for (var i = 0; i < poldScenarios.length && oneBox === false; i++) {
       if(formValsObj.api      <= poldScenarios[i].api
-      && formValsObj.poldSsr  <= poldScenarios[i].poldSsr - 2
-      && formValsObj.recirc   <= poldScenarios[i].recirc){
-        oneBox = true;
-        break;
+        && formValsObj.poldSsr  <= poldScenarios[i].poldSsr - 2
+        && formValsObj.recirc   <= poldScenarios[i].recirc){
+          oneBox = true;
+          break;
+        }
       }
-    }
-    if (!oneBox) {
-      // loop through pold scenarios test if twoBox = true
-          for(var i = 0; i < poldScenarios.length && twoBox === false; i++){
-            for(var c = 0; c < poldScenarios.length && twoBox === false; c++){
-              if(formValsObj.api      <= poldScenarios[i].api + poldScenarios[c].api
-              && formValsObj.poldSsr  <= (poldScenarios[i].poldSsr - 2) + poldScenarios[c].poldSsr
-              && formValsObj.recirc   <= poldScenarios[i].recirc + poldScenarios[c].recirc){
+      if (!oneBox) {
+        // loop through pold scenarios test if twoBox = true
+        for(var i = 0; i < poldScenarios.length && twoBox === false; i++){
+          for(var c = 0; c < poldScenarios.length && twoBox === false; c++){
+            if(formValsObj.api     <= poldScenarios[i].api + poldScenarios[c].api
+              && formValsObj.poldSsr <= (poldScenarios[i].poldSsr - 2) + poldScenarios[c].poldSsr
+              && formValsObj.recirc  <= poldScenarios[i].recirc + poldScenarios[c].recirc){
                 twoBox = true;
                 break;
               }
             }
           }
-    }
-  } else if (isChecked(ldsRadio)){
-    shipperSize = (formValsObj.ldsSize < 200) ? '19 x 12 x 7' : '14 x 14 x 14';
-  // loop through ldsScenarios test if oneBox = true
-    oneBox = ldsBoxFunc();
-  }
-
-  if (oneBox) {
-    if ($(juncBox).hasClass('active') || $(backflowBag).hasClass('active')) {
-      modalTitle.innerHTML = 'Two boxes required:';
-      modalBody.innerHTML  = ($(juncBox.hasClass('active'))) ? shipperSize + '<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>19 x 12 x 7 (Backflow Preventer Bag)';
-    } else {
-      modalTitle.innerHTML = 'One box required:';
-      modalBody.innerHTML  = shipperSize;
-    }
-  } else if (!oneBox) {
-// loop through pold scenarios test if twoBox = true
-    for(var i = 0; i < poldScenarios.length && twoBox === false; i++){
-      for(var c = 0; c < ldsScenarios.length && twoBox === false; c++){
-        if(formValsObj.api      <= poldScenarios[i].api + ldsScenarios[c].api
-        && formValsObj.poldSsr  <= poldScenarios[i].poldSsr + ldsScenarios[c].poldSsr
-        && formValsObj.recirc   <= poldScenarios[i].recirc + ldsScenarios[c].recirc
-        && formValsObj.ldsSize  <= ldsScenarios[c].ldsSize){
-          twoBox = true;
-          break;
         }
-      }
-    }
-    if (twoBox) {
-      if ($(juncBox).hasClass('active') || $(backflowBag).hasClass('active')) {
-        modalTitle.innerHTML = 'Three boxes required:';
-        modalBody.innerHTML  = ($(juncBox.hasClass('active'))) ? shipperSize + '<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>19 x 12 x 7 (Backflow Preventer Bag)';
-      } else {
-        modalTitle.innerHTML = 'Two boxes required:';
-        modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5';
-      }
-    } else if (!twoBox){
-      modalTitle.innerHTML = 'Call 760-884-3734';
-      modalBody.innerHTML  = "We'd like to help with this one.";
-    }
+      } else if (isChecked(accessRadio)) {
+        // A C C E S S O R I E S - O N L Y - T E S T
+        shipperSize = '13 x 10 x 5';
+        // for loop --> check if <= poldScenarios.key
+        for (var i = 0; i < poldScenarios.length && oneBox === false; i++) {
+          if(formValsObj.api      <= poldScenarios[i].api
+            && formValsObj.poldSsr  <= poldScenarios[i].poldSsr
+            && formValsObj.recirc   <= poldScenarios[i].recirc){
+              oneBox = true;
+              break;
+            }
+          }
+          if (!oneBox) {
+            // loop through pold scenarios test if twoBox = true
+            for(var i = 0; i < poldScenarios.length && twoBox === false; i++){
+              for(var c = 0; c < poldScenarios.length && twoBox === false; c++){
+                if(formValsObj.api     <= poldScenarios[i].api + poldScenarios[c].api
+                  && formValsObj.poldSsr <= (poldScenarios[i].poldSsr) + poldScenarios[c].poldSsr
+                  && formValsObj.recirc  <= poldScenarios[i].recirc + poldScenarios[c].recirc){
+                    twoBox = true;
+                    break;
+                  }
+                }
+              }
+            }
 
-  }
+          } else if (isChecked(ldsRadio)){
+            // L D S - O N L Y - T E S T
+            shipperSize = (formValsObj.ldsSize < 200) ? '19 x 12 x 7' : '14 x 14 x 14';
+            // loop through ldsScenarios test if oneBox = true
+            oneBox = ldsBoxFunc();
+          }
+          if (oneBox) {
+            if (isChecked(juncBox) || isChecked(backflowBag)) {
+              modalTitle.innerHTML = 'Two boxes required:';
+              modalBody.innerHTML  = (isChecked(juncBox)) ? shipperSize + '<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>19 x 12 x 7 (Backflow Preventer Bag)';
+            } else {
+              modalTitle.innerHTML = 'One box required:';
+              modalBody.innerHTML  = shipperSize;
+            }
+          } else if (!oneBox) {
+            // loop through pold scenarios test if twoBox = true
+            for(var i = 0; i < poldScenarios.length && twoBox === false; i++){
+              for(var c = 0; c < ldsScenarios.length && twoBox === false; c++){
+                if(formValsObj.api      <= poldScenarios[i].api + ldsScenarios[c].api
+                  && formValsObj.poldSsr  <= poldScenarios[i].poldSsr + ldsScenarios[c].poldSsr
+                  && formValsObj.recirc   <= poldScenarios[i].recirc + ldsScenarios[c].recirc
+                  && formValsObj.ldsSize  <= ldsScenarios[c].ldsSize){
+                    twoBox = true;
+                    break;
+                  }
+                }
+              }
+              if (twoBox) {
+                if (isChecked(juncBox) || isChecked(backflowBag)) {
+                  modalTitle.innerHTML = 'Three boxes required:';
+                  modalBody.innerHTML  = (isChecked(juncBox)) ? shipperSize + '<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>19 x 12 x 7 (Backflow Preventer Bag)';
+                } else {
+                  modalTitle.innerHTML = 'Two boxes required:';
+                  modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5';
+                }
+              } else if (!twoBox){
+                modalTitle.innerHTML = 'Call 760-884-3734';
+                modalBody.innerHTML  = "We'd like to help with this one.";
+              }
 
-  // Create ldsBoxFunc to use for loop through formValsObj <= ldsScenarios
-  function ldsBoxFunc() {
-    for (var i = 0; i < ldsScenarios.length; i++) {
-      if (formValsObj.api       <= ldsScenarios[i].api
-        && formValsObj.poldSsr  <= ldsScenarios[i].poldSsr
-        && formValsObj.recirc   <= ldsScenarios[i].recirc
-        && formValsObj.ldsSize  <= ldsScenarios[i].ldsSize)
-        {
-          return oneBox = true;
-          break;
-        }
-      }
-    } // End ldsBoxFunc
+            }
 
-} // End calcPack
+            // Create ldsBoxFunc to use for loop through formValsObj <= ldsScenarios
+            function ldsBoxFunc() {
+              for (var i = 0; i < ldsScenarios.length; i++) {
+                if (formValsObj.api       <= ldsScenarios[i].api
+                  && formValsObj.poldSsr  <= ldsScenarios[i].poldSsr
+                  && formValsObj.recirc   <= ldsScenarios[i].recirc
+                  && formValsObj.ldsSize  <= ldsScenarios[i].ldsSize)
+                  {
+                    return oneBox = true;
+                    break;
+                  }
+                }
+              } // End ldsBoxFunc
 
-// Disables/enables ldsSize select and juncBox inputs based on type_radios
-function disableRadios(){
-  // set delay to allow .active to be added to clicked el before code is run
-  setTimeout(function(){
-    if (isChecked(accessRadio)) {
-      ldsSizeGroup.classList.add('d-none');
-      juncBox.classList.remove('d-none');
-      backflowBag.classList.remove('d-none');
-    } else if(isChecked(poldRadio)){
-      ldsSizeGroup.classList.add('d-none');
-      juncBox.classList.add('d-none');
-      backflowBag.classList.add('d-none');
-    } else if(isChecked(ldsRadio)){
-      ldsSizeGroup.classList.remove('d-none');
-      juncBox.classList.remove('d-none');
-      backflowBag.classList.remove('d-none');
-    }
-  }, 1);
-}
+            } // End calcPack
 
-// Reset form
-function resetForm(){
-  // remove active class from all inputs
-  for(let i = 0; i < radioBtns.length; i++){
-    radioBtns[i].classList.remove('active');
-  }
-  // make ldsRadio active
-  ldsRadio.classList.add('active');
-  disableRadios();
-}
+            // Disables/enables ldsSize select and juncBox inputs based on type_radios
+            function disableRadios(){
+              // set delay to allow .active to be added to clicked el before code is run
+              setTimeout(function(){
+                if (isChecked(accessRadio)) {
+                  ldsSizeGroup.classList.add('d-none');
+                  juncBox.classList.remove('d-none');
+                  backflowBag.classList.remove('d-none');
+                } else if(isChecked(poldRadio)){
+                  ldsSizeGroup.classList.add('d-none');
+                  juncBox.classList.add('d-none');
+                  backflowBag.classList.add('d-none');
+                } else if(isChecked(ldsRadio)){
+                  ldsSizeGroup.classList.remove('d-none');
+                  juncBox.classList.remove('d-none');
+                  backflowBag.classList.remove('d-none');
+                }
+              }, 1);
+            }
 
-// test hasClass return boolean
-function isChecked (el) {return $(el).hasClass('active');}
+            // Reset form
+            function resetForm(){
+              // remove active class from all inputs
+              for(let i = 0; i < radioBtns.length; i++){
+                radioBtns[i].classList.remove('active');
+              }
+              // make ldsRadio active
+              ldsRadio.classList.add('active');
+              disableRadios();
+            }
 
-  // tool check scenario object poldSsr count
-  // function checkPoldSsr(scenArray){
-  //   scenArray.forEach((scenario, ind) => {
-  //     return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + ' correct') : console.log('Check scenario at index ' + ind);
-  //   });
-  // };
+            // test hasClass return boolean
+            function isChecked (el) {return $(el).hasClass('active');}
+
+            // tool check scenario object poldSsr count
+            // function checkPoldSsr(scenArray){
+            //   scenArray.forEach((scenario, ind) => {
+            //     return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + ' correct') : console.log('Check scenario at index ' + ind);
+            //   });
+            // };
