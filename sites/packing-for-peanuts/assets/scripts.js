@@ -363,20 +363,29 @@ function calcPack(e) {
               // set delay to allow .active to be added to clicked el before code is run
               setTimeout(function(){
                 if (isChecked(accessRadio)) {
-                  ldsSizeGroup.classList.add('d-none');
-                  juncBox.classList.remove('d-none');
-                  backflowBag.classList.remove('d-none');
+                  $(ldsSizeGroup).hide("blind");
+                  // ldsSizeGroup.classList.add('d-none');
+                  $(juncBox).show("blind");
+                  // juncBox.classList.remove('d-none');
+                  $(backflowBag).show("blind");
+                  // backflowBag.classList.remove('d-none');
                 } else if(isChecked(poldRadio)){
-                  ldsSizeGroup.classList.add('d-none');
+                  $(ldsSizeGroup).hide("blind");
+                  // ldsSizeGroup.classList.add('d-none');
                   ldsSizeGroup.classList.remove('active');
-                  juncBox.classList.add('d-none');
+                  $(juncBox).hide("blind");
+                  // juncBox.classList.add('d-none');
                   juncBox.classList.remove('active');
-                  backflowBag.classList.add('d-none');
+                  $(backflowBag).hide("blind");
+                  // backflowBag.classList.add('d-none');
                   backflowBag.classList.remove('active');
                 } else if(isChecked(ldsRadio)){
-                  ldsSizeGroup.classList.remove('d-none');
-                  juncBox.classList.remove('d-none');
-                  backflowBag.classList.remove('d-none');
+                  // ldsSizeGroup.classList.remove('d-none');
+                  $(ldsSizeGroup).show("blind");
+                  // juncBox.classList.remove('d-none');
+                  $(juncBox).show("blind");
+                  // backflowBag.classList.remove('d-none');
+                  $(backflowBag).show("blind");
                 }
               }, 1);
             }
