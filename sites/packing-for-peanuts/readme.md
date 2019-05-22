@@ -1,17 +1,13 @@
 # TO DO:
 
 ###What's next?
-#####ADD ACCESSORIES LOGIC!
+#####Rewrite packaging scripts
+--> create separate functions for each radio lds type
+--> check for junc boxes and backflow bags at the end and append each to the end of the modal body
+--> 2 electrical junction boxes = 14x14x14
 #####Add input for LDC
 --> if >75' then POLD box required
-#####Use radio buttons to determine: LDS vs POLD vs Accessories only
---> if POLD only set formValsObj.ldsSize === 9000
---> if Accessories only set formValsObj.ldsSize === 9999?
-If lds radio checked show ldsSize else hide for accessories and POLD only
-#####Backflow Preventer
---> 1 backflow preventer = 19x12x7
 #####Add Checkbox for Electrical Junction Box
---> 2 electrical junction boxes = 14x14x14
 #####Add weights for each accessory and provide sum for each package type.
 --> Weights listed in scenario_tables.txt
 #####2 JUNC BOXES = 14X14X14

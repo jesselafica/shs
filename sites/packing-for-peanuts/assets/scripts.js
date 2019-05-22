@@ -326,7 +326,7 @@ function calcPack(e) {
                   modalTitle.innerHTML = 'Three boxes required:';
                   modalBody.innerHTML  = (isChecked(juncBox)) ? shipperSize + '<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>19 x 12 x 7 (Backflow Preventer Bag)';
                 } else {
-                  modalTitle.innerHTML = 'Three boxes required:';
+                  modalTitle.innerHTML = 'Two boxes required:';
                   modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5';
                 }
               } else if (!twoBox){
