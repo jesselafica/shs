@@ -301,7 +301,10 @@ function calcPack(e) {
             oneBox = ldsBoxFunc();
           }
           if (oneBox) {
-            if (isChecked(juncBox) || isChecked(backflowBag)) {
+            if (isChecked(juncBox) && isChecked(backflowBag)) {
+              modalTitle.innerHTML = 'Two boxes required:';
+              modalBody.innerHTML  = shipperSize + '<br>16 x 12 x 8 (Junction Box + Backflow Bag)';
+            } else if (isChecked(juncBox) || isChecked(backflowBag)) {
               modalTitle.innerHTML = 'Two boxes required:';
               modalBody.innerHTML  = (isChecked(juncBox)) ? shipperSize + '<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>19 x 12 x 7 (Backflow Preventer Bag)';
             } else {
@@ -322,12 +325,15 @@ function calcPack(e) {
                 }
               }
               if (twoBox) {
-                if (isChecked(juncBox) || isChecked(backflowBag)) {
+              if (isChecked(juncBox) && isChecked(backflowBag)) {
+                modalTitle.innerHTML = 'Three boxes required:';
+                modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5 (Accessories)<br>16 x 12 x 8 (Junction Box + Backflow Bag)';
+                } else if (isChecked(juncBox) || isChecked(backflowBag)) {
                   modalTitle.innerHTML = 'Three boxes required:';
-                  modalBody.innerHTML  = (isChecked(juncBox)) ? shipperSize + '<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>19 x 12 x 7 (Backflow Preventer Bag)';
-                } else {
+                  modalBody.innerHTML  = (isChecked(juncBox)) ? shipperSize + '<br>13 x 10 x 5 (Accessories)<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>13 x 10 x 5 (Accessories)<br>19 x 12 x 7 (Backflow Preventer Bag)';
+              } else {
                   modalTitle.innerHTML = 'Two boxes required:';
-                  modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5';
+                  modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5 (Accessories)';
                 }
               } else if (!twoBox){
                 modalTitle.innerHTML = 'Call 760-884-3734';
@@ -362,8 +368,11 @@ function calcPack(e) {
                   backflowBag.classList.remove('d-none');
                 } else if(isChecked(poldRadio)){
                   ldsSizeGroup.classList.add('d-none');
+                  ldsSizeGroup.classList.remove('active');
                   juncBox.classList.add('d-none');
+                  juncBox.classList.remove('active');
                   backflowBag.classList.add('d-none');
+                  backflowBag.classList.remove('active');
                 } else if(isChecked(ldsRadio)){
                   ldsSizeGroup.classList.remove('d-none');
                   juncBox.classList.remove('d-none');

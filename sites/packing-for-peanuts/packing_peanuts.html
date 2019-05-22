@@ -39,7 +39,7 @@
     <div class="jumbotron">
       <h1 class="display-4">Packing For Peanuts</h1>
       <div class="row">
-        <div class="col-7">
+        <div class="col-xl-7 col-12 mb-xl-0 mb-3">
           <form id="pack_form">
             <!-- L D S - T Y P E - R O W -->
             <div class="form-row">
@@ -84,43 +84,43 @@
           </div>
           <!-- A P I - I N P U T - R O W -->
           <div class="form-row">
-            <div class="col">
+            <div class="col-9">
               <label for="api">How many API's?</label>
             </div>
             <div class="col">
-              <input required type="number" min="0" id="api" placeholder="0" value="0">
+              <input required type="number" min="0" max="12" id="api" placeholder="0" value="0">
             </div>
           </div>
           <!-- P O L D - I N P U T - R O W -->
           <div class="form-row">
-            <div class="col">
+            <div class="col-9">
               <label for="pold">How many POLD's?</label>
             </div>
             <div class="col">
-              <input required type="number" min="0" id="pold" placeholder="0" value="0">
+              <input required type="number" min="0" max="46" id="pold" placeholder="0" value="0">
             </div>
           </div>
           <!-- S S R - I N P U T - R O W -->
           <div class="form-row">
-            <div class="col">
+            <div class="col-9">
               <label for="ssr">How many SSR's?</label>
             </div>
             <div class="col">
-              <input required type="number" min="0" id="ssr" placeholder="0" value="0">
+              <input required type="number" min="0" max="93" id="ssr" placeholder="0" value="0">
             </div>
           </div>
           <!-- R E C I R C - I N P U T - R O W -->
           <div class="form-row">
-            <div class="col">
+            <div class="col-9">
               <label for="recirc">Total 4hr Timers & Recirc Pump Switches?</label>
             </div>
             <div class="col">
-              <input required type="number" min="0" id="recirc" placeholder="0" value="0">
+              <input required type="number" min="0" max="9" id="recirc" placeholder="0" value="0">
             </div>
           </div>
           <!-- R E S E T - P A C K A G E - B T N S - R O W -->
           <div class="form-row">
-            <div class="col">
+            <div class="col-9">
               <input type="reset" id="reset_button" class="btn btn-danger">
             </div>
             <div class="col">
@@ -131,7 +131,7 @@
           </section>
         </form>
       </div>
-      <div class="card col-5">
+      <div class="card col-xl-5 col-12">
         <h1 class="display-5" id="message">Add items and ship!</h1>
         <p>Adjust the size and number of each accessory before pressing the <strong class="font-weight-bold green-text">Package!</strong> button. </p>
         <p>Don't worry about any accessories you don't see on this list, we've got you covered.</p>
