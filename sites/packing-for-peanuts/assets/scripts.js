@@ -243,6 +243,7 @@ function calcPack(e) {
   formValsObj.recirc  = parseInt(recircInput.value);
   formValsObj.ldsSize = parseInt(ldsSize.value);
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
+  // calculate shipper size
   shipperCalc();
 
   if (isChecked(poldRadio)) {
