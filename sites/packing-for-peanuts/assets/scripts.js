@@ -28,203 +28,6 @@ for (var i = 0; i < radioBtns.length; i++) {
   radioBtns[i].addEventListener('click', disableRadios, false);
 }
 
-// Scenario array objects
-const ldsScenarios  = [
-  // START SM SHIPPER
-  {
-    api     : 0,
-    pold    : 18,
-    ssr     : 0,
-    poldSsr : 18,
-    recirc  : 0,
-    ldsSize: 150
-  },
-  {
-    api     : 1,
-    pold    : 14,
-    ssr     : 0,
-    poldSsr : 14,
-    recirc  : 1,
-    ldsSize: 150
-  },
-  {
-    api     : 1,
-    pold    : 1,
-    ssr     : 2,
-    poldSsr : 3,
-    recirc  : 3,
-    ldsSize: 150
-  },
-  {
-    api     : 1,
-    pold    : 13,
-    ssr     : 0,
-    poldSsr : 13,
-    recirc  : 1,
-    ldsSize: 150
-  },
-  {
-    api     : 1,
-    pold    : 12,
-    ssr     : 2,
-    poldSsr : 14,
-    recirc  : 1,
-    ldsSize: 150
-  },
-  {
-    api     : 2,
-    pold    : 13,
-    ssr     : 0,
-    poldSsr : 13,
-    recirc  : 0,
-    ldsSize: 150
-  },
-  {
-    api     : 2,
-    pold    : 0,
-    ssr     : 0,
-    poldSsr : 0,
-    recirc  : 2,
-    ldsSize: 150
-  },
-  {
-    api     : 3,
-    pold    : 5,
-    ssr     : 0,
-    poldSsr : 5,
-    recirc  : 1,
-    ldsSize: 150
-  },
-  {
-    api    : 4,
-    pold   : 0,
-    ssr    : 0,
-    poldSsr: 0,
-    recirc : 1,
-    ldsSize: 150
-  },
-  // END SM SHIPPER
-  // START BROWN BOX
-  {
-    api     : 2,
-    pold    : 0,
-    ssr     : 0,
-    poldSsr : 0,
-    recirc  : 2,
-    ldsSize : 200
-  },
-  {
-    api     : 1,
-    pold    : 2,
-    ssr     : 0,
-    poldSsr : 2,
-    recirc  : 2,
-    ldsSize : 200
-  },
-  {
-    api     : 0,
-    pold    : 4,
-    ssr     : 0,
-    poldSsr : 4,
-    recirc  : 2,
-    ldsSize : 200
-  }
-  // END BROWN BOX
-];
-const poldScenarios = [
-  {
-    api     : 3,
-    pold    : 0,
-    ssr     : 0,
-    poldSsr : 0,
-    recirc  : 3
-  },
-  {
-    api     : 0,
-    pold    : 0,
-    ssr     : 2,
-    poldSsr : 1,
-    recirc  : 5
-  },
-  {
-    api     : 6,
-    pold    : 0,
-    ssr     : 2,
-    poldSsr : 1,
-    recirc  : 0
-  },
-  {
-    api     : 2,
-    pold    : 2,
-    ssr     : 2,
-    poldSsr : 3,
-    recirc  : 3
-  },
-  {
-    api     : 1,
-    pold    : 4,
-    ssr     : 2,
-    poldSsr : 5,
-    recirc  : 3
-  },
-  {
-    api     : 0,
-    pold    : 6,
-    ssr     : 2,
-    poldSsr : 7,
-    recirc  : 3
-  },
-  {
-    api     : 0,
-    pold    : 15,
-    ssr     : 2,
-    poldSsr : 16,
-    recirc  : 2
-  },
-  {
-    api     : 0,
-    pold    : 22,
-    ssr     : 2,
-    poldSsr : 23,
-    recirc  : 0
-  },
-  {
-    api     : 2,
-    pold    : 14,
-    ssr     : 2,
-    poldSsr : 15,
-    recirc  : 0
-  },
-  {
-    api     : 1,
-    pold    : 18,
-    ssr     : 2,
-    poldSsr : 19,
-    recirc  : 0
-  },
-  {
-    api     : 3,
-    pold    : 12,
-    ssr     : 2,
-    poldSsr : 13,
-    recirc  : 0
-  },
-  {
-    api     : 4,
-    pold    : 8,
-    ssr     : 2,
-    poldSsr : 9,
-    recirc  : 0
-  },
-  {
-    api     : 5,
-    pold    : 4,
-    ssr     : 2,
-    poldSsr : 5,
-    recirc  : 0
-  }
-];
-
 // Declare functions
 function calcPack(e) {
   // Reinit vars and vals
@@ -410,3 +213,199 @@ function calcPack(e) {
             //     return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + ' correct') : console.log('Check scenario at index ' + ind);
             //   });
             // };
+            // Scenario array objects
+            const ldsScenarios  = [
+              // START SM SHIPPER
+              {
+                api     : 0,
+                pold    : 18,
+                ssr     : 0,
+                poldSsr : 18,
+                recirc  : 0,
+                ldsSize: 150
+              },
+              {
+                api     : 1,
+                pold    : 14,
+                ssr     : 0,
+                poldSsr : 14,
+                recirc  : 1,
+                ldsSize: 150
+              },
+              {
+                api     : 1,
+                pold    : 1,
+                ssr     : 2,
+                poldSsr : 3,
+                recirc  : 3,
+                ldsSize: 150
+              },
+              {
+                api     : 1,
+                pold    : 13,
+                ssr     : 0,
+                poldSsr : 13,
+                recirc  : 1,
+                ldsSize: 150
+              },
+              {
+                api     : 1,
+                pold    : 12,
+                ssr     : 2,
+                poldSsr : 14,
+                recirc  : 1,
+                ldsSize: 150
+              },
+              {
+                api     : 2,
+                pold    : 13,
+                ssr     : 0,
+                poldSsr : 13,
+                recirc  : 0,
+                ldsSize: 150
+              },
+              {
+                api     : 2,
+                pold    : 0,
+                ssr     : 0,
+                poldSsr : 0,
+                recirc  : 2,
+                ldsSize: 150
+              },
+              {
+                api     : 3,
+                pold    : 5,
+                ssr     : 0,
+                poldSsr : 5,
+                recirc  : 1,
+                ldsSize: 150
+              },
+              {
+                api    : 4,
+                pold   : 0,
+                ssr    : 0,
+                poldSsr: 0,
+                recirc : 1,
+                ldsSize: 150
+              },
+              // END SM SHIPPER
+              // START BROWN BOX
+              {
+                api     : 2,
+                pold    : 0,
+                ssr     : 0,
+                poldSsr : 0,
+                recirc  : 2,
+                ldsSize : 200
+              },
+              {
+                api     : 1,
+                pold    : 2,
+                ssr     : 0,
+                poldSsr : 2,
+                recirc  : 2,
+                ldsSize : 200
+              },
+              {
+                api     : 0,
+                pold    : 4,
+                ssr     : 0,
+                poldSsr : 4,
+                recirc  : 2,
+                ldsSize : 200
+              }
+              // END BROWN BOX
+            ];
+            const poldScenarios = [
+              {
+                api     : 3,
+                pold    : 0,
+                ssr     : 0,
+                poldSsr : 0,
+                recirc  : 3
+              },
+              {
+                api     : 0,
+                pold    : 0,
+                ssr     : 2,
+                poldSsr : 1,
+                recirc  : 5
+              },
+              {
+                api     : 6,
+                pold    : 0,
+                ssr     : 2,
+                poldSsr : 1,
+                recirc  : 0
+              },
+              {
+                api     : 2,
+                pold    : 2,
+                ssr     : 2,
+                poldSsr : 3,
+                recirc  : 3
+              },
+              {
+                api     : 1,
+                pold    : 4,
+                ssr     : 2,
+                poldSsr : 5,
+                recirc  : 3
+              },
+              {
+                api     : 0,
+                pold    : 6,
+                ssr     : 2,
+                poldSsr : 7,
+                recirc  : 3
+              },
+              {
+                api     : 0,
+                pold    : 15,
+                ssr     : 2,
+                poldSsr : 16,
+                recirc  : 2
+              },
+              {
+                api     : 0,
+                pold    : 22,
+                ssr     : 2,
+                poldSsr : 23,
+                recirc  : 0
+              },
+              {
+                api     : 2,
+                pold    : 14,
+                ssr     : 2,
+                poldSsr : 15,
+                recirc  : 0
+              },
+              {
+                api     : 1,
+                pold    : 18,
+                ssr     : 2,
+                poldSsr : 19,
+                recirc  : 0
+              },
+              {
+                api     : 3,
+                pold    : 12,
+                ssr     : 2,
+                poldSsr : 13,
+                recirc  : 0
+              },
+              {
+                api     : 4,
+                pold    : 8,
+                ssr     : 2,
+                poldSsr : 9,
+                recirc  : 0
+              },
+              {
+                api     : 5,
+                pold    : 4,
+                ssr     : 2,
+                poldSsr : 5,
+                recirc  : 0
+              }
+            ];
