@@ -18,6 +18,7 @@ function calcPack(e) {
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
   // determine shipper size based on lds type radio button
   let shipperSize   = '';
+<<<<<<< HEAD
 for (let i = 0; i < ldsTypes.length; i++) {
   let radioClasses = ldsTypes[i].classList;
   for (let c = 0; c < radioClasses.length; c++) {
@@ -27,6 +28,20 @@ for (let i = 0; i < ldsTypes.length; i++) {
     }
   }
 }
+=======
+  const shipperCalc = () => {
+    for (let i = 0; i < ldsTypes.length; i++) {
+      let radioClasses = ldsTypes[i].classList;
+      for (let c = 0; c < radioClasses.length; c++) {
+        if (radioClasses[c] === 'active') {
+          shipperSize = (ldsTypes[i].getAttribute('id') === 'lds_radio') ? '19 x 12 x 7' : '13 x 10 x 5';
+          console.log(shipperSize);
+          break;
+        }
+      }
+    }
+  }
+>>>>>>> master
   // ===================================================
   //
   // ===================================================

@@ -11,6 +11,7 @@ const backflowBag = document.getElementById('backflow_bag');
 const ldsRadio    = document.getElementById('lds_radio');
 const poldRadio   = document.getElementById('pold_radio');
 const accessRadio = document.getElementById('accessories_radio');
+const ldsTypes    = document.getElementsByClassName('lds-type');
 //Buttons
 const resetBtn  = document.getElementById('reset_button');
 resetBtn.addEventListener('click', resetForm, false);
@@ -45,10 +46,11 @@ function calcPack(e) {
   formValsObj.recirc  = parseInt(recircInput.value);
   formValsObj.ldsSize = parseInt(ldsSize.value);
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
+  // calculate shipper size
+  shipperCalc();
 
   if (isChecked(poldRadio)) {
     // P O L D - O N L Y - T E S T
-    shipperSize = '13 x 10 x 5';
     // for loop --> check if <= poldScenarios.key
     for (var i = 0; i < poldScenarios.length && oneBox === false; i++) {
       if(formValsObj.api      <= poldScenarios[i].api
@@ -73,7 +75,6 @@ function calcPack(e) {
         }
       } else if (isChecked(accessRadio)) {
         // A C C E S S O R I E S - O N L Y - T E S T
-        shipperSize = '13 x 10 x 5';
         // for loop --> check if <= poldScenarios.key
         for (var i = 0; i < poldScenarios.length && oneBox === false; i++) {
           if(formValsObj.api      <= poldScenarios[i].api
@@ -99,7 +100,6 @@ function calcPack(e) {
 
           } else if (isChecked(ldsRadio)){
             // L D S - O N L Y - T E S T
-            shipperSize = (formValsObj.ldsSize < 200) ? '19 x 12 x 7' : '14 x 14 x 14';
             // loop through ldsScenarios test if oneBox = true
             oneBox = ldsBoxFunc();
           }
@@ -128,13 +128,13 @@ function calcPack(e) {
                 }
               }
               if (twoBox) {
-              if (isChecked(juncBox) && isChecked(backflowBag)) {
-                modalTitle.innerHTML = 'Three boxes required:';
-                modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5 (Accessories)<br>16 x 12 x 8 (Junction Box + Backflow Bag)';
+                if (isChecked(juncBox) && isChecked(backflowBag)) {
+                  modalTitle.innerHTML = 'Three boxes required:';
+                  modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5 (Accessories)<br>16 x 12 x 8 (Junction Box + Backflow Bag)';
                 } else if (isChecked(juncBox) || isChecked(backflowBag)) {
                   modalTitle.innerHTML = 'Three boxes required:';
                   modalBody.innerHTML  = (isChecked(juncBox)) ? shipperSize + '<br>13 x 10 x 5 (Accessories)<br>16 x 12 x 8 (Junction Box)' : shipperSize + '<br>13 x 10 x 5 (Accessories)<br>19 x 12 x 7 (Backflow Preventer Bag)';
-              } else {
+                } else {
                   modalTitle.innerHTML = 'Two boxes required:';
                   modalBody.innerHTML  = shipperSize + '<br>13 x 10 x 5 (Accessories)';
                 }
@@ -159,7 +159,25 @@ function calcPack(e) {
                 }
               } // End ldsBoxFunc
 
+              // shipperSize calculator
+              function shipperCalc () {
+                for (let i = 0; i < ldsTypes.length; i++) {
+                  let radioClasses = ldsTypes[i].classList;
+                  for (let c = 0; c < radioClasses.length; c++) {
+                    if (radioClasses[c] === 'active') {
+                      if (ldsTypes[i].getAttribute('id') === 'lds_radio') {
+                        return shipperSize = (formValsObj.ldsSize < 200) ? '19 x 12 x 7' : '14 x 14 x 14';
+                      } else {
+                        return shipperSize = '13 x 10 x 5';
+                      }
+                      console.log(shipperSize);
+                      break;
+                    }
+                  }
+                }
+              }
             } // End calcPack
+
 
             // Disables/enables ldsSize select and juncBox inputs based on type_radios
             function disableRadios(){
