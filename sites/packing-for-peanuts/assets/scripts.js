@@ -35,8 +35,9 @@ function calcPack(e) {
   e.preventDefault();
 
   const formValsObj = {};
-  let oneBox        = false;
-  let twoBox        = false;
+  let boxCount = 0;
+  // let oneBox        = false;
+  // let twoBox        = false;
   let shipperSize   = '';
 
   // create formValsObj from inputs
@@ -101,7 +102,53 @@ function calcPack(e) {
           } else if (isChecked(ldsRadio)){
             // L D S - O N L Y - T E S T
             // loop through ldsScenarios test if oneBox = true
-            oneBox = ldsBoxFunc();
+            let boxCount = 0;
+            let scenArrInd = {remainder : undefined, boxed : false};
+            if (isChecked(ldsRadio)) {
+              // first conditional for ldsScenarios
+              for (let i = 0; i < ldsScenarios.length; i++) {
+                let apiSum;
+                let poldSsrSum;
+                let recircSum;
+                let formValsRem;
+                if (formValsObj.ldsSize <= ldsScenarios[i].ldsSize) {
+                  if (formValsObj.api > 0) {apiSum = formValsObj.api - ldsScenarios[i].api;}
+                  if (formValsObj.poldSsr > 0) {poldSsrSum = formValsObj.poldSsr - ldsScenarios[i].poldSsr;}
+                  if (formValsObj.recirc > 0) {recircSum = formValsObj.recirc - ldsScenarios[i].recirc;}
+                  // (formValsObj.api <= 0 ? formValsRem += 0 : formValsRem += apiSum);
+                  // (formValsObj.poldSsr <= 0 ? formValsRem += 0 : formValsRem += poldSsrSum);
+                  // (formValsObj.recirc <= 0 ? formValsRem += 0 : formValsRem += recircSum);
+                  if (apiSum <= 0) {
+                    formValsRem += 0;
+                  } else {
+                    formValsRem += apiSum;
+                  }
+                  if (poldSsrSum <= 0) {
+                    formValsRem += 0;
+                  } else {
+                    formValsRem += poldSsrSum;
+                  }
+                  if (recircSum <= 0) {
+                    formValsRem += 0;
+                  } else {
+                    formValsRem += recircSum;
+                  }
+                  // formValsRem = (apiSum <= 0) ? += 0 :
+                  // formValsRem = apiSum + poldSsrSum + recircSum;
+                  if (formValsRem < scenArrInd.remainder || (scenArrInd.remainder === undefined && formValsRem >= 0)) {
+                    scenArrInd.remainder = formValsRem;
+                    scenArrInd.ind = [i];
+                  }
+                  if (formValsRem === 0) {
+                    scenArrInd.boxed = true;
+                    console.log(scenArrInd);
+                    console.log('shipped!');
+                  }
+                }
+              }
+              }
+
+            // oneBox = ldsFunc();
           }
           if (oneBox) {
             if (isChecked(juncBox) && isChecked(backflowBag)) {
@@ -146,7 +193,7 @@ function calcPack(e) {
             }
 
             // Create ldsBoxFunc to use for loop through formValsObj <= ldsScenarios
-            function ldsBoxFunc() {
+            function ldsFunc() {
               for (var i = 0; i < ldsScenarios.length; i++) {
                 if (formValsObj.api       <= ldsScenarios[i].api
                   && formValsObj.poldSsr  <= ldsScenarios[i].poldSsr
@@ -157,10 +204,34 @@ function calcPack(e) {
                     break;
                   }
                 }
-              } // End ldsBoxFunc
+              } // End ldsFunc
+            // Create poldFunc to use for loop through formValsObj <= poldScenarios
+            function poldFunc() {
+              for (var i = 0; i < poldScenarios.length; i++) {
+                if (formValsObj.api       <= poldScenarios[i].api
+                  && formValsObj.poldSsr  <= poldScenarios[i].poldSsr - 2
+                  && formValsObj.recirc   <= poldScenarios[i].recirc)
+                  {
+                    return oneBox = true;
+                    break;
+                  }
+                }
+              } // End poldFunc
+            // Create accessFunc to use for loop through formValsObj <= poldScenarios
+            function accessFunc() {
+              for (var i = 0; i < poldScenarios.length; i++) {
+                if (formValsObj.api       <= poldScenarios[i].api
+                  && formValsObj.poldSsr  <= poldScenarios[i].poldSsr
+                  && formValsObj.recirc   <= poldScenarios[i].recirc)
+                  {
+                    return oneBox = true;
+                    break;
+                  }
+                }
+              } // End ldsFunc
 
               // shipperSize calculator
-              function shipperCalc () {
+              function shipperCalc() {
                 for (let i = 0; i < ldsTypes.length; i++) {
                   let radioClasses = ldsTypes[i].classList;
                   for (let c = 0; c < radioClasses.length; c++) {
