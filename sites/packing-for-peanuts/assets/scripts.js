@@ -35,7 +35,6 @@ function calcPack(e) {
   e.preventDefault();
 
   const formValsObj = {};
-  let boxCount = 0;
   // let oneBox        = false;
   // let twoBox        = false;
   let shipperSize   = '';
@@ -102,9 +101,8 @@ function calcPack(e) {
           } else if (isChecked(ldsRadio)){
             // L D S - O N L Y - T E S T
             // loop through ldsScenarios test if oneBox = true
-            let boxCount = 0;
-              let scenArrInd = {remainder : null, boxed : false};
-              // first conditional for ldsScenarios
+              let scenObj = {remainder : null, boxed : false, boxCount: 0};
+              // BOX COUNT 0 LOOP START
               for (let i = 0; i < ldsScenarios.length; i++) {
                 let formValsRem = 0, apiSum = 0, poldSsrSum = 0, recircSum = 0;
                 if (formValsObj.ldsSize <= ldsScenarios[i].ldsSize) {
@@ -114,18 +112,18 @@ function calcPack(e) {
                   (formValsObj.api <= 0 ? formValsRem += 0 : formValsRem += apiSum);
                   (formValsObj.poldSsr <= 0 ? formValsRem += 0 : formValsRem += poldSsrSum);
                   (formValsObj.recirc <= 0 ? formValsRem += 0 : formValsRem += recircSum);
-                  if (formValsRem < scenArrInd.remainder || scenArrInd.remainder === null) {
-                    scenArrInd.remainder = parseInt(formValsRem);
-                    scenArrInd.box1 = ldsScenarios[i];
-                    console.log(scenArrInd);
+                  if (formValsRem < scenObj.remainder || scenObj.remainder === null) {
+                    scenObj.remainder = parseInt(formValsRem);
+                    scenObj.box1 = ldsScenarios[i];
+                    console.log(scenObj);
                   }
                   if (formValsRem <= 0) {
-                    scenArrInd.boxed = true;
-                    boxCount = 1;
+                    scenObj.boxed = true;
+                    scenObj.boxCount = 1;
                     console.log('shipped!');
                   }
                 }
-              }
+              } // END LOOP
               // box up remainder 
 
             // oneBox = ldsFunc();
