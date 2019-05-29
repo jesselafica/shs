@@ -1,17 +1,17 @@
 // Const Declarations
 // Inputs
-const apiInput    = document.getElementById('api');
-const poldInput   = document.getElementById('pold');
-const ssrInput    = document.getElementById('ssr');
-const recircInput = document.getElementById('recirc');
-const ldsSize     = document.getElementById('lds_size');
-const ldsSizeGroup= document.getElementsByClassName('lds-size')[0];
-const juncBox     = document.getElementById('junc_box');
-const backflowBag = document.getElementById('backflow_bag');
-const ldsRadio    = document.getElementById('lds_radio');
-const poldRadio   = document.getElementById('pold_radio');
-const accessRadio = document.getElementById('accessories_radio');
-const ldsTypes    = document.getElementsByClassName('lds-type');
+const apiInput    = document.getElementById('api'),
+      poldInput   = document.getElementById('pold'),
+      ssrInput    = document.getElementById('ssr'),
+      recircInput = document.getElementById('recirc'),
+      ldsSize     = document.getElementById('lds_size'),
+      ldsSizeGroup= document.getElementsByClassName('lds-size')[0],
+      juncBox     = document.getElementById('junc_box'),
+      backflowBag = document.getElementById('backflow_bag'),
+      ldsRadio    = document.getElementById('lds_radio'),
+      poldRadio   = document.getElementById('pold_radio'),
+      accessRadio = document.getElementById('accessories_radio'),
+      ldsTypes    = document.getElementsByClassName('lds-type');
 //Buttons
 const resetBtn  = document.getElementById('reset_button');
 resetBtn.addEventListener('click', resetForm, false);
