@@ -1,4 +1,4 @@
-// Initialize variables
+// Const Declarations
 // Inputs
 const apiInput    = document.getElementById('api');
 const poldInput   = document.getElementById('pold');
@@ -103,50 +103,30 @@ function calcPack(e) {
             // L D S - O N L Y - T E S T
             // loop through ldsScenarios test if oneBox = true
             let boxCount = 0;
-            let scenArrInd = {remainder : undefined, boxed : false};
-            if (isChecked(ldsRadio)) {
+              let scenArrInd = {remainder : null, boxed : false};
               // first conditional for ldsScenarios
               for (let i = 0; i < ldsScenarios.length; i++) {
-                let apiSum;
-                let poldSsrSum;
-                let recircSum;
-                let formValsRem;
+                let formValsRem = 0, apiSum = 0, poldSsrSum = 0, recircSum = 0;
                 if (formValsObj.ldsSize <= ldsScenarios[i].ldsSize) {
                   if (formValsObj.api > 0) {apiSum = formValsObj.api - ldsScenarios[i].api;}
                   if (formValsObj.poldSsr > 0) {poldSsrSum = formValsObj.poldSsr - ldsScenarios[i].poldSsr;}
                   if (formValsObj.recirc > 0) {recircSum = formValsObj.recirc - ldsScenarios[i].recirc;}
-                  // (formValsObj.api <= 0 ? formValsRem += 0 : formValsRem += apiSum);
-                  // (formValsObj.poldSsr <= 0 ? formValsRem += 0 : formValsRem += poldSsrSum);
-                  // (formValsObj.recirc <= 0 ? formValsRem += 0 : formValsRem += recircSum);
-                  if (apiSum <= 0) {
-                    formValsRem += 0;
-                  } else {
-                    formValsRem += apiSum;
-                  }
-                  if (poldSsrSum <= 0) {
-                    formValsRem += 0;
-                  } else {
-                    formValsRem += poldSsrSum;
-                  }
-                  if (recircSum <= 0) {
-                    formValsRem += 0;
-                  } else {
-                    formValsRem += recircSum;
-                  }
-                  // formValsRem = (apiSum <= 0) ? += 0 :
-                  // formValsRem = apiSum + poldSsrSum + recircSum;
-                  if (formValsRem < scenArrInd.remainder || (scenArrInd.remainder === undefined && formValsRem >= 0)) {
-                    scenArrInd.remainder = formValsRem;
-                    scenArrInd.ind = [i];
-                  }
-                  if (formValsRem === 0) {
-                    scenArrInd.boxed = true;
+                  (formValsObj.api <= 0 ? formValsRem += 0 : formValsRem += apiSum);
+                  (formValsObj.poldSsr <= 0 ? formValsRem += 0 : formValsRem += poldSsrSum);
+                  (formValsObj.recirc <= 0 ? formValsRem += 0 : formValsRem += recircSum);
+                  if (formValsRem < scenArrInd.remainder || scenArrInd.remainder === null) {
+                    scenArrInd.remainder = parseInt(formValsRem);
+                    scenArrInd.box1 = ldsScenarios[i];
                     console.log(scenArrInd);
+                  }
+                  if (formValsRem <= 0) {
+                    scenArrInd.boxed = true;
+                    boxCount = 1;
                     console.log('shipped!');
                   }
                 }
               }
-              }
+              // box up remainder 
 
             // oneBox = ldsFunc();
           }
