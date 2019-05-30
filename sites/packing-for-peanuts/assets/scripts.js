@@ -35,6 +35,8 @@ function calcPack(e) {
   e.preventDefault();
 
   const formValsObj = {};
+  const shipmentArr = [];
+  const boxCount = shipmentArr.length;
   // let oneBox        = false;
   // let twoBox        = false;
   let shipperSize   = '';
@@ -101,7 +103,7 @@ function calcPack(e) {
           } else if (isChecked(ldsRadio)){
             // L D S - O N L Y - T E S T
             // loop through ldsScenarios test if oneBox = true
-              let scenObj = {remainder : null, boxed : false, boxCount: 0};
+              let scenObj = {remainder: null, boxed: false, boxCount: 0};
               // BOX COUNT 0 LOOP START
               for (let i = 0; i < ldsScenarios.length; i++) {
                 let formValsRem = 0, apiSum = 0, poldSsrSum = 0, recircSum = 0;
@@ -123,8 +125,14 @@ function calcPack(e) {
                     console.log('shipped!');
                   }
                 }
-              } // END LOOP
-              // box up remainder 
+              } console.log(scenObj.box1); // END LOOP
+              shipmentArr.push(scenObj.box1)
+              console.log(shipmentArr);
+              shipmentArr.forEach(function (arrItem){
+                arrItem.api - 2;
+              });
+              console.log(shipmentArr);
+              // box up remainder
 
             // oneBox = ldsFunc();
           }
