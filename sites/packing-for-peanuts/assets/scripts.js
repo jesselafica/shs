@@ -34,8 +34,8 @@ function calcPack(e) {
   // Reinit vars and vals
   e.preventDefault();
 
-  const formValsObj = {};
-  const shipmentArr = [];
+  let formValsObj = {};
+  let shipmentArr = [];
   const boxCount = shipmentArr.length;
   // let oneBox        = false;
   // let twoBox        = false;
@@ -48,9 +48,10 @@ function calcPack(e) {
   formValsObj.recirc  = parseInt(recircInput.value);
   formValsObj.ldsSize = parseInt(ldsSize.value);
   formValsObj.poldSsr = parseInt(formValsObj.pold + (formValsObj.ssr / 2));
+  formValsObj.remainder = parseInt(formValsObj.api + formValsObj.poldSsr + formValsObj.recirc);
   // calculate shipper size
   shipperCalc();
-
+console.log(formValsObj);
   if (isChecked(poldRadio)) {
     // P O L D - O N L Y - T E S T
     // for loop --> check if <= poldScenarios.key
@@ -103,35 +104,49 @@ function calcPack(e) {
           } else if (isChecked(ldsRadio)){
             // L D S - O N L Y - T E S T
             // loop through ldsScenarios test if oneBox = true
-              let scenObj = {remainder: null, boxed: false, boxCount: 0};
+            // box object constructor
+            function Box(){
+              this.api;
+            }
               // BOX COUNT 0 LOOP START
+              let box0 = {};
+              let loopScen;
+              let creatingBox = true;
               for (let i = 0; i < ldsScenarios.length; i++) {
-                let formValsRem = 0, apiSum = 0, poldSsrSum = 0, recircSum = 0;
+                let apiSum = 0, poldSsrSum = 0, recircSum = 0;
                 if (formValsObj.ldsSize <= ldsScenarios[i].ldsSize) {
-                  if (formValsObj.api > 0) {apiSum = formValsObj.api - ldsScenarios[i].api;}
-                  if (formValsObj.poldSsr > 0) {poldSsrSum = formValsObj.poldSsr - ldsScenarios[i].poldSsr;}
-                  if (formValsObj.recirc > 0) {recircSum = formValsObj.recirc - ldsScenarios[i].recirc;}
-                  (formValsObj.api <= 0 ? formValsRem += 0 : formValsRem += apiSum);
-                  (formValsObj.poldSsr <= 0 ? formValsRem += 0 : formValsRem += poldSsrSum);
-                  (formValsObj.recirc <= 0 ? formValsRem += 0 : formValsRem += recircSum);
-                  if (formValsRem < scenObj.remainder || scenObj.remainder === null) {
-                    scenObj.remainder = parseInt(formValsRem);
-                    scenObj.box1 = ldsScenarios[i];
-                    console.log(scenObj);
+                  if (formValsObj.api >= ldsScenarios[i]) {apiSum = formValsObj.api - ldsScenarios[i].api;}
+                  if (formValsObj.poldSsr >= ldsScenarios[i]) {poldSsrSum = formValsObj.poldSsr - ldsScenarios[i].poldSsr;}
+                  if (formValsObj.recirc >= ldsScenarios[i]) {recircSum = formValsObj.recirc - ldsScenarios[i].recirc;}
+                  (formValsObj.api <= 0 ? formValsObj.remainder += 0 : formValsObj.remainder += apiSum);
+                  (formValsObj.poldSsr <= 0 ? formValsObj.remainder += 0 : formValsObj.remainder += poldSsrSum);
+                  (formValsObj.recirc <= 0 ? formValsObj.remainder += 0 : formValsObj.remainder += recircSum);
+                  if (formValsObj.remainder < scenObj.remainder || scenObj.remainder === null) {
+                    // formValsObj.remainder = parseInt(formValsObj.remainder);
+                    loopScen = ldsScenarios[i];
                   }
-                  if (formValsRem <= 0) {
-                    scenObj.boxed = true;
-                    scenObj.boxCount = 1;
-                    console.log('shipped!');
+              //     if (formValsObj.remainder <= 0) {
+              //       scenObj.boxed = true;
+              //       scenObj.boxCount = 1;
+              //       console.log('shipped!');
+              //     }
+                }
+              }  // END LOOP
+              // create a new box obj to subract formValsObj into
+              while (creatingBox) {
+                for (var i = 0; i < shipmentArr.length; i++) {
+                  if (!shipmentArr.box[i]) {
+                      shipmentArr.box[i];
+                      creatingBox = false;
+                      break;
                   }
                 }
-              } console.log(scenObj.box1); // END LOOP
-              shipmentArr.push(scenObj.box1)
-              console.log(shipmentArr);
-              shipmentArr.forEach(function (arrItem){
-                arrItem.api - 2;
-              });
-              console.log(shipmentArr);
+              }
+              // shipmentArr.push(scenObj.box1)
+              // console.log(shipmentArr);
+              // shipmentArr.forEach(function (arrItem){
+              //   arrItem.api - 2;
+              // });
               // box up remainder
 
             // oneBox = ldsFunc();
