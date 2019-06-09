@@ -241,7 +241,7 @@ if (isChecked(poldRadio)) {
                 && formValsObj.recirc   <= ldsScenarios[i].recirc
                 && formValsObj.ldsSize  <= ldsScenarios[i].ldsSize)
                 {
-                  return oneBox = true;
+
                   break;
                 }
               }
@@ -270,3 +270,67 @@ if (isChecked(poldRadio)) {
                 }
               }
             } // End ldsFunc
+
+
+
+
+
+// ===========================================================================================
+// J U N E - 3 - 2 0 1 9
+// ===========================================================================================
+            // loop through ldsScenarios until formValsObj.remainder = 0
+            ldsScenarios.forEach((scenario, ind) => {
+              let apiSub = 0, poldSsrSub = 0, recircSub = 0;
+              let scenRemainder = apiSub + poldSsrSub + recircSub;
+              let scenObj = {};
+              scenObj.api = parseInt(scenario.api);
+              scenObj.poldSsr = parseInt(scenario.poldSsr);
+              scenObj.recirc = parseInt(scenario.recirc);
+              scenObj.ldsSize = parseInt(scenario.ldsSize);
+              if (shipmentArr.length === 0 && formValsObj.ldsSize <= scenObj.ldsSize) {
+                for (var key in scenObj) {
+                    if (scenObj.hasOwnProperty(key)) {
+                        scenObj[key] = (formValsObj[key] <= scenObj[key]) ? formValsObj[key] : scenObj[key];
+                      }
+                    }
+                scenObj.remainder = 0;
+                scenObj.remainder += formValsObj.api - scenObj.api;
+                scenObj.remainder += formValsObj.poldSsr - scenObj.poldSsr;
+                scenObj.remainder += formValsObj.recirc - scenObj.recirc;
+                // scenObj.remainder += (formValsObj.api > scenObj.api) ? formValsObj.api - scenObj.api : 0;
+                // scenObj.remainder += (formValsObj.poldSsr > scenObj.poldSsr) ? formValsObj.poldSsr - scenObj.poldSsr : 0;
+                // scenObj.remainder += (formValsObj.recirc > scenObj.recirc) ? formValsObj.recirc - scenObj.recirc : 0;
+                shipmentArr.push(scenObj);
+                console.log(shipmentArr);
+                console.log(formValsObj);
+              } else if (formValsObj.ldsSize <= scenario.ldsSize){
+                // keep saving ldsScenarios[i] with lowest remainder with shipmentArr.push() & shipmentArr.pop()
+                for (var key in scenObj) {
+                  if (scenObj.hasOwnProperty(key)) {
+                    scenObj[key] = (formValsObj[key] <= scenObj[key]) ? formValsObj[key] : scenObj[key];
+                  }
+                }
+                scenObj.remainder = 0;
+                scenObj.remainder += formValsObj.api - scenObj.api;
+                scenObj.remainder += formValsObj.poldSsr - scenObj.poldSsr;
+                scenObj.remainder += formValsObj.recirc - scenObj.recirc;
+                if (scenObj.remainder < shipmentArr[0].remainder) {
+                  shipmentArr.pop();
+                  shipmentArr.push(scenObj);
+                  console.log(shipmentArr);
+                }
+              }
+
+            });
+            // for (let i = 0; i < ldsScenarios.length; i++) {
+            //   ldsScenarios[i]
+            // }
+            // then shipmentArr[0].key = (formValsObj.key <= shipmentArr[0].key) ? formValsObj.key : shipmentArr[0].key;
+            // then formValsObj.key = (formValsObj.key >= shipmentArr[0].key) ? formValsObj.key - shipmentArr[0].key : formValsObj.key;
+            // if it succeeds i.e. formValsObj.remainder <= 0;
+            // calculate single package weight based on accessories and ldsSize
+            // if it fails
+            // loop through poldScenarios with lowest remainder with shipmentArr.push() & shipmentArr.pop()
+            // repeating all steps until formValsObj.remainder = 0
+            // if shipmentArr.length > 2
+            // return error message to user

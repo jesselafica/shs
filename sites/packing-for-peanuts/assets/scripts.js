@@ -51,284 +51,317 @@ function calcPack(e) {
   formValsObj.remainder = parseInt(formValsObj.api + formValsObj.poldSsr + formValsObj.recirc);
   // calculate shipper size
   shipperCalc();
-  // loop through ldsScenarios until formValsObj.remainder = 0
-  // keep saving ldsScenarios[i] with lowest remainder with shipmentArr.push() & shipmentArr.pop()
-  // then shipmentArr[0].key = (formValsObj.key <= shipmentArr[0].key) ? formValsObj.key : shipmentArr[0].key;
-  // then formValsObj.key = (formValsObj.key >= shipmentArr[0].key) ? formValsObj.key - shipmentArr[0].key : formValsObj.key;
-  // if it succeeds i.e. formValsObj.remainder <= 0;
-  // calculate single package weight based on accessories and ldsSize
-  // if it fails
-  // loop through poldScenarios with lowest remainder with shipmentArr.push() & shipmentArr.pop()
-  // repeating all steps until formValsObj.remainder = 0
-  // if shipmentArr.length > 2
-  // return error message to user
-// R E S E A R C H - J S - C L A S S E S
+  // if ldsRadio is checked and shipmentArr.length is 0
+  if (isChecked(ldsRadio)) {
+     do {
+      firstPack(ldsScenarios);
+      secondPack(ldsScenarios);
+    }
+    while (shipmentArr.length < 1);
+  }
+  // calculate weight of shipmentArr[0]
 
-  // shipperSize calculator
-  function shipperCalc() {
-    for (let i = 0; i < ldsTypes.length; i++) {
-      let radioClasses = ldsTypes[i].classList;
-      for (let c = 0; c < radioClasses.length; c++) {
-        if (radioClasses[c] === 'active') {
-          if (ldsTypes[i].getAttribute('id') === 'lds_radio') {
-            return shipperSize = (formValsObj.ldsSize < 200) ? '19 x 12 x 7' : '14 x 14 x 14';
-          } else {
-            return shipperSize = '13 x 10 x 5';
+
+  // firstPack
+  function firstPack(scenarioArray) {
+    for (var i = 0; i < scenarioArray.length && shipmentArr.length < 1; i++) {
+      if ((isChecked(ldsRadio) && formValsObj.ldsSize  <= scenarioArray[i].ldsSize)
+      || (isChecked(poldRadio) && formValsObj.poldSsr <= scenarioArray[i].poldSsr - 2)
+      || (isChecked(accessRadio))) {
+        if (formValsObj.api       <= scenarioArray[i].api
+          && formValsObj.poldSsr  <= scenarioArray[i].poldSsr
+          && formValsObj.recirc   <= scenarioArray[i].recirc)
+          {
+            shipmentArr.push(formValsObj);
+            console.log("Packed!");
+            console.log(shipmentArr);
+            break;
           }
-          console.log(shipperSize);
-          break;
+        }
+      }
+    } // End firstPack
+// F I X - B E L O W
+// CONDITIONAL SHOULD MATCH firstPack + poldScenarios
+  function secondPack(scenarioArray){
+    for(let i = 0; i < poldScenarios.length && shipmentArr.length < 2; i++){
+      for(let c = 0; c < scenarioArray.length && shipmentArr.length < 2; c++){
+        if(formValsObj.api      <= poldScenarios[i].api + scenarioArray[c].api
+          && formValsObj.poldSsr  <= poldScenarios[i].poldSsr + scenarioArray[c].poldSsr
+          && formValsObj.recirc   <= poldScenarios[i].recirc + scenarioArray[c].recirc
+          && formValsObj.ldsSize  <= scenarioArray[c].ldsSize){
+            shipmentArr.push(scenarioArray[c], poldScenarios[i]);
+            console.log("Packed!");
+            console.log(shipmentArr);
+            break;
+          }
         }
       }
     }
-  }
-} // End calcPack
+      // shipperSize calculator
+      function shipperCalc() {
+        for (let i = 0; i < ldsTypes.length; i++) {
+          let radioClasses = ldsTypes[i].classList;
+          for (let c = 0; c < radioClasses.length; c++) {
+            if (radioClasses[c] === 'active') {
+              if (ldsTypes[i].getAttribute('id') === 'lds_radio') {
+                return shipperSize = (formValsObj.ldsSize < 200) ? '19 x 12 x 7' : '14 x 14 x 14';
+              } else {
+                return shipperSize = '13 x 10 x 5';
+              }
+              console.log(shipperSize);
+              break;
+            }
+          }
+        }
+      }
+    } // End calcPack
 
 
-// Disables/enables ldsSize select and juncBox inputs based on type_radios
-function disableRadios(){
-  // set delay to allow .active to be added to clicked el before code is run
-  setTimeout(function(){
-    if (isChecked(accessRadio)) {
-      $(ldsSizeGroup).hide("blind");
-      // ldsSizeGroup.classList.add('d-none');
-      $(juncBox).show("blind");
-      // juncBox.classList.remove('d-none');
-      $(backflowBag).show("blind");
-      // backflowBag.classList.remove('d-none');
-    } else if(isChecked(poldRadio)){
-      $(ldsSizeGroup).hide("blind");
-      // ldsSizeGroup.classList.add('d-none');
-      ldsSizeGroup.classList.remove('active');
-      $(juncBox).hide("blind");
-      // juncBox.classList.add('d-none');
-      juncBox.classList.remove('active');
-      $(backflowBag).hide("blind");
-      // backflowBag.classList.add('d-none');
-      backflowBag.classList.remove('active');
-    } else if(isChecked(ldsRadio)){
-      // ldsSizeGroup.classList.remove('d-none');
-      $(ldsSizeGroup).show("blind");
-      // juncBox.classList.remove('d-none');
-      $(juncBox).show("blind");
-      // backflowBag.classList.remove('d-none');
-      $(backflowBag).show("blind");
+    // Disables/enables ldsSize select and juncBox inputs based on type_radios
+    function disableRadios(){
+      // set delay to allow .active to be added to clicked el before code is run
+      setTimeout(function(){
+        if (isChecked(accessRadio)) {
+          $(ldsSizeGroup).hide("blind");
+          // ldsSizeGroup.classList.add('d-none');
+          $(juncBox).show("blind");
+          // juncBox.classList.remove('d-none');
+          $(backflowBag).show("blind");
+          // backflowBag.classList.remove('d-none');
+        } else if(isChecked(poldRadio)){
+          $(ldsSizeGroup).hide("blind");
+          // ldsSizeGroup.classList.add('d-none');
+          ldsSizeGroup.classList.remove('active');
+          $(juncBox).hide("blind");
+          // juncBox.classList.add('d-none');
+          juncBox.classList.remove('active');
+          $(backflowBag).hide("blind");
+          // backflowBag.classList.add('d-none');
+          backflowBag.classList.remove('active');
+        } else if(isChecked(ldsRadio)){
+          // ldsSizeGroup.classList.remove('d-none');
+          $(ldsSizeGroup).show("blind");
+          // juncBox.classList.remove('d-none');
+          $(juncBox).show("blind");
+          // backflowBag.classList.remove('d-none');
+          $(backflowBag).show("blind");
+        }
+      }, 1);
     }
-  }, 1);
-}
 
-// Reset form
-function resetForm(){
-  // remove active class from all inputs
-  for(let i = 0; i < radioBtns.length; i++){
-    radioBtns[i].classList.remove('active');
-  }
-  // make ldsRadio active
-  ldsRadio.classList.add('active');
-  disableRadios();
-}
+    // Reset form
+    function resetForm(){
+      // remove active class from all inputs
+      for(let i = 0; i < radioBtns.length; i++){
+        radioBtns[i].classList.remove('active');
+      }
+      // make ldsRadio active
+      ldsRadio.classList.add('active');
+      disableRadios();
+    }
 
-// test hasClass return boolean
-function isChecked (el) {return $(el).hasClass('active');}
+    // test hasClass return boolean
+    function isChecked (el) {return $(el).hasClass('active');}
 
-// tool check scenario object poldSsr count
-// function checkPoldSsr(scenArray){
-//   scenArray.forEach((scenario, ind) => {
-//     return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + ' correct') : console.log('Check scenario at index ' + ind);
-//   });
-// };
-// Scenario array objects
-const ldsScenarios  = [
-  // START SM SHIPPER
-  {
-    api     : 0,
-    pold    : 18,
-    ssr     : 0,
-    poldSsr : 18,
-    recirc  : 0,
-    ldsSize: 150
-  },
-  {
-    api     : 1,
-    pold    : 14,
-    ssr     : 0,
-    poldSsr : 14,
-    recirc  : 1,
-    ldsSize: 150
-  },
-  {
-    api     : 1,
-    pold    : 1,
-    ssr     : 2,
-    poldSsr : 3,
-    recirc  : 3,
-    ldsSize: 150
-  },
-  {
-    api     : 1,
-    pold    : 13,
-    ssr     : 0,
-    poldSsr : 13,
-    recirc  : 1,
-    ldsSize: 150
-  },
-  {
-    api     : 1,
-    pold    : 12,
-    ssr     : 2,
-    poldSsr : 14,
-    recirc  : 1,
-    ldsSize: 150
-  },
-  {
-    api     : 2,
-    pold    : 13,
-    ssr     : 0,
-    poldSsr : 13,
-    recirc  : 0,
-    ldsSize: 150
-  },
-  {
-    api     : 2,
-    pold    : 0,
-    ssr     : 0,
-    poldSsr : 0,
-    recirc  : 2,
-    ldsSize: 150
-  },
-  {
-    api     : 3,
-    pold    : 5,
-    ssr     : 0,
-    poldSsr : 5,
-    recirc  : 1,
-    ldsSize: 150
-  },
-  {
-    api    : 4,
-    pold   : 0,
-    ssr    : 0,
-    poldSsr: 0,
-    recirc : 1,
-    ldsSize: 150
-  },
-  // END SM SHIPPER
-  // START BROWN BOX
-  {
-    api     : 2,
-    pold    : 0,
-    ssr     : 0,
-    poldSsr : 0,
-    recirc  : 2,
-    ldsSize : 200
-  },
-  {
-    api     : 1,
-    pold    : 2,
-    ssr     : 0,
-    poldSsr : 2,
-    recirc  : 2,
-    ldsSize : 200
-  },
-  {
-    api     : 0,
-    pold    : 4,
-    ssr     : 0,
-    poldSsr : 4,
-    recirc  : 2,
-    ldsSize : 200
-  }
-  // END BROWN BOX
-];
-const poldScenarios = [
-  {
-    api     : 3,
-    pold    : 0,
-    ssr     : 0,
-    poldSsr : 0,
-    recirc  : 3
-  },
-  {
-    api     : 0,
-    pold    : 0,
-    ssr     : 2,
-    poldSsr : 1,
-    recirc  : 5
-  },
-  {
-    api     : 6,
-    pold    : 0,
-    ssr     : 2,
-    poldSsr : 1,
-    recirc  : 0
-  },
-  {
-    api     : 2,
-    pold    : 2,
-    ssr     : 2,
-    poldSsr : 3,
-    recirc  : 3
-  },
-  {
-    api     : 1,
-    pold    : 4,
-    ssr     : 2,
-    poldSsr : 5,
-    recirc  : 3
-  },
-  {
-    api     : 0,
-    pold    : 6,
-    ssr     : 2,
-    poldSsr : 7,
-    recirc  : 3
-  },
-  {
-    api     : 0,
-    pold    : 15,
-    ssr     : 2,
-    poldSsr : 16,
-    recirc  : 2
-  },
-  {
-    api     : 0,
-    pold    : 22,
-    ssr     : 2,
-    poldSsr : 23,
-    recirc  : 0
-  },
-  {
-    api     : 2,
-    pold    : 14,
-    ssr     : 2,
-    poldSsr : 15,
-    recirc  : 0
-  },
-  {
-    api     : 1,
-    pold    : 18,
-    ssr     : 2,
-    poldSsr : 19,
-    recirc  : 0
-  },
-  {
-    api     : 3,
-    pold    : 12,
-    ssr     : 2,
-    poldSsr : 13,
-    recirc  : 0
-  },
-  {
-    api     : 4,
-    pold    : 8,
-    ssr     : 2,
-    poldSsr : 9,
-    recirc  : 0
-  },
-  {
-    api     : 5,
-    pold    : 4,
-    ssr     : 2,
-    poldSsr : 5,
-    recirc  : 0
-  }
-];
+    // tool check scenario object poldSsr count
+    // function checkPoldSsr(scenArray){
+    //   scenArray.forEach((scenario, ind) => {
+    //     return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + ' correct') : console.log('Check scenario at index ' + ind);
+    //   });
+    // };
+    // Scenario array objects
+    const ldsScenarios  = [
+      // START SM SHIPPER
+      {
+        api     : 0,
+        pold    : 18,
+        ssr     : 0,
+        poldSsr : 18,
+        recirc  : 0,
+        ldsSize: 150
+      },
+      {
+        api     : 1,
+        pold    : 14,
+        ssr     : 0,
+        poldSsr : 14,
+        recirc  : 1,
+        ldsSize: 150
+      },
+      {
+        api     : 1,
+        pold    : 1,
+        ssr     : 2,
+        poldSsr : 3,
+        recirc  : 3,
+        ldsSize: 150
+      },
+      {
+        api     : 1,
+        pold    : 13,
+        ssr     : 0,
+        poldSsr : 13,
+        recirc  : 1,
+        ldsSize: 150
+      },
+      {
+        api     : 1,
+        pold    : 12,
+        ssr     : 2,
+        poldSsr : 14,
+        recirc  : 1,
+        ldsSize: 150
+      },
+      {
+        api     : 2,
+        pold    : 13,
+        ssr     : 0,
+        poldSsr : 13,
+        recirc  : 0,
+        ldsSize: 150
+      },
+      {
+        api     : 2,
+        pold    : 0,
+        ssr     : 0,
+        poldSsr : 0,
+        recirc  : 2,
+        ldsSize: 150
+      },
+      {
+        api     : 3,
+        pold    : 5,
+        ssr     : 0,
+        poldSsr : 5,
+        recirc  : 1,
+        ldsSize: 150
+      },
+      {
+        api    : 4,
+        pold   : 0,
+        ssr    : 0,
+        poldSsr: 0,
+        recirc : 1,
+        ldsSize: 150
+      },
+      // END SM SHIPPER
+      // START BROWN BOX
+      {
+        api     : 2,
+        pold    : 0,
+        ssr     : 0,
+        poldSsr : 0,
+        recirc  : 2,
+        ldsSize : 200
+      },
+      {
+        api     : 1,
+        pold    : 2,
+        ssr     : 0,
+        poldSsr : 2,
+        recirc  : 2,
+        ldsSize : 200
+      },
+      {
+        api     : 0,
+        pold    : 4,
+        ssr     : 0,
+        poldSsr : 4,
+        recirc  : 2,
+        ldsSize : 200
+      }
+      // END BROWN BOX
+    ];
+    const poldScenarios = [
+      {
+        api     : 3,
+        pold    : 0,
+        ssr     : 0,
+        poldSsr : 0,
+        recirc  : 3
+      },
+      {
+        api     : 0,
+        pold    : 0,
+        ssr     : 2,
+        poldSsr : 1,
+        recirc  : 5
+      },
+      {
+        api     : 6,
+        pold    : 0,
+        ssr     : 2,
+        poldSsr : 1,
+        recirc  : 0
+      },
+      {
+        api     : 2,
+        pold    : 2,
+        ssr     : 2,
+        poldSsr : 3,
+        recirc  : 3
+      },
+      {
+        api     : 1,
+        pold    : 4,
+        ssr     : 2,
+        poldSsr : 5,
+        recirc  : 3
+      },
+      {
+        api     : 0,
+        pold    : 6,
+        ssr     : 2,
+        poldSsr : 7,
+        recirc  : 3
+      },
+      {
+        api     : 0,
+        pold    : 15,
+        ssr     : 2,
+        poldSsr : 16,
+        recirc  : 2
+      },
+      {
+        api     : 0,
+        pold    : 22,
+        ssr     : 2,
+        poldSsr : 23,
+        recirc  : 0
+      },
+      {
+        api     : 2,
+        pold    : 14,
+        ssr     : 2,
+        poldSsr : 15,
+        recirc  : 0
+      },
+      {
+        api     : 1,
+        pold    : 18,
+        ssr     : 2,
+        poldSsr : 19,
+        recirc  : 0
+      },
+      {
+        api     : 3,
+        pold    : 12,
+        ssr     : 2,
+        poldSsr : 13,
+        recirc  : 0
+      },
+      {
+        api     : 4,
+        pold    : 8,
+        ssr     : 2,
+        poldSsr : 9,
+        recirc  : 0
+      },
+      {
+        api     : 5,
+        pold    : 4,
+        ssr     : 2,
+        poldSsr : 5,
+        recirc  : 0
+      }
+    ];
