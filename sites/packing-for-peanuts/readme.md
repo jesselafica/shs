@@ -1,18 +1,12 @@
 # TO DO:
 
 ###What's next?
-#####Rewrite packaging scripts
---> create separate functions for each radio lds type
---> check for junc boxes and backflow bags at the end and append each to the end of the modal body
---> 2 electrical junction boxes = 14x14x14
-#####Add input for LDC
---> if >75' then POLD box required
-#####Add Checkbox for Electrical Junction Box
-#####Add weights for each accessory and provide sum for each package type.
---> Weights listed in scenario_tables.txt
-#####2 JUNC BOXES = 14X14X14
-#####Refactor and implement => funcs
-#####Replace disable/enable with show/hide
+####NEW INPUTS:
+1. SCV
+2. Express?
+-->If yes, expose State dropdown
+3. LDC
+-->If >75' then POLD box required
 
 PHASE 1
 Create initial application that will only look at the input values and see if they exceed the 13 possible scenarios

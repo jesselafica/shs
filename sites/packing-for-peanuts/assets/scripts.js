@@ -20,10 +20,10 @@ form.addEventListener('submit', calcPack, false);
 
 // Message
 // const message      = document.getElementById('message');
-const modal      = document.getElementById('modal');
-const modalBody  = document.getElementById('modal_body');
-const modalTitle = document.getElementById('modal_title');
-const radioBtns = document.getElementsByClassName('radio-btn');
+const modal = document.getElementById('modal'),
+modalBody   = document.getElementById('modal_body'),
+modalTitle  = document.getElementById('modal_title'),
+radioBtns   = document.getElementsByClassName('radio-btn');
 // add eventListeners to radioBtns for input disabling
 for (var i = 0; i < radioBtns.length; i++) {
   radioBtns[i].addEventListener('click', disableRadios, false);
@@ -53,18 +53,24 @@ function calcPack(e) {
   shipperCalc();
   // if ldsRadio is checked and shipmentArr.length is 0
   if (isChecked(ldsRadio)) {
-     do {
-      firstPack(ldsScenarios);
-      secondPack(ldsScenarios);
-    }
-    while (shipmentArr.length < 1);
+    do {firstPack(ldsScenarios);}
+      while (shipmentArr.length < 1);
+    do {secondPack(ldsScenarios);}
+      while (shipmentArr.length < 1);
   }
-  // calculate weight of shipmentArr[0]
+  //if shipmentArr.length > 0
+   // then if shipmentArr.length = 2
+   // subtract formValsObj into shipmentArr[1] (poldScenario)
+   // calculate shipmentArr[1].weight
+   // calculate shipmentArr[1].estCost
+   // then subtract formValsObj into shipmentArr[1] (ldsScenario)
+   // calculate shipmentArr[0].weight
+   // calculate shipmentArr[0].estCost
 
 
   // firstPack
   function firstPack(scenarioArray) {
-    for (var i = 0; i < scenarioArray.length && shipmentArr.length < 1; i++) {
+    for (let i = 0; i < scenarioArray.length && shipmentArr.length < 1; i++) {
       if ((isChecked(ldsRadio) && formValsObj.ldsSize  <= scenarioArray[i].ldsSize)
       || (isChecked(poldRadio) && formValsObj.poldSsr <= scenarioArray[i].poldSsr - 2)
       || (isChecked(accessRadio))) {
@@ -80,23 +86,26 @@ function calcPack(e) {
         }
       }
     } // End firstPack
-// F I X - B E L O W
-// CONDITIONAL SHOULD MATCH firstPack + poldScenarios
-  function secondPack(scenarioArray){
-    for(let i = 0; i < poldScenarios.length && shipmentArr.length < 2; i++){
-      for(let c = 0; c < scenarioArray.length && shipmentArr.length < 2; c++){
-        if(formValsObj.api      <= poldScenarios[i].api + scenarioArray[c].api
-          && formValsObj.poldSsr  <= poldScenarios[i].poldSsr + scenarioArray[c].poldSsr
-          && formValsObj.recirc   <= poldScenarios[i].recirc + scenarioArray[c].recirc
-          && formValsObj.ldsSize  <= scenarioArray[c].ldsSize){
-            shipmentArr.push(scenarioArray[c], poldScenarios[i]);
-            console.log("Packed!");
-            console.log(shipmentArr);
-            break;
+    // F I X - B E L O W
+    // CONDITIONAL SHOULD MATCH firstPack + poldScenarios
+    function secondPack(scenarioArray){
+      for(let i = 0; i < poldScenarios.length && shipmentArr.length < 2; i++){
+        for(let c = 0; c < scenarioArray.length && shipmentArr.length < 2; c++){
+          if ((isChecked(ldsRadio) && formValsObj.ldsSize  <= scenarioArray[i].ldsSize)
+          || (isChecked(poldRadio) && formValsObj.poldSsr <= scenarioArray[i].poldSsr + poldScenarios[c] - 2)
+          || (isChecked(accessRadio))) {
+            if (formValsObj.api      <= poldScenarios[i].api + scenarioArray[c].api
+              && formValsObj.poldSsr  <= poldScenarios[i].poldSsr + scenarioArray[c].poldSsr
+              && formValsObj.recirc   <= poldScenarios[i].recirc + scenarioArray[c].recirc) {
+                shipmentArr.push(scenarioArray[c], poldScenarios[i]);
+                console.log("Packed!");
+                console.log(shipmentArr);
+                break;
+              }
+            }
           }
         }
       }
-    }
       // shipperSize calculator
       function shipperCalc() {
         for (let i = 0; i < ldsTypes.length; i++) {
@@ -123,27 +132,18 @@ function calcPack(e) {
       setTimeout(function(){
         if (isChecked(accessRadio)) {
           $(ldsSizeGroup).hide("blind");
-          // ldsSizeGroup.classList.add('d-none');
           $(juncBox).show("blind");
-          // juncBox.classList.remove('d-none');
           $(backflowBag).show("blind");
-          // backflowBag.classList.remove('d-none');
         } else if(isChecked(poldRadio)){
           $(ldsSizeGroup).hide("blind");
-          // ldsSizeGroup.classList.add('d-none');
           ldsSizeGroup.classList.remove('active');
           $(juncBox).hide("blind");
-          // juncBox.classList.add('d-none');
           juncBox.classList.remove('active');
           $(backflowBag).hide("blind");
-          // backflowBag.classList.add('d-none');
           backflowBag.classList.remove('active');
         } else if(isChecked(ldsRadio)){
-          // ldsSizeGroup.classList.remove('d-none');
           $(ldsSizeGroup).show("blind");
-          // juncBox.classList.remove('d-none');
           $(juncBox).show("blind");
-          // backflowBag.classList.remove('d-none');
           $(backflowBag).show("blind");
         }
       }, 1);
