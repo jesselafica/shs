@@ -58,7 +58,15 @@ function calcPack(e) {
     do {secondPack(ldsScenarios);}
       while (shipmentArr.length < 1);
   }
-  //if shipmentArr.length > 0
+  if (shipmentArr.length === 1) {
+    // use .spread here??? (ie ...)
+    shipmentArr[0].api = formValsObj.api;
+    shipmentArr[0].pold = formValsObj.pold;
+    shipmentArr[0].ssr = formValsObj.ssr;
+    shipmentArr[0].recirc = formValsObj.recirc;
+    shipmentArr[0].ldsSize = formValsObj.ldsSize;
+    shipmentArr[0].poldSsr = formValsObj.poldSsr;
+  }
    // then if shipmentArr.length = 2
    // subtract formValsObj into shipmentArr[1] (poldScenario)
    // calculate shipmentArr[1].weight
@@ -66,7 +74,8 @@ function calcPack(e) {
    // then subtract formValsObj into shipmentArr[1] (ldsScenario)
    // calculate shipmentArr[0].weight
    // calculate shipmentArr[0].estCost
-
+// make shipmentArr.ldsSize always = formValsObj.size
+// always use shipmentArr when calculating weight and creating the text output. Easier for refactoring.
 
   // firstPack
   function firstPack(scenarioArray) {
