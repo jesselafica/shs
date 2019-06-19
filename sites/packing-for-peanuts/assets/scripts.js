@@ -5,6 +5,7 @@ poldInput   = document.getElementById('pold'),
 ssrInput    = document.getElementById('ssr'),
 recircInput = document.getElementById('recirc'),
 ldsSize     = document.getElementById('lds_size'),
+scvInput    = document.getElementById('scv'),
 ldsSizeGroup= document.getElementsByClassName('lds-size')[0],
 juncBox     = document.getElementById('junc_box'),
 backflowBag = document.getElementById('backflow_bag'),
@@ -53,10 +54,12 @@ function calcPack(e) {
   shipperCalc();
   // if ldsRadio is checked and shipmentArr.length is 0
   if (isChecked(ldsRadio)) {
-    do {firstPack(ldsScenarios);}
-      while (shipmentArr.length < 1);
-    do {secondPack(ldsScenarios);}
-      while (shipmentArr.length < 1);
+    firstPack(ldsScenarios);
+    if (shipmentArr.length === 0) {secondPack(ldsScenarios);}
+    // do {firstPack(ldsScenarios);}
+    //   while (shipmentArr.length === 0);
+    // do {secondPack(ldsScenarios);}
+    //   while (shipmentArr.length === 0);
   }
   if (shipmentArr.length === 1) {
     // use .spread here??? (ie ...)
@@ -66,6 +69,7 @@ function calcPack(e) {
     shipmentArr[0].recirc = formValsObj.recirc;
     shipmentArr[0].ldsSize = formValsObj.ldsSize;
     shipmentArr[0].poldSsr = formValsObj.poldSsr;
+    calcWeight(shipmentArr[0]);
   }
    // then if shipmentArr.length = 2
    // subtract formValsObj into shipmentArr[1] (poldScenario)
@@ -76,6 +80,7 @@ function calcPack(e) {
    // calculate shipmentArr[0].estCost
 // make shipmentArr.ldsSize always = formValsObj.size
 // always use shipmentArr when calculating weight and creating the text output. Easier for refactoring.
+// if juncBox or backflowBag then push respective packaging and weight to shipmentArr
 
   // firstPack
   function firstPack(scenarioArray) {
@@ -131,6 +136,20 @@ function calcPack(e) {
             }
           }
         }
+      }
+      // shipmentArr[n].weight calculator
+      function calcWeight(shipmentObj){
+        shipmentObj.weight = 0;
+        // + weight based on ldsSize
+        if (shipmentObj.ldsSize === 75) {
+          (scvInput.checked) ? shipmentObj.weight += 9.55 : shipmentObj.weight += 9.05;
+          console.log(shipmentObj.weight);
+        }
+        // + weight based on SCV true && ldsSize
+        // begin accessories calculation
+        // + api * 0.6
+        // + pold * 0.2
+        // + recirc * 0.8
       }
     } // End calcPack
 
