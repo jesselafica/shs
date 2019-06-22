@@ -141,10 +141,34 @@ function calcPack(e) {
       function calcWeight(shipmentObj){
         shipmentObj.weight = 0;
         // + weight based on ldsSize
-        if (shipmentObj.ldsSize === 75) {
-          (scvInput.checked) ? shipmentObj.weight += 9.55 : shipmentObj.weight += 9.05;
-          console.log(shipmentObj.weight);
+        switch (shipmentObj.ldsSize) {
+          case 75:
+            (scvInput.checked) ? shipmentObj.weight += 9.05 + 0.5 : shipmentObj.weight += 9.05;
+            console.log(shipmentObj.weight);
+            break;
+          case 100:
+            (scvInput.checked) ? shipmentObj.weight += 9.95 + 0.75 : shipmentObj.weight += 9.95;
+            console.log(shipmentObj.weight);
+            break;
+          case 125:
+            (scvInput.checked) ? shipmentObj.weight += 10.6 + 1.2 : shipmentObj.weight += 10.6;
+            console.log(shipmentObj.weight);
+            break;
+          case 150:
+            (scvInput.checked) ? shipmentObj.weight += 12.2 + 1.6 : shipmentObj.weight += 12.2;
+            console.log(shipmentObj.weight);
+            break;
+          case 200:
+            (scvInput.checked) ? shipmentObj.weight += 17.4 + 2.35: shipmentObj.weight += 17.4;
+            console.log(shipmentObj.weight);
+            break;
+          default:
+
         }
+        // if (shipmentObj.ldsSize === 75) {
+        //   (scvInput.checked) ? shipmentObj.weight += 9.55 : shipmentObj.weight += 9.05;
+        //   console.log(shipmentObj.weight);
+        // }
         // + weight based on SCV true && ldsSize
         // begin accessories calculation
         // + api * 0.6
