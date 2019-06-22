@@ -74,14 +74,13 @@ standby = 0
 shutdown = 0
 
 Panel POL Terminals Alarm - w/ or w/o paired LDS
---> ?? Use trip val 100% to indicate it was by Panel POL?
 {"id":"987654...",
 "key":"007E897D...",
 "trip_time":"inherit",
 "cur_val":"inherit",
 "trip_val":"inherit",
 "status_state":14350}
-	*alarm_type = 7*
+	*alarm_type = 6*
 	*cur_val = cur_val
 	*in_alarm = 1*
 flow_in_partial = 0
