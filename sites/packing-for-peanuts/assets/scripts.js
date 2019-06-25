@@ -163,12 +163,8 @@ function calcPack(e) {
             console.log(shipmentObj.weight);
             break;
           default:
-
+            shipmentObj.weight += 0;
         }
-        // if (shipmentObj.ldsSize === 75) {
-        //   (scvInput.checked) ? shipmentObj.weight += 9.55 : shipmentObj.weight += 9.05;
-        //   console.log(shipmentObj.weight);
-        // }
         // + weight based on SCV true && ldsSize
         // begin accessories calculation
         // + api * 0.6
