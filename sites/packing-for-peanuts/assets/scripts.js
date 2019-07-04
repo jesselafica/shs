@@ -30,11 +30,13 @@ for (var i = 0; i < radioBtns.length; i++) {
   radioBtns[i].addEventListener('click', disableRadios, false);
 }
 
-// Declare functions
+// B E G I N - C A L C - P A C K
 function calcPack(e) {
   // Reinit vars and vals
   e.preventDefault();
 
+  modalBody.innerHTML = "Please close this window and add items.";
+  modalTitle.innerHTML = "Empty box?";
   let formValsObj = {};
   let shipmentArr = [];
   // const boxCount = shipmentArr.length;
@@ -56,10 +58,7 @@ function calcPack(e) {
   if (isChecked(ldsRadio)) {
     firstPack(ldsScenarios);
     if (shipmentArr.length === 0) {secondPack(ldsScenarios);}
-    // do {firstPack(ldsScenarios);}
-    //   while (shipmentArr.length === 0);
-    // do {secondPack(ldsScenarios);}
-    //   while (shipmentArr.length === 0);
+
   }
   if (shipmentArr.length === 1) {
     // use .spread here??? (ie ...)
@@ -70,17 +69,56 @@ function calcPack(e) {
     shipmentArr[0].ldsSize = formValsObj.ldsSize;
     shipmentArr[0].poldSsr = formValsObj.poldSsr;
     calcWeight(shipmentArr[0]);
+    shipmentArr[0].boxSize = (shipmentArr[0].ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
+    modalTitle.innerHTML = 'Your Shipment Array:';
+    modalBody.innerHTML = `${shipmentArr[0].boxSize} @ ${shipmentArr[0].weight}lbs LDS <br>`; 
+  } else if (shipmentArr.length === 2) {
+    // then if shipmentArr.length = 2
+    // subtract formValsObj into shipmentArr[1] (poldScenario)
+    console.log(shipmentArr,formValsObj);
+    if (shipmentArr[1].api >= formValsObj.api) {
+      shipmentArr[1].api = formValsObj.api;
+      formValsObj.api = 0;
+    } else {
+      formValsObj.api -= shipmentArr[1].api;
+    }
+    if (shipmentArr[1].recirc >= formValsObj.recirc) {
+      shipmentArr[1].recirc = formValsObj.recirc;
+      formValsObj.recirc = 0;
+    } else {
+      formValsObj.recirc -= shipmentArr[1].recirc;
+    }
+    if (shipmentArr[1].poldSsr >= formValsObj.poldSsr) {
+      shipmentArr[1].poldSsr = formValsObj.poldSsr;
+      formValsObj.poldSsr = 0;
+    } else {
+      formValsObj.poldSsr -= shipmentArr[1].poldSsr;
+    }
+    // calculate shipmentArr[1].weight
+    calcWeight(shipmentArr[1]);
+    // calculate shipmentArr[1].estCost
+    // then subtract formValsObj into shipmentArr[0] (ldsScenario)
+    shipmentArr[0].api = formValsObj.api;
+    shipmentArr[0].pold = formValsObj.pold;
+    shipmentArr[0].ssr = formValsObj.ssr;
+    shipmentArr[0].recirc = formValsObj.recirc;
+    shipmentArr[0].ldsSize = formValsObj.ldsSize;
+    // make shipmentArr.ldsSize always = formValsObj.size
+    shipmentArr[0].poldSsr = formValsObj.poldSsr;
+    // calculate shipmentArr[0].weight
+    calcWeight(shipmentArr[0]);
+    // calculate shipmentArr[0].estCost
+    console.log(shipmentArr,formValsObj);
+    shipmentArr[0].boxSize = (shipmentArr[0].ldsSize < 200) ? '19 x 12 x 7' : '14 x 14 x 14';
+    shipmentArr[1].boxSize = '13 x 10 x 5';
+    modalTitle.innerHTML = 'Your Shipment Array:';
+    modalBody.innerHTML = `${shipmentArr[0].boxSize} @ ${shipmentArr[0].weight}lbs LDS <br> ${shipmentArr[1].boxSize} @ ${shipmentArr[1].weight}lbs Accessories<br>`;
   }
-   // then if shipmentArr.length = 2
-   // subtract formValsObj into shipmentArr[1] (poldScenario)
-   // calculate shipmentArr[1].weight
-   // calculate shipmentArr[1].estCost
-   // then subtract formValsObj into shipmentArr[1] (ldsScenario)
-   // calculate shipmentArr[0].weight
-   // calculate shipmentArr[0].estCost
-// make shipmentArr.ldsSize always = formValsObj.size
-// always use shipmentArr when calculating weight and creating the text output. Easier for refactoring.
 // if juncBox or backflowBag then push respective packaging and weight to shipmentArr
+  if(isChecked(juncBox)){
+    shipmentArr.push(juncBoxObj);
+    modalBody.innerHTML += `${juncBoxObj.boxSize} @ ${juncBoxObj.weight}lbs Junction Box <br>`; 
+  }
 
   // firstPack
   function firstPack(scenarioArray) {
@@ -93,8 +131,8 @@ function calcPack(e) {
           && formValsObj.recirc   <= scenarioArray[i].recirc)
           {
             shipmentArr.push(formValsObj);
-            console.log("Packed!");
-            console.log(shipmentArr);
+            // console.log("Packed!");
+            // console.log(shipmentArr);
             break;
           }
         }
@@ -112,8 +150,8 @@ function calcPack(e) {
               && formValsObj.poldSsr  <= poldScenarios[i].poldSsr + scenarioArray[c].poldSsr
               && formValsObj.recirc   <= poldScenarios[i].recirc + scenarioArray[c].recirc) {
                 shipmentArr.push(scenarioArray[c], poldScenarios[i]);
-                console.log("Packed!");
-                console.log(shipmentArr);
+                // console.log("Packed!");
+                // console.log(shipmentArr);
                 break;
               }
             }
@@ -144,34 +182,29 @@ function calcPack(e) {
         switch (shipmentObj.ldsSize) {
           case 75:
             (scvInput.checked) ? shipmentObj.weight += 9.05 + 0.5 : shipmentObj.weight += 9.05;
-            console.log(shipmentObj.weight);
             break;
           case 100:
             (scvInput.checked) ? shipmentObj.weight += 9.95 + 0.75 : shipmentObj.weight += 9.95;
-            console.log(shipmentObj.weight);
             break;
           case 125:
             (scvInput.checked) ? shipmentObj.weight += 10.6 + 1.2 : shipmentObj.weight += 10.6;
-            console.log(shipmentObj.weight);
             break;
           case 150:
             (scvInput.checked) ? shipmentObj.weight += 12.2 + 1.6 : shipmentObj.weight += 12.2;
-            console.log(shipmentObj.weight);
             break;
           case 200:
             (scvInput.checked) ? shipmentObj.weight += 17.4 + 2.35: shipmentObj.weight += 17.4;
-            console.log(shipmentObj.weight);
             break;
           default:
             shipmentObj.weight += 0;
         }
-        // + weight based on SCV true && ldsSize
         // begin accessories calculation
-        // + api * 0.6
-        // + pold * 0.2
-        // + recirc * 0.8
+        shipmentObj.weight += shipmentObj.api *  0.6;
+        shipmentObj.weight += shipmentObj.pold * 0.2;
+        shipmentObj.weight += shipmentObj.recirc * 0.8;
+        shipmentObj.weight = Math.round(shipmentObj.weight);
       }
-    } // End calcPack
+    } // E N D - C A L C - P A C K
 
 
     // Disables/enables ldsSize select and juncBox inputs based on type_radios
@@ -209,15 +242,16 @@ function calcPack(e) {
     }
 
     // test hasClass return boolean
-    function isChecked (el) {return $(el).hasClass('active');}
+    function isChecked (el) {return el.classList.contains('active');}
+    // el.contains instead of .hasClass
 
     // tool check scenario object poldSsr count
-    // function checkPoldSsr(scenArray){
-    //   scenArray.forEach((scenario, ind) => {
-    //     return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + ' correct') : console.log('Check scenario at index ' + ind);
-    //   });
-    // };
-    // Scenario array objects
+    function checkPoldSsr(scenArray){
+      scenArray.forEach((scenario, ind) => {
+        return((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + ' correct') : console.log('Check scenario at index ' + ind);
+      });
+    };
+    // L D S - S C E N A R I O S - A R R A Y 
     const ldsScenarios  = [
       // START SM SHIPPER
       {
@@ -240,7 +274,7 @@ function calcPack(e) {
         api     : 1,
         pold    : 1,
         ssr     : 2,
-        poldSsr : 3,
+        poldSsr : 2,
         recirc  : 3,
         ldsSize: 150
       },
@@ -256,7 +290,7 @@ function calcPack(e) {
         api     : 1,
         pold    : 12,
         ssr     : 2,
-        poldSsr : 14,
+        poldSsr : 13,
         recirc  : 1,
         ldsSize: 150
       },
@@ -320,6 +354,7 @@ function calcPack(e) {
       }
       // END BROWN BOX
     ];
+    // P O L D - S C E N A R I O S - A R R A Y
     const poldScenarios = [
       {
         api     : 3,
@@ -413,3 +448,13 @@ function calcPack(e) {
         recirc  : 0
       }
     ];
+// J U N C - B O X - O B J E C T
+const juncBoxObj = {
+  boxSize: "14 x 14 x 14",
+  weight: 5.45
+};
+// B A C K F L O W - B A G - O B J E C T
+const backflowBagObj = {
+  boxSize: "19 x 12 x 7",
+  weight: 2
+};

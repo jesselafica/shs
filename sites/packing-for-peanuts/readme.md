@@ -1,5 +1,7 @@
 # TO DO:
-
+1. Use getters & setters with objs (accessors)
+2. Rest & Spread
+3. JS Classes
 ###What's next?
 ####NEW INPUTS:
 1. SCV
