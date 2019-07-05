@@ -61,13 +61,14 @@ function calcPack(e) {
 
   }
   if (shipmentArr.length === 1) {
-    // use .spread here??? (ie ...)
-    shipmentArr[0].api = formValsObj.api;
-    shipmentArr[0].pold = formValsObj.pold;
-    shipmentArr[0].ssr = formValsObj.ssr;
-    shipmentArr[0].recirc = formValsObj.recirc;
-    shipmentArr[0].ldsSize = formValsObj.ldsSize;
-    shipmentArr[0].poldSsr = formValsObj.poldSsr;
+    shipmentArr[0] ={...formValsObj};
+    console.log(shipmentArr);
+    // shipmentArr[0].api = formValsObj.api;
+    // shipmentArr[0].pold = formValsObj.pold;
+    // shipmentArr[0].ssr = formValsObj.ssr;
+    // shipmentArr[0].recirc = formValsObj.recirc;
+    // shipmentArr[0].ldsSize = formValsObj.ldsSize;
+    // shipmentArr[0].poldSsr = formValsObj.poldSsr;
     calcWeight(shipmentArr[0]);
     shipmentArr[0].boxSize = (shipmentArr[0].ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
     modalTitle.innerHTML = 'Your Shipment Array:';
@@ -77,19 +78,19 @@ function calcPack(e) {
     // subtract formValsObj into shipmentArr[1] (poldScenario)
     console.log(shipmentArr,formValsObj);
     if (shipmentArr[1].api >= formValsObj.api) {
-      shipmentArr[1].api = formValsObj.api;
+      shipmentArr[1].api = Object.assign(formValsObj.api);
       formValsObj.api = 0;
     } else {
       formValsObj.api -= shipmentArr[1].api;
     }
     if (shipmentArr[1].recirc >= formValsObj.recirc) {
-      shipmentArr[1].recirc = formValsObj.recirc;
+      shipmentArr[1].recirc = Object.assign(formValsObj.recirc);
       formValsObj.recirc = 0;
     } else {
       formValsObj.recirc -= shipmentArr[1].recirc;
     }
     if (shipmentArr[1].poldSsr >= formValsObj.poldSsr) {
-      shipmentArr[1].poldSsr = formValsObj.poldSsr;
+      shipmentArr[1].poldSsr = Object.assign(formValsObj.poldSsr);
       formValsObj.poldSsr = 0;
     } else {
       formValsObj.poldSsr -= shipmentArr[1].poldSsr;
@@ -98,13 +99,14 @@ function calcPack(e) {
     calcWeight(shipmentArr[1]);
     // calculate shipmentArr[1].estCost
     // then subtract formValsObj into shipmentArr[0] (ldsScenario)
-    shipmentArr[0].api = formValsObj.api;
-    shipmentArr[0].pold = formValsObj.pold;
-    shipmentArr[0].ssr = formValsObj.ssr;
-    shipmentArr[0].recirc = formValsObj.recirc;
-    shipmentArr[0].ldsSize = formValsObj.ldsSize;
+    shipmentArr[0] = {...formValsObj};
+    // shipmentArr[0].api = formValsObj.api;
+    // shipmentArr[0].pold = formValsObj.pold;
+    // shipmentArr[0].ssr = formValsObj.ssr;
+    // shipmentArr[0].recirc = formValsObj.recirc;
+    // shipmentArr[0].ldsSize = formValsObj.ldsSize;
     // make shipmentArr.ldsSize always = formValsObj.size
-    shipmentArr[0].poldSsr = formValsObj.poldSsr;
+    shipmentArr[0].poldSsr = Object.assign(formValsObj.poldSsr);
     // calculate shipmentArr[0].weight
     calcWeight(shipmentArr[0]);
     // calculate shipmentArr[0].estCost
