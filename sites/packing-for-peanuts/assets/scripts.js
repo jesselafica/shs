@@ -57,26 +57,19 @@ function calcPack(e) {
   // if ldsRadio is checked and shipmentArr.length is 0
   if (isChecked(ldsRadio)) {
     firstPack(ldsScenarios);
-    if (shipmentArr.length === 0) {secondPack(ldsScenarios);}
-
+    if (shipmentArr.length === 0) {
+      secondPack(ldsScenarios);
+    }
+    shipmentArr[0].boxSize = (shipmentArr[0].ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
   }
   if (shipmentArr.length === 1) {
     shipmentArr[0] ={...formValsObj};
-    console.log(shipmentArr);
-    // shipmentArr[0].api = formValsObj.api;
-    // shipmentArr[0].pold = formValsObj.pold;
-    // shipmentArr[0].ssr = formValsObj.ssr;
-    // shipmentArr[0].recirc = formValsObj.recirc;
-    // shipmentArr[0].ldsSize = formValsObj.ldsSize;
-    // shipmentArr[0].poldSsr = formValsObj.poldSsr;
     calcWeight(shipmentArr[0]);
-    shipmentArr[0].boxSize = (shipmentArr[0].ldsSize < 200) ? "19 x 12 x 7" : "14 x 14 x 14";
     modalTitle.innerHTML = 'Your Shipment Array:';
     modalBody.innerHTML = `${shipmentArr[0].boxSize} @ ${shipmentArr[0].weight}lbs LDS <br>`; 
   } else if (shipmentArr.length === 2) {
     // then if shipmentArr.length = 2
     // subtract formValsObj into shipmentArr[1] (poldScenario)
-    console.log(shipmentArr,formValsObj);
     if (shipmentArr[1].api >= formValsObj.api) {
       shipmentArr[1].api = Object.assign(formValsObj.api);
       formValsObj.api = 0;
@@ -100,28 +93,21 @@ function calcPack(e) {
     // calculate shipmentArr[1].estCost
     // then subtract formValsObj into shipmentArr[0] (ldsScenario)
     shipmentArr[0] = {...formValsObj};
-    // shipmentArr[0].api = formValsObj.api;
-    // shipmentArr[0].pold = formValsObj.pold;
-    // shipmentArr[0].ssr = formValsObj.ssr;
-    // shipmentArr[0].recirc = formValsObj.recirc;
-    // shipmentArr[0].ldsSize = formValsObj.ldsSize;
-    // make shipmentArr.ldsSize always = formValsObj.size
+    // make shipmentArr.ldsSize always = formValsObj.ldsSize
     shipmentArr[0].poldSsr = Object.assign(formValsObj.poldSsr);
     // calculate shipmentArr[0].weight
     calcWeight(shipmentArr[0]);
     // calculate shipmentArr[0].estCost
-    console.log(shipmentArr,formValsObj);
-    shipmentArr[0].boxSize = (shipmentArr[0].ldsSize < 200) ? '19 x 12 x 7' : '14 x 14 x 14';
-    shipmentArr[1].boxSize = '13 x 10 x 5';
     modalTitle.innerHTML = 'Your Shipment Array:';
     modalBody.innerHTML = `${shipmentArr[0].boxSize} @ ${shipmentArr[0].weight}lbs LDS <br> ${shipmentArr[1].boxSize} @ ${shipmentArr[1].weight}lbs Accessories<br>`;
   }
+
 // if juncBox or backflowBag then push respective packaging and weight to shipmentArr
   if(isChecked(juncBox)){
     shipmentArr.push(juncBoxObj);
     modalBody.innerHTML += `${juncBoxObj.boxSize} @ ${juncBoxObj.weight}lbs Junction Box <br>`; 
   }
-
+// C A L C - P A C K - F U N C T I O N S
   // firstPack
   function firstPack(scenarioArray) {
     for (let i = 0; i < scenarioArray.length && shipmentArr.length < 1; i++) {
@@ -131,7 +117,7 @@ function calcPack(e) {
         if (formValsObj.api       <= scenarioArray[i].api
           && formValsObj.poldSsr  <= scenarioArray[i].poldSsr
           && formValsObj.recirc   <= scenarioArray[i].recirc)
-          {
+          { 
             shipmentArr.push(formValsObj);
             // console.log("Packed!");
             // console.log(shipmentArr);
@@ -184,21 +170,27 @@ function calcPack(e) {
         switch (shipmentObj.ldsSize) {
           case 75:
             (scvInput.checked) ? shipmentObj.weight += 9.05 + 0.5 : shipmentObj.weight += 9.05;
+            shipmentObj.boxSize = '19 x 12 x 7';
             break;
           case 100:
             (scvInput.checked) ? shipmentObj.weight += 9.95 + 0.75 : shipmentObj.weight += 9.95;
+            shipmentObj.boxSize = '19 x 12 x 7';
             break;
           case 125:
             (scvInput.checked) ? shipmentObj.weight += 10.6 + 1.2 : shipmentObj.weight += 10.6;
+            shipmentObj.boxSize = '19 x 12 x 7';
             break;
           case 150:
             (scvInput.checked) ? shipmentObj.weight += 12.2 + 1.6 : shipmentObj.weight += 12.2;
+            shipmentObj.boxSize = '19 x 12 x 7';
             break;
           case 200:
             (scvInput.checked) ? shipmentObj.weight += 17.4 + 2.35: shipmentObj.weight += 17.4;
+            shipmentObj.boxSize = '14 x 14 x 14'
             break;
           default:
-            shipmentObj.weight += 0;
+            shipmentObj.weight += 0.75;
+            shipmentObj.boxSize = '13 x 10 x 5';
         }
         // begin accessories calculation
         shipmentObj.weight += shipmentObj.api *  0.6;
