@@ -88,15 +88,26 @@
               </label>
             </div>
           </div>
-          <!-- <div class="form-row">
+          <div class="form-row">
             <div class="col-9">
-              <label>Backflow Preventer Bag:</label><select name="" id="" class="">
+              <label>Backflow Preventer Bag:</label>
+              <select>
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
               </select>
             </div>
-          </div> -->
+          </div>
+          <div class="form-row">
+            <div class="col-9">
+              <label>Electrical Junction Box:</label>
+              <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+          </div>
           <!-- A P I - I N P U T - R O W -->
           <div class="form-row">
             <div class="col-9">
@@ -113,6 +124,20 @@
             </div>
             <div class="col">
               <input required type="number" min="0" max="46" id="pold" placeholder="0" value="0">
+            </div>
+          </div>
+          <!-- P O L D - L D C - I N P U T - R O W -->
+          <div class="form-row">
+            <div class="col-9">
+              <label for="pold_rope"></label>
+            </div>
+            <div class="col">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">with LDC</span>
+                </div>
+                <input type="number" placeholder="0" min="0" max="46" class="form-control" aria-label="sm" aria-describedby="inputGroup-sizing-default">
+              </div>
             </div>
           </div>
           <!-- S S R - I N P U T - R O W -->

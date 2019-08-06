@@ -76,7 +76,7 @@ function calcPack(e) {
       }      
       break;
     default:
-        console.log('ERROR AT CHECKEDRADIO SWITCH');
+        console.log('ERROR AT CHECKED RADIO SWITCH');
         break;
           }
     // *************************************************

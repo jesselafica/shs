@@ -3,6 +3,8 @@
 2. Rest & Spread
 3. JS Classes
 ###What's next?
+1. Logic for new backflow bag and junction box inputs
+2. Add input for POLD's w/ LDC
 ####NEW INPUTS:
 1. SCV
 2. Express?
