@@ -30,6 +30,7 @@ for (var i = 0; i < radioBtns.length; i++) {
   radioBtns[i].addEventListener('click', disableRadios, false);
 }
 
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // B E G I N - C A L C - P A C K
 function calcPack(e) {
   // Reinit vars and vals
@@ -122,14 +123,19 @@ function calcPack(e) {
   }
   // if juncBox or backflowBag then push respective packaging and weight to shipmentArr
   if (isChecked(accessRadio) || isChecked(ldsRadio) && shipmentArr.length > 0) {
-    if (isChecked(juncBox)) {
-      shipmentArr.push(juncBoxObj);
-      modalBody.innerHTML += `${juncBoxObj.boxSize} @ ${juncBoxObj.weight}lbs Junction Box <br>`;
+    if(isChecked(juncBox) && isChecked(backflowBag)){
+      shipmentArr.push(jbBfbObj);
+      modalBody.innerHTML += `${jbBfbObj.boxSize} @ ${jbBfbObj.weight}lbs Junc Box + Backflow Bag<br>`;
+    } else {
+      if (isChecked(juncBox)) {
+        shipmentArr.push(juncBoxObj);
+        modalBody.innerHTML += `${juncBoxObj.boxSize} @ ${juncBoxObj.weight}lbs Junction Box <br>`;
+      }
+      if (isChecked(backflowBag)) {
+        shipmentArr.push(backflowBagObj);
+        modalBody.innerHTML += `${backflowBagObj.boxSize} @ ${backflowBagObj.weight}lbs Backflow Bag <br>`;
+      }      
     }
-    if (isChecked(backflowBag)) {
-      shipmentArr.push(backflowBagObj);
-      modalBody.innerHTML += `${backflowBagObj.boxSize} @ ${backflowBagObj.weight}lbs Backflow Bag <br>`;
-    }      
   }
   if (shipmentArr.length === 0) {
     modalTitle.innerHTML = `Access-ive... don't ya think?`;
@@ -147,8 +153,6 @@ function calcPack(e) {
           && formValsObj.poldSsr <= scenarioArray[i].poldSsr
           && formValsObj.recirc <= scenarioArray[i].recirc) {
           shipmentArr.push(formValsObj);
-          // console.log("Packed!");
-          // console.log(shipmentArr);
           break;
         }
       }
@@ -166,8 +170,6 @@ function calcPack(e) {
             && formValsObj.poldSsr <= poldScenarios[c].poldSsr + scenarioArray[i].poldSsr
             && formValsObj.recirc <= poldScenarios[c].recirc + scenarioArray[i].recirc) {
             shipmentArr.push(scenarioArray[c], poldScenarios[i]);
-            // console.log("Packed!");
-            // console.log(shipmentArr);
             break;
           }
         }
@@ -247,7 +249,7 @@ function calcPack(e) {
     shipmentObj.weight = Math.round(shipmentObj.weight);
   }
 } // E N D - C A L C - P A C K
-
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // Disables/enables ldsSize select and juncBox inputs based on type_radios
 function disableRadios() {
@@ -500,3 +502,8 @@ const backflowBagObj = {
   boxSize: "19 x 12 x 7",
   weight: 2
 };
+// J U N C - B O X + B A C K F L O W - B A G
+const jbBfbObj = {
+  boxSize: "14 x 14 x 14",
+  weight: 7
+}
