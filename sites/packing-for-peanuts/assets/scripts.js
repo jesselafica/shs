@@ -121,9 +121,15 @@ function calcPack(e) {
     modalBody.innerHTML = `${shipmentArr[0].boxSize} @ ${shipmentArr[0].weight}lbs ${shipmentArr[0].type} <br> ${shipmentArr[1].boxSize} @ ${shipmentArr[1].weight}lbs Accessories<br>`;
   }
   // if juncBox or backflowBag then push respective packaging and weight to shipmentArr
-  if (isChecked(juncBox)) {
-    shipmentArr.push(juncBoxObj);
-    modalBody.innerHTML += `${juncBoxObj.boxSize} @ ${juncBoxObj.weight}lbs Junction Box <br>`;
+  if (isChecked(accessRadio) || isChecked(ldsRadio) && shipmentArr.length > 0) {
+    if (isChecked(juncBox)) {
+      shipmentArr.push(juncBoxObj);
+      modalBody.innerHTML += `${juncBoxObj.boxSize} @ ${juncBoxObj.weight}lbs Junction Box <br>`;
+    }
+    if (isChecked(backflowBag)) {
+      shipmentArr.push(backflowBagObj);
+      modalBody.innerHTML += `${backflowBagObj.boxSize} @ ${backflowBagObj.weight}lbs Backflow Bag <br>`;
+    }      
   }
   if (shipmentArr.length === 0) {
     modalTitle.innerHTML = `Access-ive... don't ya think?`;
@@ -151,14 +157,14 @@ function calcPack(e) {
   // F I X - B E L O W
   // CONDITIONAL SHOULD MATCH firstPack + poldScenarios
   function secondPack(scenarioArray) {
-    for (let i = 0; i < poldScenarios.length && shipmentArr.length < 2; i++) {
-      for (let c = 0; c < scenarioArray.length && shipmentArr.length < 2; c++) {
+    for (let i = 0; i < scenarioArray.length && shipmentArr.length < 2; i++) {
+      for (let c = 0; c < poldScenarios.length && shipmentArr.length < 2; c++) {
         if ((isChecked(ldsRadio) && formValsObj.ldsSize <= scenarioArray[i].ldsSize)
           || (isChecked(poldRadio) && formValsObj.poldSsr <= (scenarioArray[i].poldSsr + poldScenarios[c].poldSsr) - 2)
           || (isChecked(accessRadio))) {
-          if (formValsObj.api <= poldScenarios[i].api + scenarioArray[c].api
-            && formValsObj.poldSsr <= poldScenarios[i].poldSsr + scenarioArray[c].poldSsr
-            && formValsObj.recirc <= poldScenarios[i].recirc + scenarioArray[c].recirc) {
+          if (formValsObj.api <= poldScenarios[c].api + scenarioArray[i].api
+            && formValsObj.poldSsr <= poldScenarios[c].poldSsr + scenarioArray[i].poldSsr
+            && formValsObj.recirc <= poldScenarios[c].recirc + scenarioArray[i].recirc) {
             shipmentArr.push(scenarioArray[c], poldScenarios[i]);
             // console.log("Packed!");
             // console.log(shipmentArr);
