@@ -123,7 +123,7 @@ function calcPack(e) {
   }
   // if juncBox or backflowBag then push respective packaging and weight to shipmentArr
   if (isChecked(accessRadio) || isChecked(ldsRadio) && shipmentArr.length > 0) {
-    if(isChecked(juncBox) && isChecked(backflowBag)){
+    if (isChecked(juncBox) && isChecked(backflowBag)) {
       shipmentArr.push(jbBfbObj);
       modalBody.innerHTML += `${jbBfbObj.boxSize} @ ${jbBfbObj.weight}lbs Junc Box + Backflow Bag<br>`;
     } else {
@@ -134,7 +134,7 @@ function calcPack(e) {
       if (isChecked(backflowBag)) {
         shipmentArr.push(backflowBagObj);
         modalBody.innerHTML += `${backflowBagObj.boxSize} @ ${backflowBagObj.weight}lbs Backflow Bag <br>`;
-      }      
+      }
     }
   }
   if (shipmentArr.length === 0) {
