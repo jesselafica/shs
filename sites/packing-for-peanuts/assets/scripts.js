@@ -40,7 +40,6 @@ function calcPack(e) {
   modalTitle.innerHTML = "Empty box?";
   let formValsObj = {};
   let shipmentArr = [];
-  let checkedRadio = checkRadios();
   // create formValsObj from inputs
   formValsObj.api = parseInt(apiInput.value);
   formValsObj.pold = parseInt(poldInput.value);
@@ -56,12 +55,19 @@ function calcPack(e) {
   // calculate shipper size
   shipperCalc();
   // *************************************************
+  let checkedRadio = checkRadios();
   // S W I T C H - R A D I O - C H E C K E D
   switch (checkedRadio) {
-    case 'ldsRadio':
-      firstPack(ldsScenarios);
+    case 'smShipper':
+      firstPack(smShipper);
       if (shipmentArr.length === 0) {
-        secondPack(ldsScenarios);
+        secondPack(smShipper);
+      }
+      break;
+    case 'medShipper':
+      firstPack(medShipper);
+      if (shipmentArr.length === 0) {
+        secondPack(medShipper);
       }
       break;
     case 'poldRadio':
@@ -195,7 +201,7 @@ function calcPack(e) {
   }
   function checkRadios() {
     if (isChecked(ldsRadio)) {
-      return 'ldsRadio';
+      return (formValsObj.ldsSize > 150) ? 'medShipper' : 'smShipper'; 
     } else if (isChecked(accessRadio)) {
       return 'accessRadio';
     } else if (isChecked(poldRadio)) {
@@ -295,8 +301,8 @@ function checkPoldSsr(scenArray) {
     return ((scenario.pold + (scenario.ssr / 2)) === scenario.poldSsr) ? console.log(ind + ' correct') : console.log('Check scenario at index ' + ind);
   });
 };
-// L D S - S C E N A R I O S - A R R A Y 
-const ldsScenarios = [
+// S M - S H I P P E R - S C E N A R I O S
+const smShipper = [
   // START SM SHIPPER
   {
     api: 0,
@@ -369,9 +375,10 @@ const ldsScenarios = [
     poldSsr: 0,
     recirc: 0,
     ldsSize: 150
-  },
-  // END SM SHIPPER
-  // START BROWN BOX
+  }
+];
+  // M E D - S H I P P E R - S C E N A R I O S
+  const medShipper = [
   {
     api: 2,
     pold: 0,
@@ -396,9 +403,8 @@ const ldsScenarios = [
     recirc: 2,
     ldsSize: 200
   }
-  // END BROWN BOX
 ];
-// P O L D - S C E N A R I O S - A R R A Y
+// P O L D - S C E N A R I O S
 const poldScenarios = [
   {
     api: 3,
