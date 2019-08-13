@@ -64,10 +64,10 @@ function calcPack(e) {
         secondPack(smShipper);
       }
       break;
-    case 'medShipper':
-      firstPack(medShipper);
+    case 'mdShipper':
+      firstPack(mdShipper);
       if (shipmentArr.length === 0) {
-        secondPack(medShipper);
+        secondPack(mdShipper);
       }
       break;
     case 'poldRadio':
@@ -201,7 +201,7 @@ function calcPack(e) {
   }
   function checkRadios() {
     if (isChecked(ldsRadio)) {
-      return (formValsObj.ldsSize > 150) ? 'medShipper' : 'smShipper'; 
+      return (formValsObj.ldsSize > 150) ? 'mdShipper' : 'smShipper'; 
     } else if (isChecked(accessRadio)) {
       return 'accessRadio';
     } else if (isChecked(poldRadio)) {
@@ -377,14 +377,14 @@ const smShipper = [
     ldsSize: 150
   }
 ];
-  // M E D - S H I P P E R - S C E N A R I O S
-  const medShipper = [
+  // M D - S H I P P E R - S C E N A R I O S
+  const mdShipper = [
   {
     api: 2,
     pold: 0,
     ssr: 0,
     poldSsr: 0,
-    recirc: 2,
+    recirc: 0,
     ldsSize: 200
   },
   {
@@ -392,7 +392,7 @@ const smShipper = [
     pold: 2,
     ssr: 0,
     poldSsr: 2,
-    recirc: 2,
+    recirc: 0,
     ldsSize: 200
   },
   {
@@ -400,7 +400,7 @@ const smShipper = [
     pold: 4,
     ssr: 0,
     poldSsr: 4,
-    recirc: 2,
+    recirc: 0,
     ldsSize: 200
   }
 ];
