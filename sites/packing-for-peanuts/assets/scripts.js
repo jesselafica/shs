@@ -265,17 +265,21 @@ function disableRadios() {
       $(ldsSizeGroup).hide("blind");
       $(juncBox).show("blind");
       $(backflowBag).show("blind");
+      $(scvInput).show("blind");
     } else if (isChecked(poldRadio)) {
       $(ldsSizeGroup).hide("blind");
-      ldsSizeGroup.classList.remove('active');
+      ldsSizeGroup.classList.remove("active");
       $(juncBox).hide("blind");
-      juncBox.classList.remove('active');
+      juncBox.classList.remove("active");
       $(backflowBag).hide("blind");
-      backflowBag.classList.remove('active');
+      backflowBag.classList.remove("active");
+      $(scvInput).hide("blind");
+      $(scvInput).checked = false;
     } else if (isChecked(ldsRadio)) {
       $(ldsSizeGroup).show("blind");
       $(juncBox).show("blind");
       $(backflowBag).show("blind");
+      $(scvInput).show("blind");
     }
   }, 1);
 }
