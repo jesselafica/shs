@@ -2,6 +2,7 @@
 1. Create new inputs (below)
 2. Update Shipper Scenarios
 3. New Condition: backflow/juncBox && shipmentArr > 1 = shipper + 14x14x14 (bacflow/juncbox and POLD box can fit in 14x14x14)
+4. Modal images of devices listed
 ####NEW INPUTS:
 1. Hidden Wire [CHECKBOX]
 2. WDC [CHECKBOX]

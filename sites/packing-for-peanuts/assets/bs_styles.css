@@ -1,0 +1,34 @@
+.form-row {
+  margin: 1rem 0;
+  max-height: 2rem;
+}
+.form-group, input {
+  width: 125px;
+  text-align: center;
+}
+input[type="radio"]{
+  width: 13px;
+}
+input[type="radio"] + label {
+  margin: 0 1rem;
+}
+.form-control {
+  padding: 0;
+  /* text-align: center; */
+}
+select {
+  padding: 0;
+  text-align: center;
+}
+.green-text {
+  color: #28a745;
+}
+.small-text {
+  font-size: 0.9rem;
+}
+/* .radio-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+} */

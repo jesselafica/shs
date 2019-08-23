@@ -1,164 +1,23 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PFP 2.5</title>
-  <link rel="shortcut icon" type="image/png" href="assets/pfp-favicon.png">
-  <link rel="stylesheet" href="assets/bootstrap.css">
-  <link rel="stylesheet" href="assets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PFP</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:700|Ubuntu:700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
-
 <body>
-  <!-- Button trigger modal -->
-  <button type="button" id="modal_button" class="d-none" data-toggle="modal" data-target="#exampleModalCenter"></button>
+    <div class="container">
+        <h1>PFP 3.0!</h1>
+        
+        <div class="section-left">
 
-  <!-- BOOTSTRAP MODAL -->
-  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal_title">Empty box?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
-        <div class="modal-body">
-          <p id="modal_body">Please close this window and add items.</p>
+        <div class="section-right">
+
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- END BOOTSTRAP MODAL -->
-
-  <div class="container">
-    <div class="jumbotron">
-      <h1 class="display-4">Packing For Peanuts</h1>
-      <div class="row">
-        <div class="col-xl-7 col-12 mb-xl-0 mb-3">
-          <form id="pack_form">
-            <!-- L D S - T Y P E - R O W -->
-            <div class="form-row">
-              <div class="col btn-group btn-group-toggle radio-group" data-toggle="buttons">
-                <label class="lds-type btn btn-secondary radio-btn active" id="lds_radio" for="lds_radio">
-                  <input type="radio" name="options">LDS Valve
-                </label>
-                <label class="lds-type btn btn-secondary radio-btn" id="accessories_radio" for="accessories_radio">
-                  <input type="radio" name="options">Accessories Only
-                </label>
-                <label class="lds-type btn btn-secondary radio-btn" id="pold_radio" for="pold_radio">
-                  <input type="radio" name="options">POLD Only
-                </label>
-              </div>
-            </div>
-            <!-- L D S - S I Z E - R O W -->
-            <div class="form-row">
-              <div class="col lds-size">
-                <div>
-                  <select required id="lds_size" placeholder="-" class="form-control">
-                    <!-- <option value="">LDS-3-...</option> -->
-                    <option value="075">LDS-3-075</option>
-                    <option value="100">LDS-3-100</option>
-                    <option value="125">LDS-3-125</option>
-                    <option value="150">LDS-3-150</option>
-                    <option value="200">LDS-3-200</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <!-- S C V - I N P U T - R O W -->
-            <div class="form-row">
-              <div class="col-9">
-                <label for="scv">Spring Check Valve?</label>
-                <input type="checkbox" id="scv">
-              </div>
-            </div>
-
-            <!-- B P - B A G - E J - B O X - R O W -->
-            <div class="form-row">
-              <div class="col btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-warning" id="backflow_bag">
-                  <input type="checkbox" name="options">Backflow Preventer Bag
-                </label>
-
-                <label class="btn btn-warning" id="junc_box">
-                  <input type="checkbox" name="options">Electrical Junction Box
-                </label>
-              </div>
-            </div>
-            <!-- A P I - I N P U T - R O W -->
-            <div class="form-row">
-              <div class="col-9">
-                <label for="api">How many API's?</label>
-              </div>
-              <div class="col">
-                <input required type="number" min="0" max="12" id="api" placeholder="0" value="0">
-              </div>
-            </div>
-            <!-- P O L D - I N P U T - R O W -->
-            <div class="form-row">
-              <div class="col-9">
-                <label for="pold">How many POLD's?</label>
-              </div>
-              <div class="col">
-                <input required type="number" min="0" max="46" id="pold" placeholder="0" value="0">
-              </div>
-            </div>
-            <!-- S S R - I N P U T - R O W -->
-            <div class="form-row">
-              <div class="col-9">
-                <label for="ssr">How many SSR's?</label>
-              </div>
-              <div class="col">
-                <input required type="number" min="0" max="93" id="ssr" placeholder="0" value="0">
-              </div>
-            </div>
-            <!-- R E C I R C - I N P U T - R O W -->
-            <div class="form-row">
-              <div class="col-9">
-                <label for="recirc">Total 4hr Timers & Recirc Pump Switches?</label>
-              </div>
-              <div class="col">
-                <input required type="number" min="0" max="9" id="recirc" placeholder="0" value="0">
-              </div>
-            </div>
-            <!-- R E S E T - P A C K A G E - B T N S - R O W -->
-            <div class="form-row">
-              <div class="col-9">
-                <input type="reset" id="reset_button" class="btn btn-danger">
-              </div>
-              <div class="col">
-                <input type="submit" value="Package!" id="submit_button" class="btn btn-success" data-toggle="modal"
-                  data-target="#modal">
-              </div>
-            </div>
-            <section>
-            </section>
-          </form>
-        </div>
-        <div class="card col-xl-5 col-12">
-          <h1 class="display-5" id="message">Add items and ship!</h1>
-          <p>Adjust the size and number of each accessory before pressing the <strong
-              class="font-weight-bold green-text">Package!</strong> button. </p>
-          <p>Don't worry about any accessories you don't see on this list, we've got you covered.</p>
-          <p class="small-text font-italic">If you have any questions, feel free to email jessel@senthydro.com.</p>
-        </div>
-      </div>
-    </div>
-    <footer>
-
-    </footer>
-  </div>
-  <!-- SCRIPT FILES -->
-  <script src="assets/scripts.js" charset="utf-8"></script>
-  <script src="assets/jquery-3.4.1.js"></script>
-  <script src="assets/popper.min.js"></script>
-  <script src="assets/bootstrap.js"></script>
 </body>
-
 </html>
