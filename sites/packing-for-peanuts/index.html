@@ -23,6 +23,7 @@
         </div>
         <div class="section-left">
             <div class="form-group">
+                <label for="lds-size">Flowbody Size:</label>
                 <select name="lds-size" id="lds_size" placeholder="-" required>
                     <option value="075">075</option>
                     <option value="100">100</option>
@@ -31,9 +32,53 @@
                     <option value="200">200</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="scv">Spring Check Valve:</label>
+                <input type="checkbox" name="scv" id="scv">
+            </div>
+            <div class="form-group">
+                <label for="backflow_bag">Backflow Preventer Bag:</label>
+                <input type="checkbox" name="backflow_bag" id="backflow_bag">
+            </div>
+            <div class="form-group">
+                <label for="junc_box">Electrical Junction Box:</label>
+                <input type="checkbox" name="junc_box" id="junc_box">
+            </div>
+            <div class="form-group">
+                <label for="hidden_wire">Control Panel Plenum Cable:</label>
+                <input type="checkbox" name="hidden_wire" id="hidden_wire">
+            </div>
+            
         </div>
         <div class="section-right">
-
+            <div class="form-group">
+                <label for="api">All Purpose Interfaces:</label>
+                <input id="api" type="number" min="0" max="12" placeholder="0" value="0">
+            </div>
+            <div class="form-group">
+                <label for="pold">Point of Leak Detectors:</label>
+                <input id="pold" type="number" min="0" max="46" placeholder="0" value="0">
+            </div>
+            <div class="form-group">
+                <label for="wdc">Water Detection Cable:</label>
+                <input type="checkbox" id="wdc" name="wdc">
+            </div>
+            <div class="form-group">
+                <label for="ssr">Solid State Relays:</label>
+                <input id="ssr" type="number" min="0" max="93" placeholder="0" value="0">
+            </div>
+            <div class="form-group">
+                <label for="recirc">Recirculation Pump Switches:</label>
+                <input id="recirc" type="number" min="0" max="9" placeholder="0" value="0">
+            </div>
+            <div class="form-group">
+                <label for="timer">4hr Timers:</label>
+                <input id="timer" type="number" min="0" max="9" placeholder="0" value="0">
+            </div>
+        </div>
+        <div class="button-group">
+            <input type="submit" id="submit_button" value="Package!">
+            <input type="reset" id="reset_button" value="Reset">
         </div>
     </div>
 </body>
