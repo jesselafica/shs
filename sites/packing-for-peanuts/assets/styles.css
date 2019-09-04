@@ -58,7 +58,27 @@ h1{
     background-color: #fff;
     margin: 2em auto;
     max-width: 700px;
-    width: 100%;
+    /* width: 100%; */
     height: 700px;
-    padding: 0.5rem 1rem;
+		padding: 0.5rem 1rem;
+		box-shadow: 0px 5px 20px #808080;
+		display: grid;
+		grid-template-columns: 50% 50%;
+		grid-template-rows: 30% 30% 30%;
+		grid-template-areas:
+			"section-top section-top"
+			"section-left section-right"
+			"section-bottom section-bottom";
+	}
+.section-top{
+	grid-area: section-top;
+}
+.section-left{
+	grid-area: section-left;
+}
+.section-right{
+	grid-area: section-right;
+}
+.section-bottom{
+	grid-area: section-bottom;
 }
