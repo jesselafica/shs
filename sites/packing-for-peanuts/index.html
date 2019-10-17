@@ -13,13 +13,13 @@
         <div class="section-top">
             <h1>PFP 3.0!</h1>
             <div class="form-group">
-                <input type="radio" value="lds_radio" name="order-type" checked>
+                <input type="radio" value="lds_radio" name="order-type" id="lds_radio" checked>
                 <label for="lds_radio">LDS Valve</label>
                 
-                <input type="radio" value="pold_radio" name="order-type">
+                <input type="radio" value="pold_radio" name="order-type" id="pold_radio">
                 <label for="pold_radio">POLD Only</label>
                 
-                <input type="radio" value="accessories_radio"  name="order-type">
+                <input type="radio" value="accessories_radio"  name="order-type" id="accessories_radio">
                 <label for="accessories_radio">Accessories</label> 
             </div>
         </div>
@@ -82,6 +82,11 @@
             <input type="submit" id="submit_button" value="Package!">
             <input type="reset" id="reset_button" value="Reset">
         </div>
+        <div class="message">
+            <div id="modal_title"></div>
+            <div id="modal_body"></div>
+        </div>
     </div>
+<script src="assets/scripts.js"></script>
 </body>
 </html>

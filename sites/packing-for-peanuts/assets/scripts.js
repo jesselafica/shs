@@ -1,30 +1,31 @@
 // Const Declarations
 // Inputs
-const apiInput = document.getElementById('api'),
-  poldInput = document.getElementById('pold'),
-  ssrInput = document.getElementById('ssr'),
-  recircInput = document.getElementById('recirc'),
-  ldsSize = document.getElementById('lds_size'),
-  scvInput = document.getElementById('scv'),
-  ldsSizeGroup = document.getElementsByClassName('lds-size')[0],
-  juncBox = document.getElementById('junc_box'),
-  backflowBag = document.getElementById('backflow_bag'),
-  ldsRadio = document.getElementById('lds_radio'),
-  poldRadio = document.getElementById('pold_radio'),
-  accessRadio = document.getElementById('accessories_radio'),
-  ldsTypes = document.getElementsByClassName('lds-type');
+const apiInput  = document.getElementById('api'),
+  poldInput     = document.getElementById('pold'),
+  ssrInput      = document.getElementById('ssr'),
+  recircInput   = document.getElementById('recirc'),
+  timerInput    = document.getElementById('timer'),
+  ldsSize       = document.getElementById('lds_size'),
+  scvInput      = document.getElementById('scv'),
+  ldsSizeGroup  = document.getElementsByClassName('lds-size')[0],
+  juncBox       = document.getElementById('junc_box'),
+  backflowBag   = document.getElementById('backflow_bag'),
+  ldsRadio      = document.getElementById('lds_radio'),
+  poldRadio     = document.getElementById('pold_radio'),
+  accessRadio   = document.getElementById('accessories_radio'),
+  ldsTypes      = document.getElementsByClassName('lds-type');
 //Buttons
 const resetBtn = document.getElementById('reset_button');
-resetBtn.addEventListener('click', resetForm, false);
-const form = document.getElementById('pack_form');
-form.addEventListener('submit', calcPack, false);
+      resetBtn.addEventListener('click', resetForm, false);
+const submitBtn = document.getElementById('submit_button');
+      submitBtn.addEventListener('click', calcPack, false);
 
 // Message
 // const message      = document.getElementById('message');
-const modal = document.getElementById('modal'),
-  modalBody = document.getElementById('modal_body'),
-  modalTitle = document.getElementById('modal_title'),
-  radioBtns = document.getElementsByClassName('radio-btn');
+const modal   = document.getElementById('modal'),
+  modalBody   = document.getElementById('modal_body'),
+  modalTitle  = document.getElementById('modal_title'),
+  radioBtns   = document.getElementsByClassName('radio-btn');
 // add eventListeners to radioBtns for input disabling
 for (var i = 0; i < radioBtns.length; i++) {
   radioBtns[i].addEventListener('click', disableRadios, false);
@@ -41,11 +42,13 @@ function calcPack(e) {
   let formValsObj = {};
   let shipmentArr = [];
   // create formValsObj from inputs
-  formValsObj.api = parseInt(apiInput.value);
-  formValsObj.pold = parseInt(poldInput.value);
-  formValsObj.ssr = parseInt(ssrInput.value);
-  formValsObj.recirc = parseInt(recircInput.value);
-  if (isChecked(poldRadio) || isChecked(accessRadio)) {
+  formValsObj.api     = parseInt(apiInput.value);
+  formValsObj.pold    = parseInt(poldInput.value);
+  formValsObj.ssr     = parseInt(ssrInput.value);
+  formValsObj.recirc  = parseInt(recircInput.value) + parseInt(timerInput.value);
+  console.log(formValsObj.recirc);
+  
+  if (poldRadio.checked || accessRadio.checked) {
     formValsObj.ldsSize = 0;
   } else {
     formValsObj.ldsSize = parseInt(ldsSize.value);
@@ -56,7 +59,7 @@ function calcPack(e) {
   shipperCalc();
   // *************************************************
   let checkedRadio = checkRadios();
-  // S W I T C H - R A D I O - C H E C K E D
+  // S W I T C H - R A D I O - C H E C K E D  
   switch (checkedRadio) {
     case 'smShipper':
       firstPack(smShipper);
@@ -128,16 +131,16 @@ function calcPack(e) {
     modalBody.innerHTML = `${shipmentArr[0].boxSize} @ ${shipmentArr[0].weight}lbs ${shipmentArr[0].type} <br> ${shipmentArr[1].boxSize} @ ${shipmentArr[1].weight}lbs Accessories<br>`;
   }
   // if juncBox or backflowBag then push respective packaging and weight to shipmentArr
-  if (isChecked(accessRadio) || isChecked(ldsRadio) && shipmentArr.length > 0) {
-    if (isChecked(juncBox) && isChecked(backflowBag)) {
+  if (accessRadio.checked || ldsRadio.checked && shipmentArr.length > 0) {
+    if (juncBox.checked && backflowBag.checked) {
       shipmentArr.push(jbBfbObj);
       modalBody.innerHTML += `${jbBfbObj.boxSize} @ ${jbBfbObj.weight}lbs Junc Box + Backflow Bag<br>`;
     } else {
-      if (isChecked(juncBox)) {
+      if (juncBox.checked) {
         shipmentArr.push(juncBoxObj);
         modalBody.innerHTML += `${juncBoxObj.boxSize} @ ${juncBoxObj.weight}lbs Junction Box <br>`;
       }
-      if (isChecked(backflowBag)) {
+      if (backflowBag.checked) {
         shipmentArr.push(backflowBagObj);
         modalBody.innerHTML += `${backflowBagObj.boxSize} @ ${backflowBagObj.weight}lbs Backflow Bag <br>`;
       }
@@ -152,9 +155,9 @@ function calcPack(e) {
   // firstPack
   function firstPack(scenarioArray) {
     for (let i = 0; i < scenarioArray.length && shipmentArr.length < 1; i++) {
-      if ((isChecked(ldsRadio) && formValsObj.ldsSize <= scenarioArray[i].ldsSize)
-        || (isChecked(poldRadio) && formValsObj.poldSsr <= scenarioArray[i].poldSsr - 2)
-        || (isChecked(accessRadio))) {
+      if ((ldsRadio.checked && formValsObj.ldsSize <= scenarioArray[i].ldsSize)
+        || (poldRadio.checked && formValsObj.poldSsr <= scenarioArray[i].poldSsr - 2)
+        || (accessRadio.checked)) {
         if (formValsObj.api <= scenarioArray[i].api
           && formValsObj.poldSsr <= scenarioArray[i].poldSsr
           && formValsObj.recirc <= scenarioArray[i].recirc) {
@@ -169,13 +172,13 @@ function calcPack(e) {
   function secondPack(scenarioArray) {
     for (let i = 0; i < scenarioArray.length && shipmentArr.length < 2; i++) {
       for (let c = 0; c < poldScenarios.length && shipmentArr.length < 2; c++) {
-        if ((isChecked(ldsRadio) && formValsObj.ldsSize <= scenarioArray[i].ldsSize)
-          || (isChecked(poldRadio) && formValsObj.poldSsr <= (scenarioArray[i].poldSsr + poldScenarios[c].poldSsr) - 2)
-          || (isChecked(accessRadio))) {
+        if ((ldsRadio.checked && formValsObj.ldsSize <= scenarioArray[i].ldsSize)
+          || (poldRadio.checked && formValsObj.poldSsr <= (scenarioArray[i].poldSsr + poldScenarios[c].poldSsr) - 2)
+          || (accessRadio.checked)) {
           if (formValsObj.api <= poldScenarios[c].api + scenarioArray[i].api
             && formValsObj.poldSsr <= poldScenarios[c].poldSsr + scenarioArray[i].poldSsr
             && formValsObj.recirc <= poldScenarios[c].recirc + scenarioArray[i].recirc) {
-            shipmentArr.push(scenarioArray[c], poldScenarios[i]);
+            shipmentArr.push(scenarioArray[i], poldScenarios[c]);
             break;
           }
         }
@@ -193,18 +196,16 @@ function calcPack(e) {
           } else {
             return shipperSize = '13 x 10 x 5';
           }
-          console.log(shipperSize);
-          break;
         }
       }
     }
   }
   function checkRadios() {
-    if (isChecked(ldsRadio)) {
+    if (ldsRadio.checked) {
       return (formValsObj.ldsSize > 150) ? 'mdShipper' : 'smShipper'; 
-    } else if (isChecked(accessRadio)) {
+    } else if (accessRadio.checked) {
       return 'accessRadio';
-    } else if (isChecked(poldRadio)) {
+    } else if (poldRadio.checked) {
       return 'poldRadio';
     }
   }
@@ -239,10 +240,10 @@ function calcPack(e) {
         shipmentObj.type = 'LDS';
         break;
       default:
-        if (isChecked(accessRadio)) {
+        if (accessRadio.checked) {
           shipmentObj.weight += 0.75;
           shipmentObj.type = 'Accessories';
-        } else if (isChecked(poldRadio)) {
+        } else if (poldRadio.checked) {
           shipmentObj.weight += 1.5;
           shipmentObj.type = 'POLD Only System';
         }
@@ -261,12 +262,12 @@ function calcPack(e) {
 function disableRadios() {
   // set delay to allow .active to be added to clicked el before code is run
   setTimeout(function () {
-    if (isChecked(accessRadio)) {
+    if (accessRadio.checked) {
       $(ldsSizeGroup).hide("blind");
       $(juncBox).show("blind");
       $(backflowBag).show("blind");
       $(scvInput).show("blind");
-    } else if (isChecked(poldRadio)) {
+    } else if (poldRadio.checked) {
       $(ldsSizeGroup).hide("blind");
       ldsSizeGroup.classList.remove("active");
       $(juncBox).hide("blind");
@@ -275,7 +276,7 @@ function disableRadios() {
       backflowBag.classList.remove("active");
       $(scvInput).hide("blind");
       $(scvInput).checked = false;
-    } else if (isChecked(ldsRadio)) {
+    } else if (ldsRadio.checked) {
       $(ldsSizeGroup).show("blind");
       $(juncBox).show("blind");
       $(backflowBag).show("blind");
@@ -294,10 +295,6 @@ function resetForm() {
   ldsRadio.classList.add('active');
   disableRadios();
 }
-
-// test hasClass return boolean
-function isChecked(el) { return el.classList.contains('active'); }
-// el.contains instead of .hasClass
 
 // tool check scenario object poldSsr count
 function checkPoldSsr(scenArray) {
