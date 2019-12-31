@@ -5,13 +5,13 @@
 4. Modal images of devices listed with clickable info button (favicon)
 5. Add timer(s) to recirc(s) in scripts
 6. Condition: LDS-3-200 + Junction Box = msg this will not fit!
-####NEW INPUTS:
+#### NEW INPUTS:
 1. Hidden Wire [CHECKBOX]
 2. WDC [CHECKBOX]
 x. Express?
 -->If yes, expose State dropdown
 
-####BONUS:
+#### BONUS:
 1. Use getters & setters with objs (accessors)
 2. JS Classes
 

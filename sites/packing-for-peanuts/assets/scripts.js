@@ -304,199 +304,235 @@ function checkPoldSsr(scenArray) {
 };
 // S M - S H I P P E R - S C E N A R I O S
 const smShipper = [
-  // START SM SHIPPER
-  {
+  { // Small 1
     api: 0,
     pold: 4,
     ssr: 2,
     poldSsr: 5,
     recirc: 1,
+    wdc: true,
+    cpCable: false,
     ldsSize: 150
   },
-  {
+  { // Small 2
     api: 1,
     pold: 3,
     ssr: 0,
     poldSsr: 3,
     recirc: 1,
+    wdc: false,
+    cpCable: true,
     ldsSize: 150
   },
-  {
+  { // Small 3
     api: 1,
     pold: 2,
     ssr: 2,
     poldSsr: 3,
     recirc: 1,
+    wdc: false,
+    cpCable: true,
     ldsSize: 150
   },
-  {
+  { // Small 4
     api: 1,
     pold: 5,
     ssr: 0,
     poldSsr: 5,
     recirc: 1,
+    wdc: true,
+    cpCable: true,
     ldsSize: 150
   },
-  {
+  { // Small 5
     api: 2,
     pold: 0,
     ssr: 0,
     poldSsr: 0,
     recirc: 1,
+    wdc: true,
+    cpCable: true,
     ldsSize: 150
   },
-  {
+  { // Small 6
     api: 1,
     pold: 14,
     ssr: 2,
     poldSsr: 15,
     recirc: 0,
+    wdc: true,
+    cpCable: true,
     ldsSize: 150
   },
-  {
+  { // Small 7
     api: 0,
     pold: 18,
     ssr: 2,
     poldSsr: 19,
     recirc: 0,
+    wdc: false,
+    cpCable: false,
     ldsSize: 150
   },
-  {
+  { // Small 8
     api: 3,
     pold: 3,
     ssr: 2,
     poldSsr: 4,
     recirc: 0,
+    wdc: false,
+    cpCable: false,
     ldsSize: 150
   },
-  {
+  { // Small 9
     api: 4,
     pold: 0,
     ssr: 0,
     poldSsr: 0,
     recirc: 0,
+    wdc: false,
+    cpCable: false,
     ldsSize: 150
   }
 ];
   // M D - S H I P P E R - S C E N A R I O S
   const mdShipper = [
-  {
+  { // Med 1
     api: 2,
     pold: 0,
     ssr: 0,
     poldSsr: 0,
     recirc: 0,
+    wdc: false,
+cpCable: false,
     ldsSize: 200
   },
-  {
+  { // Med 2
     api: 1,
     pold: 2,
     ssr: 0,
     poldSsr: 2,
     recirc: 0,
+    wdc: false,
+cpCable: false,
     ldsSize: 200
   },
-  {
+  { // Med 3
     api: 0,
     pold: 4,
     ssr: 0,
     poldSsr: 4,
     recirc: 0,
+    wdc: false,
+cpCable: false,
     ldsSize: 200
   }
 ];
 // P O L D - S C E N A R I O S
 const poldScenarios = [
-  {
+  { // POLD 1
     api: 3,
     pold: 0,
     ssr: 0,
     poldSsr: 0,
-    recirc: 3
+    recirc: 3,
+    wdc: true
   },
-  {
+  { // POLD 2
     api: 0,
     pold: 0,
     ssr: 2,
     poldSsr: 1,
-    recirc: 5
+    recirc: 5,
+    wdc: true
   },
-  {
+  { // POLD 3
     api: 6,
     pold: 0,
     ssr: 2,
     poldSsr: 1,
-    recirc: 0
+    recirc: 0,
+    wdc: false
   },
-  {
+  { // POLD 4
     api: 2,
     pold: 2,
     ssr: 2,
     poldSsr: 3,
-    recirc: 3
+    recirc: 3,
+    wdc: false
   },
-  {
+  { // POLD 5
     api: 1,
     pold: 4,
     ssr: 2,
     poldSsr: 5,
-    recirc: 3
+    recirc: 3,
+    wdc: false
   },
-  {
+  { // POLD 6
     api: 0,
     pold: 6,
     ssr: 2,
     poldSsr: 7,
-    recirc: 3
+    recirc: 3,
+    wdc: false
   },
-  {
+  { // POLD 7
     api: 0,
     pold: 15,
     ssr: 2,
     poldSsr: 16,
-    recirc: 2
+    recirc: 2,
+    wdc: false
   },
-  {
+  { // POLD 8
     api: 0,
     pold: 22,
     ssr: 2,
     poldSsr: 23,
-    recirc: 0
+    recirc: 0,
+    wdc: false
   },
-  {
+  {  // POLD 9
     api: 2,
     pold: 14,
     ssr: 2,
     poldSsr: 15,
-    recirc: 0
+    recirc: 0,
+    wdc: false
   },
-  {
+  {  // POLD 10
     api: 1,
     pold: 18,
     ssr: 2,
     poldSsr: 19,
-    recirc: 0
+    recirc: 0,
+    wdc: false
   },
-  {
+  {  // POLD 11
     api: 3,
     pold: 12,
     ssr: 2,
     poldSsr: 13,
-    recirc: 0
+    recirc: 0,
+    wdc: false
   },
-  {
+  {  // POLD 12
     api: 4,
     pold: 8,
     ssr: 2,
     poldSsr: 9,
-    recirc: 0
+    recirc: 0,
+    wdc: false
   },
-  {
+  {  // POLD 13
     api: 5,
     pold: 4,
     ssr: 2,
     poldSsr: 5,
-    recirc: 0
+    recirc: 0,
+    wdc: true
   }
 ];
 // J U N C - B O X - O B J E C T
