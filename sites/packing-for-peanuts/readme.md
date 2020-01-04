@@ -1,13 +1,14 @@
 # TO DO:
-1. Create new inputs (below)
+1. Add logic for new inputs:
+  a. WDC-boolean as num (DONE)
+  b. Hidden Wire-boolean as num (DONE)
+  c. Transformer Cable >80'-boolean --> Automatically add new package? Ask Bryce
 2. Update Shipper Scenarios
 3. New Condition: backflow/juncBox && shipmentArr > 1 = shipper + 14x14x14 (bacflow/juncbox and POLD box can fit in 14x14x14)
 4. Modal images of devices listed with clickable info button (favicon)
 5. Add timer(s) to recirc(s) in scripts
 6. Condition: LDS-3-200 + Junction Box = msg this will not fit!
 #### NEW INPUTS:
-1. Hidden Wire [CHECKBOX]
-2. WDC [CHECKBOX]
 x. Express?
 -->If yes, expose State dropdown
 

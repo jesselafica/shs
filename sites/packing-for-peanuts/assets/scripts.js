@@ -1,19 +1,21 @@
 // Const Declarations
 // Inputs
-const apiInput  = document.getElementById('api'),
-  poldInput     = document.getElementById('pold'),
-  ssrInput      = document.getElementById('ssr'),
-  recircInput   = document.getElementById('recirc'),
-  timerInput    = document.getElementById('timer'),
-  ldsSize       = document.getElementById('lds_size'),
-  scvInput      = document.getElementById('scv'),
-  ldsSizeGroup  = document.getElementsByClassName('lds-size')[0],
-  juncBox       = document.getElementById('junc_box'),
-  backflowBag   = document.getElementById('backflow_bag'),
-  ldsRadio      = document.getElementById('lds_radio'),
-  poldRadio     = document.getElementById('pold_radio'),
-  accessRadio   = document.getElementById('accessories_radio'),
-  ldsTypes      = document.getElementsByClassName('lds-type');
+const apiInput = document.getElementById('api'),
+  poldInput    = document.getElementById('pold'),
+  ssrInput     = document.getElementById('ssr'),
+  recircInput  = document.getElementById('recirc'),
+  timerInput   = document.getElementById('timer'),
+  ldsSize      = document.getElementById('lds_size'),
+  scvInput     = document.getElementById('scv'),
+  ldsSizeGroup = document.getElementsByClassName('lds-size')[0],
+  juncBox      = document.getElementById('junc_box'),
+  backflowBag  = document.getElementById('backflow_bag'),
+  ldsRadio     = document.getElementById('lds_radio'),
+  poldRadio    = document.getElementById('pold_radio'),
+  accessRadio  = document.getElementById('accessories_radio'),
+  wdcInput     = document.getElementById('wdc'),
+  cpCableInput = document.getElementById('cp_cable'),
+  ldsTypes     = document.getElementsByClassName('lds-type');
 //Buttons
 const resetBtn = document.getElementById('reset_button');
       resetBtn.addEventListener('click', resetForm, false);
@@ -46,7 +48,10 @@ function calcPack(e) {
   formValsObj.pold    = parseInt(poldInput.value);
   formValsObj.ssr     = parseInt(ssrInput.value);
   formValsObj.recirc  = parseInt(recircInput.value) + parseInt(timerInput.value);
-  console.log(formValsObj.recirc);
+  formValsObj.cpCable = (cpCableInput.checked) ? 1 : 0;
+  formValsObj.wdc     = (wdcInput.checked) ? 1 : 0;
+
+  console.log(formValsObj.cpCable);
   
   if (poldRadio.checked || accessRadio.checked) {
     formValsObj.ldsSize = 0;
@@ -160,6 +165,8 @@ function calcPack(e) {
         || (accessRadio.checked)) {
         if (formValsObj.api <= scenarioArray[i].api
           && formValsObj.poldSsr <= scenarioArray[i].poldSsr
+          && formValsObj.wdc <= scenarioArray[i].wdc
+          && formValsObj.cpCable <= scenarioArray[i].cpCable
           && formValsObj.recirc <= scenarioArray[i].recirc) {
           shipmentArr.push(formValsObj);
           break;
@@ -177,6 +184,8 @@ function calcPack(e) {
           || (accessRadio.checked)) {
           if (formValsObj.api <= poldScenarios[c].api + scenarioArray[i].api
             && formValsObj.poldSsr <= poldScenarios[c].poldSsr + scenarioArray[i].poldSsr
+            && formValsObj.wdc <= poldScenarios[c].wdc + scenarioArray[i].wdc
+            && formValsObj.cpCable <= poldScenarios[c].cpCable + scenarioArray[i].cpCable
             && formValsObj.recirc <= poldScenarios[c].recirc + scenarioArray[i].recirc) {
             shipmentArr.push(scenarioArray[i], poldScenarios[c]);
             break;
@@ -310,8 +319,8 @@ const smShipper = [
     ssr: 2,
     poldSsr: 5,
     recirc: 1,
-    wdc: true,
-    cpCable: false,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 150
   },
   { // Small 2
@@ -320,8 +329,8 @@ const smShipper = [
     ssr: 0,
     poldSsr: 3,
     recirc: 1,
-    wdc: false,
-    cpCable: true,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 150
   },
   { // Small 3
@@ -330,8 +339,8 @@ const smShipper = [
     ssr: 2,
     poldSsr: 3,
     recirc: 1,
-    wdc: false,
-    cpCable: true,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 150
   },
   { // Small 4
@@ -340,8 +349,8 @@ const smShipper = [
     ssr: 0,
     poldSsr: 5,
     recirc: 1,
-    wdc: true,
-    cpCable: true,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 150
   },
   { // Small 5
@@ -350,8 +359,8 @@ const smShipper = [
     ssr: 0,
     poldSsr: 0,
     recirc: 1,
-    wdc: true,
-    cpCable: true,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 150
   },
   { // Small 6
@@ -360,8 +369,8 @@ const smShipper = [
     ssr: 2,
     poldSsr: 15,
     recirc: 0,
-    wdc: true,
-    cpCable: true,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 150
   },
   { // Small 7
@@ -370,8 +379,8 @@ const smShipper = [
     ssr: 2,
     poldSsr: 19,
     recirc: 0,
-    wdc: false,
-    cpCable: false,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 150
   },
   { // Small 8
@@ -380,8 +389,8 @@ const smShipper = [
     ssr: 2,
     poldSsr: 4,
     recirc: 0,
-    wdc: false,
-    cpCable: false,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 150
   },
   { // Small 9
@@ -390,8 +399,8 @@ const smShipper = [
     ssr: 0,
     poldSsr: 0,
     recirc: 0,
-    wdc: false,
-    cpCable: false,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 150
   }
 ];
@@ -403,8 +412,8 @@ const smShipper = [
     ssr: 0,
     poldSsr: 0,
     recirc: 0,
-    wdc: false,
-cpCable: false,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 200
   },
   { // Med 2
@@ -413,8 +422,8 @@ cpCable: false,
     ssr: 0,
     poldSsr: 2,
     recirc: 0,
-    wdc: false,
-cpCable: false,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 200
   },
   { // Med 3
@@ -423,8 +432,8 @@ cpCable: false,
     ssr: 0,
     poldSsr: 4,
     recirc: 0,
-    wdc: false,
-cpCable: false,
+    wdc: 0,
+    cpCable: 0,
     ldsSize: 200
   }
 ];
@@ -435,8 +444,9 @@ const poldScenarios = [
     pold: 0,
     ssr: 0,
     poldSsr: 0,
+    cpCable: 0,
     recirc: 3,
-    wdc: true
+    wdc: 0
   },
   { // POLD 2
     api: 0,
@@ -444,7 +454,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 1,
     recirc: 5,
-    wdc: true
+    cpCable: 0,
+    wdc: 0
   },
   { // POLD 3
     api: 6,
@@ -452,7 +463,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 1,
     recirc: 0,
-    wdc: false
+    cpCable: 0,
+    wdc: 0
   },
   { // POLD 4
     api: 2,
@@ -460,7 +472,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 3,
     recirc: 3,
-    wdc: false
+    cpCable: 0,
+    wdc: 0
   },
   { // POLD 5
     api: 1,
@@ -468,7 +481,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 5,
     recirc: 3,
-    wdc: false
+    cpCable: 0,
+    wdc: 0
   },
   { // POLD 6
     api: 0,
@@ -476,7 +490,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 7,
     recirc: 3,
-    wdc: false
+    cpCable: 0,
+    wdc: 0
   },
   { // POLD 7
     api: 0,
@@ -484,7 +499,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 16,
     recirc: 2,
-    wdc: false
+    cpCable: 0,
+    wdc: 0
   },
   { // POLD 8
     api: 0,
@@ -492,7 +508,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 23,
     recirc: 0,
-    wdc: false
+    cpCable: 0,
+    wdc: 0
   },
   {  // POLD 9
     api: 2,
@@ -500,7 +517,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 15,
     recirc: 0,
-    wdc: false
+    cpCable: 0,
+    wdc: 0
   },
   {  // POLD 10
     api: 1,
@@ -508,7 +526,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 19,
     recirc: 0,
-    wdc: false
+    cpCable: 0,
+    wdc: 0
   },
   {  // POLD 11
     api: 3,
@@ -516,7 +535,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 13,
     recirc: 0,
-    wdc: false
+    cpCable: 0,
+    wdc: 0
   },
   {  // POLD 12
     api: 4,
@@ -524,7 +544,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 9,
     recirc: 0,
-    wdc: false
+    cpCable: 0,
+    wdc: 0
   },
   {  // POLD 13
     api: 5,
@@ -532,7 +553,8 @@ const poldScenarios = [
     ssr: 2,
     poldSsr: 5,
     recirc: 0,
-    wdc: true
+    cpCable: 0,
+    wdc: 0
   }
 ];
 // J U N C - B O X - O B J E C T
