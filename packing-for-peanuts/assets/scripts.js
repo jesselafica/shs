@@ -54,42 +54,55 @@ function calcPack(e) {
   formValsObj.remainder = parseInt(formValsObj.api + formValsObj.poldSsr + formValsObj.recirc);
   // calculate shipper size
   shipperCalc();
+
+  // Verify there are items to be packed i.e. not all inputs are empty
+  let emptyBox = true;
+
+  for (const key in formValsObj) {
+    if (parseInt(formValsObj[key]) > 0) emptyBox = false;
+  }
+
   // *************************************************
-  let checkedRadio = checkRadios();
-  // S W I T C H - R A D I O - C H E C K E D
-  switch (checkedRadio) {
-    case 'smShipper':
-      firstPack(smShipper);
-      if (shipmentArr.length === 0) {
-        secondPack(smShipper);
-      }
-      break;
-    case 'mdShipper':
-      firstPack(mdShipper);
-      if (shipmentArr.length === 0) {
-        secondPack(mdShipper);
-      }
-      break;
-    case 'poldRadio':
-      firstPack(poldScenarios);
-      if (shipmentArr.length === 0) {
-        secondPack(poldScenarios);
-      }
-      break;
-    case 'accessRadio':
-      firstPack(poldScenarios);
-      if (shipmentArr.length === 0) {
-        secondPack(poldScenarios);
-      }
-      break;
-    default:
-      console.log('ERROR AT CHECKED RADIO SWITCH');
-      break;
+  if (!emptyBox) {
+
+    let checkedRadio = checkRadios();
+    // S W I T C H - R A D I O - C H E C K E D
+    switch (checkedRadio) {
+      case 'smShipper':
+        firstPack(smShipper);
+        if (shipmentArr.length === 0) {
+          secondPack(smShipper);
+        }
+        break;
+      case 'mdShipper':
+        firstPack(mdShipper);
+        if (shipmentArr.length === 0) {
+          secondPack(mdShipper);
+        }
+        break;
+      case 'poldRadio':
+        firstPack(poldScenarios);
+        if (shipmentArr.length === 0) {
+          secondPack(poldScenarios);
+        }
+        break;
+      case 'accessRadio':
+        firstPack(poldScenarios);
+        if (shipmentArr.length === 0) {
+          secondPack(poldScenarios);
+        }
+        break;
+      default:
+        console.log('ERROR AT CHECKED RADIO SWITCH');
+        break;
+    }
   }
   // *************************************************
 
   if (shipmentArr.length === 1) {
-    shipmentArr[0] = { ...formValsObj };
+    shipmentArr[0] = {
+      ...formValsObj
+    };
     calcWeight(shipmentArr[0]);
     modalTitle.innerHTML = 'Your Shipment Array:';
     modalBody.innerHTML = `${shipmentArr[0].boxSize} @ ${shipmentArr[0].weight}lbs ${shipmentArr[0].type}<br>`;
@@ -118,7 +131,9 @@ function calcPack(e) {
     calcWeight(shipmentArr[1]);
     // calculate shipmentArr[1].estCost
     // then subtract formValsObj into shipmentArr[0] (ldsScenario)
-    shipmentArr[0] = { ...formValsObj };
+    shipmentArr[0] = {
+      ...formValsObj
+    };
     // make shipmentArr.ldsSize always = formValsObj.ldsSize
     shipmentArr[0].poldSsr = Object.assign(formValsObj.poldSsr);
     // calculate shipmentArr[0].weight
@@ -128,7 +143,11 @@ function calcPack(e) {
     modalBody.innerHTML = `${shipmentArr[0].boxSize} @ ${shipmentArr[0].weight}lbs ${shipmentArr[0].type} <br> ${shipmentArr[1].boxSize} @ ${shipmentArr[1].weight}lbs Accessories<br>`;
   }
   // if juncBox or backflowBag then push respective packaging and weight to shipmentArr
-  if (isChecked(accessRadio) || isChecked(ldsRadio) && shipmentArr.length > 0) {
+  if (isChecked(accessRadio) || isChecked(ldsRadio)) {
+    if (emptyBox && (isChecked(juncBox) || isChecked(backflowBag))) {
+      modalTitle.innerHTML = 'Your Shipment Array:';
+      modalBody.innerHTML = '';
+    }
     if (isChecked(juncBox) && isChecked(backflowBag)) {
       shipmentArr.push(jbBfbObj);
       modalBody.innerHTML += `${jbBfbObj.boxSize} @ ${jbBfbObj.weight}lbs Junc Box + Backflow Bag<br>`;
@@ -143,7 +162,7 @@ function calcPack(e) {
       }
     }
   }
-  if (shipmentArr.length === 0) {
+  if (shipmentArr.length === 0 && !emptyBox) {
     modalTitle.innerHTML = `Access-ive... don't ya think?`;
     modalBody.innerHTML = `We'd like to help with this one. Give us a call!`;
   }
@@ -152,12 +171,12 @@ function calcPack(e) {
   // firstPack
   function firstPack(scenarioArray) {
     for (let i = 0; i < scenarioArray.length && shipmentArr.length < 1; i++) {
-      if ((isChecked(ldsRadio) && formValsObj.ldsSize <= scenarioArray[i].ldsSize)
-        || (isChecked(poldRadio) && formValsObj.poldSsr <= scenarioArray[i].poldSsr - 2)
-        || (isChecked(accessRadio))) {
-        if (formValsObj.api <= scenarioArray[i].api
-          && formValsObj.poldSsr <= scenarioArray[i].poldSsr
-          && formValsObj.recirc <= scenarioArray[i].recirc) {
+      if ((isChecked(ldsRadio) && formValsObj.ldsSize <= scenarioArray[i].ldsSize) ||
+        (isChecked(poldRadio) && formValsObj.poldSsr <= scenarioArray[i].poldSsr - 2) ||
+        (isChecked(accessRadio))) {
+        if (formValsObj.api <= scenarioArray[i].api &&
+          formValsObj.poldSsr <= scenarioArray[i].poldSsr &&
+          formValsObj.recirc <= scenarioArray[i].recirc) {
           shipmentArr.push(formValsObj);
           break;
         }
@@ -169,12 +188,12 @@ function calcPack(e) {
   function secondPack(scenarioArray) {
     for (let i = 0; i < scenarioArray.length && shipmentArr.length < 2; i++) {
       for (let c = 0; c < poldScenarios.length && shipmentArr.length < 2; c++) {
-        if ((isChecked(ldsRadio) && formValsObj.ldsSize <= scenarioArray[i].ldsSize)
-          || (isChecked(poldRadio) && formValsObj.poldSsr <= (scenarioArray[i].poldSsr + poldScenarios[c].poldSsr) - 2)
-          || (isChecked(accessRadio))) {
-          if (formValsObj.api <= poldScenarios[c].api + scenarioArray[i].api
-            && formValsObj.poldSsr <= poldScenarios[c].poldSsr + scenarioArray[i].poldSsr
-            && formValsObj.recirc <= poldScenarios[c].recirc + scenarioArray[i].recirc) {
+        if ((isChecked(ldsRadio) && formValsObj.ldsSize <= scenarioArray[i].ldsSize) ||
+          (isChecked(poldRadio) && formValsObj.poldSsr <= (scenarioArray[i].poldSsr + poldScenarios[c].poldSsr) - 2) ||
+          (isChecked(accessRadio))) {
+          if (formValsObj.api <= poldScenarios[c].api + scenarioArray[i].api &&
+            formValsObj.poldSsr <= poldScenarios[c].poldSsr + scenarioArray[i].poldSsr &&
+            formValsObj.recirc <= poldScenarios[c].recirc + scenarioArray[i].recirc) {
             shipmentArr.push(scenarioArray[c], poldScenarios[i]);
             break;
           }
@@ -193,15 +212,14 @@ function calcPack(e) {
           } else {
             return shipperSize = '13 x 10 x 5';
           }
-          console.log(shipperSize);
-          break;
         }
       }
     }
   }
+
   function checkRadios() {
     if (isChecked(ldsRadio)) {
-      return (formValsObj.ldsSize > 150) ? 'mdShipper' : 'smShipper'; 
+      return (formValsObj.ldsSize > 150) ? 'mdShipper' : 'smShipper';
     } else if (isChecked(accessRadio)) {
       return 'accessRadio';
     } else if (isChecked(poldRadio)) {
@@ -214,27 +232,27 @@ function calcPack(e) {
     // + weight based on ldsSize
     switch (shipmentObj.ldsSize) {
       case 75:
-        (scvInput.checked) ? shipmentObj.weight += 9.05 + 0.5 : shipmentObj.weight += 9.05;
+        (scvInput.checked) ? shipmentObj.weight += 9.05 + 0.5: shipmentObj.weight += 9.05;
         shipmentObj.boxSize = '19 x 12 x 7';
         shipmentObj.type = 'LDS';
         break;
       case 100:
-        (scvInput.checked) ? shipmentObj.weight += 9.95 + 0.75 : shipmentObj.weight += 9.95;
+        (scvInput.checked) ? shipmentObj.weight += 9.95 + 0.75: shipmentObj.weight += 9.95;
         shipmentObj.boxSize = '19 x 12 x 7';
         shipmentObj.type = 'LDS';
         break;
       case 125:
-        (scvInput.checked) ? shipmentObj.weight += 10.6 + 1.2 : shipmentObj.weight += 10.6;
+        (scvInput.checked) ? shipmentObj.weight += 10.6 + 1.2: shipmentObj.weight += 10.6;
         shipmentObj.boxSize = '19 x 12 x 7';
         shipmentObj.type = 'LDS';
         break;
       case 150:
-        (scvInput.checked) ? shipmentObj.weight += 12.2 + 1.6 : shipmentObj.weight += 12.2;
+        (scvInput.checked) ? shipmentObj.weight += 12.2 + 1.6: shipmentObj.weight += 12.2;
         shipmentObj.boxSize = '19 x 12 x 7';
         shipmentObj.type = 'LDS';
         break;
       case 200:
-        (scvInput.checked) ? shipmentObj.weight += 17.4 + 2.35 : shipmentObj.weight += 17.4;
+        (scvInput.checked) ? shipmentObj.weight += 17.4 + 2.35: shipmentObj.weight += 17.4;
         shipmentObj.boxSize = '14 x 14 x 14';
         shipmentObj.type = 'LDS';
         break;
@@ -296,7 +314,9 @@ function resetForm() {
 }
 
 // test hasClass return boolean
-function isChecked(el) { return el.classList.contains('active'); }
+function isChecked(el) {
+  return el.classList.contains('active');
+}
 // el.contains instead of .hasClass
 
 // tool check scenario object poldSsr count
@@ -381,9 +401,8 @@ const smShipper = [
     ldsSize: 150
   }
 ];
-  // M D - S H I P P E R - S C E N A R I O S
-  const mdShipper = [
-  {
+// M D - S H I P P E R - S C E N A R I O S
+const mdShipper = [{
     api: 2,
     pold: 0,
     ssr: 0,
@@ -409,8 +428,7 @@ const smShipper = [
   }
 ];
 // P O L D - S C E N A R I O S
-const poldScenarios = [
-  {
+const poldScenarios = [{
     api: 3,
     pold: 0,
     ssr: 0,
